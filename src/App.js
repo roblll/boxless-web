@@ -1,5 +1,7 @@
 import React, { Component } from "react";
+
 import Player from "./components/Player";
+import Tabs from "./components/Tabs";
 
 export default class App extends Component {
   render() {
@@ -20,6 +22,7 @@ export default class App extends Component {
       <div style={styles.container}>
         <div style={styles.sections}>
           <Player />
+          <Tabs />
         </div>
       </div>
     );
