@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import Player from "./components/Player";
 
 export default class App extends Component {
   render() {
@@ -17,7 +18,9 @@ export default class App extends Component {
     };
     return (
       <div style={styles.container}>
-        <div style={styles.sections}></div>
+        <div style={styles.sections}>
+          <Player />
+        </div>
       </div>
     );
   }
