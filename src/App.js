@@ -4,6 +4,18 @@ import Player from "./components/Player";
 import Tabs from "./components/Tabs";
 
 export default class App extends Component {
+  state = {
+    activeTab: "options",
+  };
+
+  handleTabClick = (e, { name }) => {
+    if (this.state.activeTab === name) {
+      this.setState({ activeTab: "none " });
+    } else {
+      this.setState({ activeTab: name });
+    }
+  };
+
   render() {
     const styles = {
       container: {
@@ -18,11 +30,14 @@ export default class App extends Component {
         height: "100vh",
       },
     };
+
+    const { activeTab } = this.state;
+
     return (
       <div style={styles.container}>
         <div style={styles.sections}>
           <Player />
-          <Tabs />
+          <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
         </div>
       </div>
     );
