@@ -2,6 +2,10 @@ import React, { Component } from "react";
 
 import Player from "./components/Player";
 import Tabs from "./components/Tabs";
+import Options from "./components/Options";
+import Pick from "./components/Pick";
+import Search from "./components/Search";
+import Playlist from "./components/Playlist";
 
 export default class App extends Component {
   state = {
@@ -37,6 +41,10 @@ export default class App extends Component {
       <div style={styles.container}>
         <div style={styles.sections}>
           <Player />
+          {activeTab === "options" && <Options />}
+          {activeTab === "pick" && <Pick />}
+          {activeTab === "search" && <Search />}
+          {activeTab === "playlist" && <Playlist />}
           <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
         </div>
       </div>
