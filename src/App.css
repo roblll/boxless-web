@@ -1,4 +1,4 @@
-.App {
+/* .App {
   text-align: center;
 }
 
@@ -35,4 +35,12 @@
   to {
     transform: rotate(360deg);
   }
+} */
+
+.dropdown .icon {
+  display: none;
+}
+
+.ui.inline.scrolling.dropdown > div.text {
+  font-weight: 400;
 }

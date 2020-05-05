@@ -1,5 +1,6 @@
 import React from "react";
 
+import "../App.css";
 import Date from "./Date";
 
 export default class Options extends React.Component {
