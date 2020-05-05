@@ -3,6 +3,7 @@ import React from "react";
 import "../App.css";
 import Date from "./Date";
 import Rank from "./Rank";
+import OptionsButton from "./OptionsButton";
 
 export default class Options extends React.Component {
   render() {
@@ -13,6 +14,9 @@ export default class Options extends React.Component {
         </div>
         <div style={styles.optionsRow}>
           <Rank />
+        </div>
+        <div style={styles.optionsRow}>
+          <OptionsButton toggle={() => {}} on={true} name="test" label="Test" />
         </div>
       </div>
     );
