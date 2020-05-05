@@ -2,6 +2,7 @@ import React from "react";
 
 import "../App.css";
 import Date from "./Date";
+import Rank from "./Rank";
 
 export default class Options extends React.Component {
   render() {
@@ -9,6 +10,9 @@ export default class Options extends React.Component {
       <div style={styles.container}>
         <div style={styles.optionsRow}>
           <Date />
+        </div>
+        <div style={styles.optionsRow}>
+          <Rank />
         </div>
       </div>
     );
