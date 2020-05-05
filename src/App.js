@@ -21,20 +21,6 @@ export default class App extends Component {
   };
 
   render() {
-    const styles = {
-      container: {
-        display: "flex",
-        justifyContent: "center",
-      },
-      sections: {
-        display: "flex",
-        flexDirection: "column",
-        justifyContent: "space-between",
-        backgroundColor: "blue",
-        height: "100vh",
-      },
-    };
-
     const { activeTab } = this.state;
 
     return (
@@ -51,3 +37,17 @@ export default class App extends Component {
     );
   }
 }
+
+const styles = {
+  container: {
+    display: "flex",
+    justifyContent: "center",
+  },
+  sections: {
+    display: "flex",
+    flexDirection: "column",
+    justifyContent: "space-between",
+    backgroundColor: "blue",
+    height: "100vh",
+  },
+};
