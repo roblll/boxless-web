@@ -1,9 +1,11 @@
 import React from "react";
 
+import MonthDropdown from "./MonthDropdown";
+
 const Date = () => {
   return (
     <span>
-      <o>Jan 1 2020</o>
+      <MonthDropdown />
     </span>
   );
 };
