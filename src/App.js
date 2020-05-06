@@ -6,6 +6,7 @@ import Options from "./components/Options";
 import Pick from "./components/Pick";
 import Search from "./components/Search";
 import Playlist from "./components/Playlist";
+import MinControls from "./components/MinControls";
 
 export default class App extends Component {
   state = {
@@ -32,7 +33,7 @@ export default class App extends Component {
 
   handleTabClick = (e, { name }) => {
     if (this.state.activeTab === name) {
-      this.setState({ activeTab: "none " });
+      this.setState({ activeTab: "none" });
     } else {
       this.setState({ activeTab: name });
     }
@@ -55,6 +56,7 @@ export default class App extends Component {
       <div style={styles.container}>
         <div style={styles.sections}>
           <Player />
+          {activeTab !== "none" && <MinControls />}
           {activeTab === "options" && (
             <Options options={options} toggle={this.handleOptionClick} />
           )}
