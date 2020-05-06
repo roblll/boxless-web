@@ -6,6 +6,28 @@ import Rank from "./Rank";
 import OptionsButton from "./OptionsButton";
 
 const Options = (props) => {
+  const {
+    options: {
+      lyrics,
+      clean,
+      karaoke,
+      norepeats,
+      alternative,
+      country,
+      dance,
+      electronic,
+      hiphop,
+      house,
+      latin,
+      pop,
+      rap,
+      randb,
+      rock,
+      trance,
+    },
+    toggle,
+  } = props;
+
   return (
     <div style={styles.container}>
       <div style={styles.optionsRow}>
@@ -17,21 +39,21 @@ const Options = (props) => {
       <div style={styles.divider}></div>
       <div style={styles.optionsRow}>
         <OptionsButton
-          toggle={() => {}}
-          on={true}
+          toggle={toggle}
+          on={lyrics}
           name="lyrics"
           label="Lyrics"
         />
-        <OptionsButton toggle={() => {}} on={true} name="clean" label="Clean" />
+        <OptionsButton toggle={toggle} on={clean} name="clean" label="Clean" />
         <OptionsButton
-          toggle={() => {}}
-          on={true}
+          toggle={toggle}
+          on={karaoke}
           name="karaoke"
           label="Karaoke"
         />
         <OptionsButton
-          toggle={() => {}}
-          on={true}
+          toggle={toggle}
+          on={norepeats}
           name="norepeats"
           label="No Repeats"
         />
@@ -39,45 +61,45 @@ const Options = (props) => {
       <div style={styles.divider}></div>
       <div style={styles.genreRow}>
         <OptionsButton
-          toggle={() => {}}
-          on={true}
+          toggle={toggle}
+          on={alternative}
           name="alternative"
           label="Alternative"
         />
         <OptionsButton
-          toggle={() => {}}
-          on={true}
+          toggle={toggle}
+          on={country}
           name="country"
           label="Country"
         />
-        <OptionsButton toggle={() => {}} on={true} name="dance" label="Dance" />
+        <OptionsButton toggle={toggle} on={dance} name="dance" label="Dance" />
       </div>
       <div style={styles.genreRow}>
         <OptionsButton
-          toggle={() => {}}
-          on={true}
+          toggle={toggle}
+          on={electronic}
           name="electronic"
           label="Electronic"
         />
         <OptionsButton
-          toggle={() => {}}
-          on={true}
+          toggle={toggle}
+          on={hiphop}
           name="hiphop"
           label="Hip Hop"
         />
-        <OptionsButton toggle={() => {}} on={true} name="house" label="House" />
+        <OptionsButton toggle={toggle} on={house} name="house" label="House" />
       </div>
       <div style={styles.genreRow}>
-        <OptionsButton toggle={() => {}} on={true} name="latin" label="Latin" />
-        <OptionsButton toggle={() => {}} on={true} name="pop" label="Pop" />
-        <OptionsButton toggle={() => {}} on={true} name="rap" label="Rap" />
+        <OptionsButton toggle={toggle} on={latin} name="latin" label="Latin" />
+        <OptionsButton toggle={toggle} on={pop} name="pop" label="Pop" />
+        <OptionsButton toggle={toggle} on={rap} name="rap" label="Rap" />
       </div>
       <div style={styles.genreRow}>
-        <OptionsButton toggle={() => {}} on={true} name="randb" label="R&B" />
-        <OptionsButton toggle={() => {}} on={true} name="rock" label="Rock" />
+        <OptionsButton toggle={toggle} on={randb} name="randb" label="R&B" />
+        <OptionsButton toggle={toggle} on={rock} name="rock" label="Rock" />
         <OptionsButton
-          toggle={() => {}}
-          on={true}
+          toggle={toggle}
+          on={trance}
           name="trance"
           label="Trance"
         />

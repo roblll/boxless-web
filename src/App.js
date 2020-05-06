@@ -10,6 +10,24 @@ import Playlist from "./components/Playlist";
 export default class App extends Component {
   state = {
     activeTab: "options",
+    options: {
+      lyrics: false,
+      clean: false,
+      karaoke: false,
+      norepeats: true,
+      alternative: false,
+      country: false,
+      dance: false,
+      electronic: false,
+      hiphop: false,
+      house: false,
+      latin: false,
+      pop: true,
+      rap: false,
+      randb: false,
+      rock: false,
+      trance: false,
+    },
   };
 
   handleTabClick = (e, { name }) => {
@@ -20,14 +38,26 @@ export default class App extends Component {
     }
   };
 
+  handleOptionClick = (e) => {
+    const option = e.target.name;
+    this.setState({
+      options: {
+        ...this.state.options,
+        [option]: !this.state.options[option],
+      },
+    });
+  };
+
   render() {
-    const { activeTab } = this.state;
+    const { activeTab, options } = this.state;
 
     return (
       <div style={styles.container}>
         <div style={styles.sections}>
           <Player />
-          {activeTab === "options" && <Options />}
+          {activeTab === "options" && (
+            <Options options={options} toggle={this.handleOptionClick} />
+          )}
           {activeTab === "pick" && <Pick />}
           {activeTab === "search" && <Search />}
           {activeTab === "playlist" && <Playlist />}
