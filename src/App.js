@@ -7,6 +7,7 @@ import Pick from "./components/Pick";
 import Search from "./components/Search";
 import Playlist from "./components/Playlist";
 import MinControls from "./components/MinControls";
+import FullControls from "./components/FullControls";
 
 export default class App extends Component {
   state = {
@@ -57,6 +58,7 @@ export default class App extends Component {
         <div style={styles.sections}>
           <Player />
           {activeTab !== "none" && <MinControls />}
+          {activeTab === "none" && <FullControls />}
           {activeTab === "options" && (
             <Options options={options} toggle={this.handleOptionClick} />
           )}
