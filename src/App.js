@@ -30,6 +30,32 @@ export default class App extends Component {
       rock: false,
       trance: false,
     },
+    dateMin: null,
+    dateMax: null,
+    today: null,
+    rankMin: null,
+    rankMax: null,
+  };
+
+  componentDidMount() {
+    const { yyyy, mm, dd } = this.getCurrentCurrentDate();
+
+    this.setState(
+      {
+        dateMin: `${yyyy - 10}-${mm}-${dd}`,
+        dateMax: `${yyyy}-${mm}-${dd}`,
+        today: `${yyyy}-${mm}-${dd}`,
+      },
+      () => console.log(this.state)
+    );
+  }
+
+  getCurrentCurrentDate = () => {
+    const today = new Date();
+    const yyyy = today.getFullYear();
+    const mm = `${today.getMonth() + 1}`.padStart(2, 0);
+    const dd = `${today.getDate()}`.padStart(2, 0);
+    return { yyyy, mm, dd };
   };
 
   handleTabClick = (e, { name }) => {
