@@ -35,19 +35,22 @@ export default class App extends Component {
     today: null,
     rankMin: null,
     rankMax: null,
+    currentVid: {
+      vidId: null,
+      title: null,
+      artist: null,
+      thumbnail: null,
+    },
   };
 
   componentDidMount() {
     const { yyyy, mm, dd } = this.getCurrentCurrentDate();
 
-    this.setState(
-      {
-        dateMin: `${yyyy - 10}-${mm}-${dd}`,
-        dateMax: `${yyyy}-${mm}-${dd}`,
-        today: `${yyyy}-${mm}-${dd}`,
-      },
-      () => console.log(this.state)
-    );
+    this.setState({
+      dateMin: `${yyyy - 10}-${mm}-${dd}`,
+      dateMax: `${yyyy}-${mm}-${dd}`,
+      today: `${yyyy}-${mm}-${dd}`,
+    });
   }
 
   getCurrentCurrentDate = () => {
@@ -76,13 +79,40 @@ export default class App extends Component {
     });
   };
 
+  getVid = async () => {
+    try {
+      const response = await fetch(
+        `http://localhost:3000/api/vid?dateMin=2020-04-21&dateMax=2020-04-22&rankMin=1&rankMax=100&pop=false&rap=false&latin=false&alternative=true&electronic=false&country=false&randb=false&rock&dance=false&lyrics=false&clean=false&karaoke=false`,
+        {
+          method: "GET",
+          headers: { "content-type": "application/json" },
+        }
+      );
+      const data = await response.json();
+      if (data.vidId) {
+        const { vidId, title, artist } = data;
+        this.setState({
+          currentVid: {
+            vidId,
+            title,
+            artist,
+          },
+        });
+      } else {
+        console.log("no data");
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   render() {
     const { activeTab, options } = this.state;
 
     return (
       <div style={styles.container}>
         <div style={styles.sections}>
-          <Player />
+          <Player getVid={this.getVid} vidId={this.state.currentVid.vidId} />
           {activeTab !== "none" && <MinControls />}
           {activeTab === "none" && <FullControls />}
           {activeTab === "options" && (
