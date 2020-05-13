@@ -18,13 +18,13 @@ const FullControls = (props) => {
         </p>
       </div>
       <div style={styles.controls}>
-        <i class="material-icons" style={styles.controlsIcon}>
+        <i className="material-icons" style={styles.controlsIcon}>
           skip_previous
         </i>
-        <i class="material-icons" style={styles.controlsIcon}>
+        <i className="material-icons" style={styles.controlsIcon}>
           play_arrow
         </i>
-        <i class="material-icons" style={styles.controlsIcon}>
+        <i className="material-icons" style={styles.controlsIcon}>
           skip_next
         </i>
       </div>
