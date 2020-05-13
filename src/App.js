@@ -107,14 +107,22 @@ export default class App extends Component {
   };
 
   render() {
-    const { activeTab, options } = this.state;
+    const {
+      activeTab,
+      options,
+      currentVid: { vidId, title, artist },
+    } = this.state;
 
     return (
       <div style={styles.container}>
         <div style={styles.sections}>
-          <Player getVid={this.getVid} vidId={this.state.currentVid.vidId} />
-          {activeTab !== "none" && <MinControls />}
-          {activeTab === "none" && <FullControls />}
+          <Player getVid={this.getVid} vidId={vidId} />
+          {activeTab !== "none" && (
+            <MinControls title={title} artist={artist} />
+          )}
+          {activeTab === "none" && (
+            <FullControls title={title} artist={artist} />
+          )}
           {activeTab === "options" && (
             <Options options={options} toggle={this.handleOptionClick} />
           )}

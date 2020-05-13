@@ -1,11 +1,14 @@
 import React from "react";
 
-const MinControls = () => {
+const MinControls = (props) => {
+  const { title, artist } = props;
   return (
     <div style={styles.container}>
       <div style={styles.thumbnail}>
         <div style={styles.title}>
-          <p style={styles.text}>Title - Artist</p>
+          <p style={styles.text}>
+            {title} - {artist}
+          </p>
         </div>
       </div>
       <div style={styles.controls}>

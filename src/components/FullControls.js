@@ -1,6 +1,8 @@
 import React from "react";
 
-const FullControls = () => {
+const FullControls = (props) => {
+  const { title, artist } = props;
+
   return (
     <div style={styles.container}>
       <div>
@@ -11,7 +13,9 @@ const FullControls = () => {
         />
       </div>
       <div style={styles.title}>
-        <p style={styles.text}>Title - Artist</p>
+        <p style={styles.text}>
+          {title} - {artist}
+        </p>
       </div>
       <div style={styles.controls}>
         <i class="material-icons" style={styles.controlsIcon}>
