@@ -82,7 +82,7 @@ export default class App extends Component {
   getVid = async () => {
     try {
       const response = await fetch(
-        `http://localhost:3000/api/vid?dateMin=2020-04-21&dateMax=2020-04-22&rankMin=1&rankMax=100&pop=false&rap=false&latin=false&alternative=true&electronic=false&country=false&randb=false&rock&dance=false&lyrics=false&clean=false&karaoke=false`,
+        `http://localhost:3001/api/vid?dateMin=2020-04-21&dateMax=2020-04-22&rankMin=1&rankMax=100&pop=false&rap=false&latin=false&alternative=true&electronic=false&country=false&randb=false&rock&dance=false&lyrics=false&clean=false&karaoke=false`,
         {
           method: "GET",
           headers: { "content-type": "application/json" },

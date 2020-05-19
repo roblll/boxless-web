@@ -1,7 +1,7 @@
 import React from "react";
 
 import "../App.css";
-import Date from "./Date";
+import DateRange from "./DateRange";
 import Rank from "./Rank";
 import OptionsButton from "./OptionsButton";
 
@@ -31,7 +31,7 @@ const Options = (props) => {
   return (
     <div style={styles.container}>
       <div style={styles.optionsRow}>
-        <Date />
+        <DateRange />
       </div>
       <div style={styles.optionsRow}>
         <Rank />
