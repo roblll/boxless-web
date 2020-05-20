@@ -1,13 +1,13 @@
 import React from "react";
 
 const FullControls = (props) => {
-  const { title, artist } = props;
+  const { title, artist, vidId } = props;
 
   return (
     <div style={styles.container}>
       <div>
         <img
-          src="https://i.ytimg.com/vi/jNQXAC9IVRw/hqdefault.jpg"
+          src={`https://i.ytimg.com/vi/${vidId}/hqdefault.jpg`}
           alt="test"
           style={styles.image}
         />

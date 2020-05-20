@@ -124,10 +124,10 @@ export default class App extends Component {
         <div style={styles.sections}>
           <Player getVid={this.getVid} vidId={vidId} />
           {activeTab !== "none" && (
-            <MinControls title={title} artist={artist} />
+            <MinControls title={title} artist={artist} vidId={vidId} />
           )}
           {activeTab === "none" && (
-            <FullControls title={title} artist={artist} />
+            <FullControls title={title} artist={artist} vidId={vidId} />
           )}
           {activeTab === "options" && (
             <Options options={options} toggle={this.handleOptionClick} />
