@@ -5,25 +5,20 @@ import DayDropdwon from "./DayDropdown";
 import YearDropdown from "./YearDropdown";
 
 const DateRange = (props) => {
-  const { dateMin, dateMax } = props;
+  const { dayMin, dayMax, monthMin, monthMax, yearMin, yearMax } = props;
 
-  // if (dateMin == null && dateMax == null)
-
-  // const min = Date(dateMin);
-  // const yMin = min.getFullYear();
-  // console.log(yMin);
   return (
     <span>
       <div style={styles.date}>
-        <MonthDropdown month={4} />
-        <DayDropdwon day={20} days={31} />
-        <YearDropdown year={2010} min={1960} max={2020} />
+        <MonthDropdown month={monthMin} />
+        <DayDropdwon day={dayMin} days={31} />
+        <YearDropdown year={yearMin} min={1960} max={2020} />
       </div>
       <div style={styles.dash}>-</div>
       <div style={styles.date}>
-        <MonthDropdown month={4} />
-        <DayDropdwon day={20} days={31} />
-        <YearDropdown year={2020} min={1960} max={2020} />
+        <MonthDropdown month={monthMax} />
+        <DayDropdwon day={dayMax} days={31} />
+        <YearDropdown year={yearMax} min={1960} max={2020} />
       </div>
     </span>
   );

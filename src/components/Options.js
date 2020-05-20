@@ -24,8 +24,12 @@ const Options = (props) => {
       randb,
       rock,
       trance,
-      dateMin,
-      dateMax,
+      dayMin,
+      dayMax,
+      monthMin,
+      monthMax,
+      yearMin,
+      yearMax,
     },
     toggle,
   } = props;
@@ -33,7 +37,14 @@ const Options = (props) => {
   return (
     <div style={styles.container}>
       <div style={styles.optionsRow}>
-        <DateRange dateMin={dateMin} dateMax={dateMax} />
+        <DateRange
+          dayMin={dayMin}
+          dayMax={dayMax}
+          monthMin={monthMin}
+          monthMax={monthMin}
+          yearMin={yearMin}
+          yearMax={yearMax}
+        />
       </div>
       <div style={styles.optionsRow}>
         <Rank />
