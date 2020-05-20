@@ -9,6 +9,27 @@ import Playlist from "./components/Playlist";
 import MinControls from "./components/MinControls";
 import FullControls from "./components/FullControls";
 
+const getDefaultDates = () => {
+  const today = new Date();
+  const decadeAgo = new Date(today.getTime() - 315400000000);
+  const yearMax = today.getFullYear();
+  const monthMax = today.getMonth();
+  const dayMax = today.getDate();
+  const yearMin = decadeAgo.getFullYear();
+  const monthMin = decadeAgo.getMonth();
+  const dayMin = decadeAgo.getDate();
+  return { yearMax, monthMax, dayMax, yearMin, monthMin, dayMin };
+};
+
+const {
+  dayMin,
+  monthMin,
+  yearMin,
+  dayMax,
+  monthMax,
+  yearMax,
+} = getDefaultDates();
+
 export default class App extends Component {
   state = {
     activeTab: "options",
@@ -29,12 +50,12 @@ export default class App extends Component {
       randb: false,
       rock: false,
       trance: false,
-      dayMin: 1,
-      dayMax: 1,
-      monthMin: 0,
-      monthMax: 0,
-      yearMin: 2020,
-      yearMax: 2010,
+      dayMin,
+      dayMax,
+      monthMin,
+      monthMax,
+      yearMin,
+      yearMax,
       today: null,
       rankMin: null,
       rankMax: null,
@@ -45,27 +66,6 @@ export default class App extends Component {
       artist: null,
       thumbnail: null,
     },
-  };
-
-  componentDidMount() {
-    const { yyyy, mm, dd } = this.getCurrentCurrentDate();
-
-    this.setState({
-      options: {
-        ...this.state.options,
-        dateMin: `${yyyy - 10}-${mm}-${dd}`,
-        dateMax: `${yyyy}-${mm}-${dd}`,
-        today: `${yyyy}-${mm}-${dd}`,
-      },
-    });
-  }
-
-  getCurrentCurrentDate = () => {
-    const today = new Date();
-    const yyyy = today.getFullYear();
-    const mm = `${today.getMonth() + 1}`.padStart(2, 0);
-    const dd = `${today.getDate()}`.padStart(2, 0);
-    return { yyyy, mm, dd };
   };
 
   handleTabClick = (e, { name }) => {
