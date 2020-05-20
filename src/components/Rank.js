@@ -3,10 +3,10 @@ import React from "react";
 import RankDropdown from "./RankDropdown";
 
 const Rank = (props) => {
-  const { min, max } = props;
+  const { rankMin, rankMax } = props;
   const rankOptions = [];
 
-  for (let i = min; i <= max; i += 1) {
+  for (let i = rankMin; i <= rankMax; i += 1) {
     rankOptions.push({
       key: i,
       text: i.toString(),
@@ -16,9 +16,9 @@ const Rank = (props) => {
 
   return (
     <span style={styles.rank}>
-      <RankDropdown min={1} max={10} />
+      <RankDropdown min={1} max={10} value={rankMin} />
       <div style={styles.dash}>-</div>
-      <RankDropdown min={1} max={10} />
+      <RankDropdown min={1} max={10} value={rankMax} />
     </span>
   );
 };

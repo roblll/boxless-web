@@ -56,9 +56,8 @@ export default class App extends Component {
       monthMax,
       yearMin,
       yearMax,
-      today: null,
-      rankMin: null,
-      rankMax: null,
+      rankMin: 1,
+      rankMax: 10,
     },
     currentVid: {
       vidId: null,

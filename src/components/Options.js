@@ -30,6 +30,8 @@ const Options = (props) => {
       monthMax,
       yearMin,
       yearMax,
+      rankMin,
+      rankMax,
     },
     toggle,
   } = props;
@@ -41,13 +43,13 @@ const Options = (props) => {
           dayMin={dayMin}
           dayMax={dayMax}
           monthMin={monthMin}
-          monthMax={monthMin}
+          monthMax={monthMax}
           yearMin={yearMin}
           yearMax={yearMax}
         />
       </div>
       <div style={styles.optionsRow}>
-        <Rank />
+        <Rank rankMin={rankMin} rankMax={rankMax} />
       </div>
       <div style={styles.divider}></div>
       <div style={styles.optionsRow}>
