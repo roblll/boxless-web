@@ -64,13 +64,15 @@ const monthOptions = [
   },
 ];
 
-const MonthDropdown = () => {
+const MonthDropdown = (props) => {
+  const { month } = props;
   return (
     <Dropdown
       inline
       scrolling
       options={monthOptions}
-      defaultValue={monthOptions[0].value}
+      // defaultValue={monthOptions[0].value}
+      value={monthOptions[month].value}
     />
   );
 };

@@ -2,6 +2,8 @@ import React from "react";
 import { Dropdown } from "semantic-ui-react";
 
 const DayDropdown = (props) => {
+  const { day } = props;
+
   const dayOptions = [...Array(props.days).keys()].map((d) => {
     return {
       key: d + 1,
@@ -15,7 +17,7 @@ const DayDropdown = (props) => {
       inline
       scrolling
       options={dayOptions}
-      defaultValue={dayOptions[0].value}
+      defaultValue={day}
     />
   );
 };

@@ -2,7 +2,7 @@ import React from "react";
 import { Dropdown } from "semantic-ui-react";
 
 const YearDropdown = (props) => {
-  const { min, max } = props;
+  const { year, min, max } = props;
   const yearOptions = [];
 
   for (let i = min; i <= max; i += 1) {
@@ -14,12 +14,7 @@ const YearDropdown = (props) => {
   }
 
   return (
-    <Dropdown
-      inline
-      scrolling
-      options={yearOptions}
-      defaultValue={yearOptions[0].value}
-    />
+    <Dropdown inline scrolling options={yearOptions} defaultValue={year} />
   );
 };
 
