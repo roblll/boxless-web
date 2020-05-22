@@ -64,17 +64,25 @@ const monthOptions = [
   },
 ];
 
-const MonthDropdown = (props) => {
-  const { month } = props;
-  return (
-    <Dropdown
-      inline
-      scrolling
-      options={monthOptions}
-      // defaultValue={monthOptions[0].value}
-      value={monthOptions[month].value}
-    />
-  );
-};
+export default class MonthDropdown extends React.Component {
+  onChangeValue = (e, { value }) => {
+    const { handleChange, monthType } = this.props;
+    handleChange(
+      monthType,
+      monthOptions.findIndex((elem) => elem.value === value)
+    );
+  };
 
-export default MonthDropdown;
+  render() {
+    const { month } = this.props;
+    return (
+      <Dropdown
+        inline
+        scrolling
+        options={monthOptions}
+        value={monthOptions[month].value}
+        onChange={this.onChangeValue}
+      />
+    );
+  }
+}

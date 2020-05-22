@@ -5,20 +5,58 @@ import DayDropdwon from "./DayDropdown";
 import YearDropdown from "./YearDropdown";
 
 const DateRange = (props) => {
-  const { dayMin, dayMax, monthMin, monthMax, yearMin, yearMax } = props;
+  const {
+    dayMin,
+    dayMax,
+    monthMin,
+    monthMax,
+    yearMin,
+    yearMax,
+    handleChange,
+  } = props;
 
   return (
     <span>
       <div style={styles.date}>
-        <MonthDropdown month={monthMin} />
-        <DayDropdwon day={dayMin} days={31} />
-        <YearDropdown year={yearMin} min={1960} max={2020} />
+        <MonthDropdown
+          month={monthMin}
+          handleChange={handleChange}
+          monthType="monthMin"
+        />
+        <DayDropdwon
+          day={dayMin}
+          days={31}
+          handleChange={handleChange}
+          dayType="dayMin"
+        />
+        <YearDropdown
+          year={yearMin}
+          min={1960}
+          max={2020}
+          handleChange={handleChange}
+          yearType="yearMin"
+        />
       </div>
       <div style={styles.dash}>-</div>
       <div style={styles.date}>
-        <MonthDropdown month={monthMax} />
-        <DayDropdwon day={dayMax} days={31} />
-        <YearDropdown year={yearMax} min={1960} max={2020} />
+        <MonthDropdown
+          month={monthMax}
+          handleChange={handleChange}
+          monthType="monthMax"
+        />
+        <DayDropdwon
+          day={dayMax}
+          days={31}
+          handleChange={handleChange}
+          dayType="dayMax"
+        />
+        <YearDropdown
+          year={yearMax}
+          min={1960}
+          max={2020}
+          handleChange={handleChange}
+          yearType="yearMax"
+        />
       </div>
     </span>
   );

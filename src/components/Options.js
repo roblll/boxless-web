@@ -34,6 +34,7 @@ const Options = (props) => {
       rankMax,
     },
     toggle,
+    handleChange,
   } = props;
 
   return (
@@ -46,6 +47,7 @@ const Options = (props) => {
           monthMax={monthMax}
           yearMin={yearMin}
           yearMax={yearMax}
+          handleChange={handleChange}
         />
       </div>
       <div style={styles.optionsRow}>

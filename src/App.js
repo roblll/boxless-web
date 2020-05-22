@@ -85,6 +85,10 @@ export default class App extends Component {
     });
   };
 
+  handleDropDownChange = (dateType, value) => {
+    this.setState({ options: { ...this.state.options, [dateType]: value } });
+  };
+
   getVid = async () => {
     try {
       const response = await fetch(
@@ -130,7 +134,11 @@ export default class App extends Component {
             <FullControls title={title} artist={artist} vidId={vidId} />
           )}
           {activeTab === "options" && (
-            <Options options={options} toggle={this.handleOptionClick} />
+            <Options
+              options={options}
+              toggle={this.handleOptionClick}
+              handleChange={this.handleDropDownChange}
+            />
           )}
           {activeTab === "pick" && <Pick />}
           {activeTab === "search" && <Search />}

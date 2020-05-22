@@ -1,25 +1,31 @@
 import React from "react";
 import { Dropdown } from "semantic-ui-react";
 
-const DayDropdown = (props) => {
-  const { day } = props;
+export default class DayDropdown extends React.Component {
+  onChangeValue = (e, { value }) => {
+    const { handleChange, dayType } = this.props;
+    handleChange(dayType, value);
+  };
 
-  const dayOptions = [...Array(props.days).keys()].map((d) => {
-    return {
-      key: d + 1,
-      text: (d + 1).toString(),
-      value: d + 1,
-    };
-  });
-  return (
-    <Dropdown
-      style={{ margin: "0 8px" }}
-      inline
-      scrolling
-      options={dayOptions}
-      defaultValue={day}
-    />
-  );
-};
+  render() {
+    const { day, days } = this.props;
 
-export default DayDropdown;
+    const dayOptions = [...Array(days).keys()].map((d) => {
+      return {
+        key: d + 1,
+        text: (d + 1).toString(),
+        value: d + 1,
+      };
+    });
+    return (
+      <Dropdown
+        style={{ margin: "0 8px" }}
+        inline
+        scrolling
+        options={dayOptions}
+        value={day}
+        onChange={this.onChangeValue}
+      />
+    );
+  }
+}
