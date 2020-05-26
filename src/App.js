@@ -103,19 +103,27 @@ export default class App extends Component {
       );
       const data = await response.json();
       if (data.vidId) {
-        const { vidId, title, artist } = data;
-        this.setState({
-          currentVid: {
-            vidId,
-            title,
-            artist,
-          },
-        });
+        this.addToPlaylist(data.vidId);
+        // const { vidId, title, artist } = data;
+        // this.setState({
+        //   currentVid: {
+        //     vidId,
+        //     title,
+        //     artist,
+        //   },
+        // });
       } else {
         console.log("no data");
       }
     } catch (err) {
       console.log(err);
+    }
+  };
+
+  addToPlaylist = (vid) => {
+    const { playlist } = this.state;
+    if (playlist.length === 0) {
+      this.setState({ playlist: [vid] }, () => console.log(this.state));
     }
   };
 
