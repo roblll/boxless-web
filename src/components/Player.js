@@ -16,6 +16,9 @@ class Player extends React.Component {
     const opts = {
       width: "100%",
       height: "200px",
+      playerVars: {
+        autoplay: 1,
+      },
     };
 
     return (
