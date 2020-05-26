@@ -119,6 +119,10 @@ export default class App extends Component {
     }
   };
 
+  playNext = () => {
+    console.log("Play next");
+  };
+
   render() {
     const {
       activeTab,
@@ -130,7 +134,7 @@ export default class App extends Component {
       <div style={styles.container}>
         {/* <Static /> */}
         <div style={styles.sections}>
-          <Player getVid={this.getVid} vidId={vidId} />
+          <Player getVid={this.getVid} vidId={vidId} playNext={this.playNext} />
           {activeTab !== "none" && (
             <MinControls title={title} artist={artist} vidId={vidId} />
           )}

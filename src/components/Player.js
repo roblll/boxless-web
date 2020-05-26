@@ -3,7 +3,7 @@ import YouTube from "react-youtube";
 
 class Player extends React.Component {
   render() {
-    const { getVid, vidId } = this.props;
+    const { getVid, vidId, playNext } = this.props;
 
     const styles = {
       video: {
@@ -23,7 +23,12 @@ class Player extends React.Component {
 
     return (
       <div style={styles.video}>
-        <YouTube videoId={vidId} opts={opts} onReady={getVid} />
+        <YouTube
+          videoId={vidId}
+          opts={opts}
+          onReady={getVid}
+          onEnd={playNext}
+        />
       </div>
     );
   }
