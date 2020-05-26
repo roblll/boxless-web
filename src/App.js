@@ -66,6 +66,8 @@ export default class App extends Component {
       artist: null,
       thumbnail: null,
     },
+    playlist: [],
+    playlistPosition: 0,
   };
 
   handleTabClick = (e, { name }) => {
