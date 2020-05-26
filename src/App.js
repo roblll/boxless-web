@@ -8,6 +8,7 @@ import Search from "./components/Search";
 import Playlist from "./components/Playlist";
 import MinControls from "./components/MinControls";
 import FullControls from "./components/FullControls";
+// import Static from "./components/Static";
 
 const getDefaultDates = () => {
   const today = new Date();
@@ -125,6 +126,7 @@ export default class App extends Component {
 
     return (
       <div style={styles.container}>
+        {/* <Static /> */}
         <div style={styles.sections}>
           <Player getVid={this.getVid} vidId={vidId} />
           {activeTab !== "none" && (

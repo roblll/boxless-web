@@ -3,6 +3,8 @@ import React from "react";
 const MinControls = (props) => {
   const { title, artist, vidId } = props;
 
+  // const bgImage = vidId ? `url(https://i.ytimg.com/vi/${vidId}/hqdefault.jpg)` :
+
   const styles = {
     container: {
       display: "flex",
