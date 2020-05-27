@@ -94,10 +94,13 @@ export default class App extends Component {
   };
 
   getVid = async () => {
+    const {
+      options: { rankMin, rankMax },
+    } = this.state;
     const { dateMin, dateMax } = getFormattedDate(this.state);
     try {
       const response = await fetch(
-        `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=1&rankMax=100&pop=false&rap=false&latin=false&alternative=true&electronic=false&country=false&randb=false&rock&dance=false&lyrics=false&clean=false&karaoke=false`,
+        `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=true&rap=false&latin=false&alternative=false&electronic=false&country=false&randb=false&rock&dance=false&lyrics=false&clean=false&karaoke=false`,
         {
           method: "GET",
           headers: { "content-type": "application/json" },
@@ -141,7 +144,6 @@ export default class App extends Component {
   playNext = () => {
     let { playlist, playlistPosition } = this.state;
     if (playlist.length > playlistPosition + 1) {
-      console.log("aaa");
       const { vidId, title, artist } = playlist[playlistPosition + 1];
       playlistPosition += 1;
       this.setState(
