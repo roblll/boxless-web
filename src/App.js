@@ -105,13 +105,6 @@ export default class App extends Component {
       if (data.vidId) {
         const { vidId, title, artist } = data;
         this.addToPlaylist({ vidId, title, artist });
-        // this.setState({
-        //   currentVid: {
-        //     vidId,
-        //     title,
-        //     artist,
-        //   },
-        // });
       } else {
         console.log("no data");
       }
@@ -123,7 +116,9 @@ export default class App extends Component {
   addToPlaylist = (vid) => {
     const { playlist } = this.state;
     if (playlist.length === 0) {
-      this.setState({ playlist: [vid] }, () => this.play());
+      this.setState({ playlist: [...playlist, vid] }, () => this.play());
+    } else {
+      this.setState({ playlist: [...playlist, vid] });
     }
   };
 
@@ -131,6 +126,7 @@ export default class App extends Component {
     const { playlist, playlistPosition } = this.state;
     this.setState({ currentVid: { ...playlist[playlistPosition] } }, () => {
       if (this.checkPlaylistQueue()) {
+        console.log("aaa");
         this.getVid();
       }
     });
@@ -138,11 +134,27 @@ export default class App extends Component {
 
   checkPlaylistQueue = () => {
     const { playlist, playlistPosition } = this.state;
-    return playlistPosition === playlistPosition.length - 1;
+    return playlistPosition === playlist.length - 1;
   };
 
   playNext = () => {
-    console.log("Play next");
+    let { playlist, playlistPosition } = this.state;
+    if (playlist.length > playlistPosition + 1) {
+      console.log("aaa");
+      const { vidId, title, artist } = playlist[playlistPosition + 1];
+      playlistPosition += 1;
+      this.setState(
+        {
+          currentVid: { vidId, title, artist },
+          playlistPosition,
+        },
+        () => {
+          if (this.checkPlaylistQueue()) {
+            this.getVid();
+          }
+        }
+      );
+    }
   };
 
   render() {
