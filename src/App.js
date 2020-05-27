@@ -9,6 +9,7 @@ import Playlist from "./components/Playlist";
 import MinControls from "./components/MinControls";
 import FullControls from "./components/FullControls";
 // import Static from "./components/Static";
+import { getFormattedDate } from "./utils/utils";
 
 const getDefaultDates = () => {
   const today = new Date();
@@ -93,9 +94,10 @@ export default class App extends Component {
   };
 
   getVid = async () => {
+    const { dateMin, dateMax } = getFormattedDate(this.state);
     try {
       const response = await fetch(
-        `http://localhost:3001/api/vid?dateMin=2020-04-21&dateMax=2020-04-22&rankMin=1&rankMax=100&pop=false&rap=false&latin=false&alternative=true&electronic=false&country=false&randb=false&rock&dance=false&lyrics=false&clean=false&karaoke=false`,
+        `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=1&rankMax=100&pop=false&rap=false&latin=false&alternative=true&electronic=false&country=false&randb=false&rock&dance=false&lyrics=false&clean=false&karaoke=false`,
         {
           method: "GET",
           headers: { "content-type": "application/json" },
@@ -126,7 +128,6 @@ export default class App extends Component {
     const { playlist, playlistPosition } = this.state;
     this.setState({ currentVid: { ...playlist[playlistPosition] } }, () => {
       if (this.checkPlaylistQueue()) {
-        console.log("aaa");
         this.getVid();
       }
     });
