@@ -18,15 +18,15 @@ const Rank = (props) => {
     <span style={styles.rank}>
       <RankDropdown
         min={1}
-        max={10}
+        max={rankMax}
         value={rankMin}
         rankType="rankMin"
         handleChange={handleChange}
       />
       <div style={styles.dash}>-</div>
       <RankDropdown
-        min={1}
-        max={10}
+        min={rankMin}
+        max={100}
         value={rankMax}
         rankType="rankMax"
         handleChange={handleChange}
