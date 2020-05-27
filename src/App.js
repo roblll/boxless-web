@@ -190,7 +190,12 @@ export default class App extends Component {
         <div style={styles.sections}>
           <Player getVid={this.getVid} vidId={vidId} playNext={this.playNext} />
           {activeTab !== "none" && (
-            <MinControls title={title} artist={artist} vidId={vidId} />
+            <MinControls
+              title={title}
+              artist={artist}
+              vidId={vidId}
+              playNext={this.playNext}
+            />
           )}
           {activeTab === "none" && (
             <FullControls title={title} artist={artist} vidId={vidId} />

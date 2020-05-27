@@ -1,7 +1,7 @@
 import React from "react";
 
 const MinControls = (props) => {
-  const { title, artist, vidId } = props;
+  const { title, artist, vidId, playNext } = props;
 
   // const bgImage = vidId ? `url(https://i.ytimg.com/vi/${vidId}/hqdefault.jpg)` :
 
@@ -60,7 +60,11 @@ const MinControls = (props) => {
         <i className="material-icons" style={styles.controlsIcons}>
           play_arrow
         </i>
-        <i className="material-icons" style={styles.controlsIcons}>
+        <i
+          className="material-icons"
+          style={styles.controlsIcons}
+          onClick={playNext}
+        >
           skip_next
         </i>
       </div>
