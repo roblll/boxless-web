@@ -97,12 +97,27 @@ export default class App extends Component {
 
   getVid = async () => {
     const {
-      options: { rankMin, rankMax },
+      options: {
+        rankMin,
+        rankMax,
+        alternative,
+        country,
+        dance,
+        electronic,
+        hiphop,
+        house,
+        latin,
+        pop,
+        rap,
+        randb,
+        rock,
+        trance,
+      },
     } = this.state;
     const { dateMin, dateMax } = getFormattedDate(this.state);
     try {
       const response = await fetch(
-        `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=true&rap=false&latin=false&alternative=false&electronic=false&country=false&randb=false&rock&dance=false&lyrics=false&clean=false&karaoke=false`,
+        `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&lyrics=false&clean=false&karaoke=false`,
         {
           method: "GET",
           headers: { "content-type": "application/json" },
