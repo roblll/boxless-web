@@ -129,9 +129,16 @@ export default class App extends Component {
 
   play = () => {
     const { playlist, playlistPosition } = this.state;
-    this.setState({ currentVid: { ...playlist[playlistPosition] } }, () =>
-      console.log(this.state)
-    );
+    this.setState({ currentVid: { ...playlist[playlistPosition] } }, () => {
+      if (this.checkPlaylistQueue()) {
+        this.getVid();
+      }
+    });
+  };
+
+  checkPlaylistQueue = () => {
+    const { playlist, playlistPosition } = this.state;
+    return playlistPosition === playlistPosition.length - 1;
   };
 
   playNext = () => {
