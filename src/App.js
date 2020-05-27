@@ -128,7 +128,8 @@ export default class App extends Component {
         const { vidId, title, artist } = data;
         this.addToPlaylist({ vidId, title, artist });
       } else {
-        console.log("no data");
+        // console.log("no data");
+        this.getVid();
       }
     } catch (err) {
       console.log(err);
