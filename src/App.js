@@ -103,8 +103,8 @@ export default class App extends Component {
       );
       const data = await response.json();
       if (data.vidId) {
-        this.addToPlaylist(data.vidId);
-        // const { vidId, title, artist } = data;
+        const { vidId, title, artist } = data;
+        this.addToPlaylist({ vidId, title, artist });
         // this.setState({
         //   currentVid: {
         //     vidId,
@@ -123,8 +123,15 @@ export default class App extends Component {
   addToPlaylist = (vid) => {
     const { playlist } = this.state;
     if (playlist.length === 0) {
-      this.setState({ playlist: [vid] }, () => console.log(this.state));
+      this.setState({ playlist: [vid] }, () => this.play());
     }
+  };
+
+  play = () => {
+    const { playlist, playlistPosition } = this.state;
+    this.setState({ currentVid: { ...playlist[playlistPosition] } }, () =>
+      console.log(this.state)
+    );
   };
 
   playNext = () => {
