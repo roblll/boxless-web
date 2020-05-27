@@ -89,8 +89,10 @@ export default class App extends Component {
     });
   };
 
-  handleDropDownChange = (dateType, value) => {
-    this.setState({ options: { ...this.state.options, [dateType]: value } });
+  handleDropDownChange = (dropDownType, value) => {
+    this.setState({
+      options: { ...this.state.options, [dropDownType]: value },
+    });
   };
 
   getVid = async () => {

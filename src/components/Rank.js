@@ -3,7 +3,7 @@ import React from "react";
 import RankDropdown from "./RankDropdown";
 
 const Rank = (props) => {
-  const { rankMin, rankMax } = props;
+  const { rankMin, rankMax, handleChange } = props;
   const rankOptions = [];
 
   for (let i = rankMin; i <= rankMax; i += 1) {
@@ -16,9 +16,21 @@ const Rank = (props) => {
 
   return (
     <span style={styles.rank}>
-      <RankDropdown min={1} max={10} value={rankMin} />
+      <RankDropdown
+        min={1}
+        max={10}
+        value={rankMin}
+        rankType="rankMin"
+        handleChange={handleChange}
+      />
       <div style={styles.dash}>-</div>
-      <RankDropdown min={1} max={10} value={rankMax} />
+      <RankDropdown
+        min={1}
+        max={10}
+        value={rankMax}
+        rankType="rankMax"
+        handleChange={handleChange}
+      />
     </span>
   );
 };

@@ -51,7 +51,7 @@ const Options = (props) => {
         />
       </div>
       <div style={styles.optionsRow}>
-        <Rank rankMin={rankMin} rankMax={rankMax} />
+        <Rank rankMin={rankMin} rankMax={rankMax} handleChange={handleChange} />
       </div>
       <div style={styles.divider}></div>
       <div style={styles.optionsRow}>

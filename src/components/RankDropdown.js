@@ -1,19 +1,32 @@
 import React from "react";
 import { Dropdown } from "semantic-ui-react";
 
-const RankDropdown = (props) => {
-  const { min, max, value } = props;
-  const rankOptions = [];
+export default class RankDropdown extends React.Component {
+  onChangeValue = (e, { value }) => {
+    const { handleChange, rankType } = this.props;
+    handleChange(rankType, value);
+  };
 
-  for (let i = min; i <= max; i += 1) {
-    rankOptions.push({
-      key: i,
-      text: i.toString(),
-      value: i,
-    });
+  render() {
+    const { min, max, value } = this.props;
+    const rankOptions = [];
+
+    for (let i = min; i <= max; i += 1) {
+      rankOptions.push({
+        key: i,
+        text: i.toString(),
+        value: i,
+      });
+    }
+
+    return (
+      <Dropdown
+        inline
+        scrolling
+        options={rankOptions}
+        value={value}
+        onChange={this.onChangeValue}
+      />
+    );
   }
-
-  return <Dropdown inline scrolling options={rankOptions} value={value} />;
-};
-
-export default RankDropdown;
+}
