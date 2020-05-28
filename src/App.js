@@ -75,7 +75,53 @@ export default class App extends Component {
     if (this.state.activeTab === name) {
       this.setState({ activeTab: "none" });
     } else {
-      this.setState({ activeTab: name });
+      this.setState({ activeTab: name }, () => {
+        if (this.state.activeTab === "pick") {
+          this.getPickVids();
+        }
+      });
+    }
+  };
+
+  getPickVids = async () => {
+    const {
+      options: {
+        rankMin,
+        rankMax,
+        alternative,
+        country,
+        dance,
+        electronic,
+        hiphop,
+        house,
+        latin,
+        pop,
+        rap,
+        randb,
+        rock,
+        trance,
+      },
+    } = this.state;
+    const { dateMin, dateMax } = getFormattedDate(this.state);
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&lyrics=false&clean=false&karaoke=false`,
+        {
+          method: "GET",
+          headers: { "content-type": "application/json" },
+        }
+      );
+      const data = await response.json();
+      if (data.vidId) {
+        console.log(data);
+        const { vidId, title, artist } = data;
+        // this.addToPlaylist({ vidId, title, artist });
+      } else {
+        // console.log("no data");
+        // this.getVid();
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
