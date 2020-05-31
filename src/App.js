@@ -83,48 +83,6 @@ export default class App extends Component {
     }
   };
 
-  getPickVids = async () => {
-    const {
-      options: {
-        rankMin,
-        rankMax,
-        alternative,
-        country,
-        dance,
-        electronic,
-        hiphop,
-        house,
-        latin,
-        pop,
-        rap,
-        randb,
-        rock,
-        trance,
-      },
-    } = this.state;
-    const { dateMin, dateMax } = getFormattedDate(this.state);
-    try {
-      const response = await fetch(
-        `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&lyrics=false&clean=false&karaoke=false`,
-        {
-          method: "GET",
-          headers: { "content-type": "application/json" },
-        }
-      );
-      const data = await response.json();
-      if (data.vidId) {
-        console.log(data);
-        const { vidId, title, artist } = data;
-        // this.addToPlaylist({ vidId, title, artist });
-      } else {
-        // console.log("no data");
-        // this.getVid();
-      }
-    } catch (err) {
-      console.log(err);
-    }
-  };
-
   handleOptionClick = (e) => {
     const option = e.target.name;
     this.setState({
@@ -221,6 +179,49 @@ export default class App extends Component {
           }
         }
       );
+    }
+  };
+
+  getPickVids = async () => {
+    const {
+      options: {
+        rankMin,
+        rankMax,
+        alternative,
+        country,
+        dance,
+        electronic,
+        hiphop,
+        house,
+        latin,
+        pop,
+        rap,
+        randb,
+        rock,
+        trance,
+      },
+    } = this.state;
+    const { dateMin, dateMax } = getFormattedDate(this.state);
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/pickvids?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&lyrics=false&clean=false&karaoke=false`,
+        {
+          method: "GET",
+          headers: { "content-type": "application/json" },
+        }
+      );
+      const data = await response.json();
+      if (data.vid1.vidId && data.vid2.vidId) {
+        const { vid1, vid2 } = data;
+        // this.addToPlaylist({ vidId, title, artist });
+        console.log(vid1);
+        console.log(vid2);
+      } else {
+        // console.log("no data");
+        this.getVid();
+      }
+    } catch (err) {
+      console.log(err);
     }
   };
 
