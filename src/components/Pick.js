@@ -2,18 +2,30 @@ import React from "react";
 
 export default class Pick extends React.Component {
   render() {
+    const {
+      vids: { vid1, vid2 },
+    } = this.props;
+    const vidId1 = vid1 ? vid1.vidId : "jNQXAC9IVRw";
+    const vidId2 = vid2 ? vid2.vidId : "jNQXAC9IVRw";
+    const title1 = vid1 ? vid1.title : "";
+    const title2 = vid2 ? vid2.title : "";
+    const artist1 = vid1 ? vid1.artist : "";
+    const artist2 = vid2 ? vid2.artist : "";
+
     return (
       <div style={styles.container}>
         <div style={styles.pick}>
           <div style={styles.left}>
             <div style={styles.thumbnail}>
               <img
-                src="https://i.ytimg.com/vi/jNQXAC9IVRw/hqdefault.jpg"
+                src={`https://i.ytimg.com/vi/${vidId1}/hqdefault.jpg`}
                 alt="left"
                 style={styles.image}
               />
               <p style={styles.title}>
-                <p>title - artist</p>
+                <p>
+                  {title1} - {artist1}
+                </p>
               </p>
             </div>
           </div>
@@ -25,11 +37,13 @@ export default class Pick extends React.Component {
           <div style={styles.right}>
             <div style={styles.thumbnail}>
               <img
-                src="https://i.ytimg.com/vi/jNQXAC9IVRw/hqdefault.jpg"
+                src={`https://i.ytimg.com/vi/${vidId2}/hqdefault.jpg`}
                 alt="right"
                 style={styles.image}
               />
-              <p style={styles.title}>title - artist</p>
+              <p style={styles.title}>
+                {title2} - {artist2}
+              </p>
             </div>
           </div>
         </div>

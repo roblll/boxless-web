@@ -217,8 +217,7 @@ export default class App extends Component {
       const data = await response.json();
       if (data.vid1.vidId && data.vid2.vidId) {
         const { vid1, vid2 } = data;
-        // this.addToPlaylist({ vidId, title, artist });
-        this.setState({ pick: { vid1, vid2 } }, () => console.log(this.state));
+        this.setState({ pick: { vid1, vid2 } });
       } else {
         // console.log("no data");
         this.getVid();
