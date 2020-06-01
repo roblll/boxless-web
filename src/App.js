@@ -69,6 +69,10 @@ export default class App extends Component {
     },
     playlist: [],
     playlistPosition: 0,
+    pick: {
+      vid1: null,
+      vid2: null,
+    },
   };
 
   handleTabClick = (e, { name }) => {
@@ -214,8 +218,7 @@ export default class App extends Component {
       if (data.vid1.vidId && data.vid2.vidId) {
         const { vid1, vid2 } = data;
         // this.addToPlaylist({ vidId, title, artist });
-        console.log(vid1);
-        console.log(vid2);
+        this.setState({ pick: { vid1, vid2 } }, () => console.log(this.state));
       } else {
         // console.log("no data");
         this.getVid();
@@ -255,7 +258,7 @@ export default class App extends Component {
               handleChange={this.handleDropDownChange}
             />
           )}
-          {activeTab === "pick" && <Pick />}
+          {activeTab === "pick" && <Pick vids={this.state.pick} />}
           {activeTab === "search" && <Search />}
           {activeTab === "playlist" && <Playlist />}
           <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
