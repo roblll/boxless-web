@@ -257,7 +257,9 @@ export default class App extends Component {
               handleChange={this.handleDropDownChange}
             />
           )}
-          {activeTab === "pick" && <Pick vids={this.state.pick} />}
+          {activeTab === "pick" && (
+            <Pick vids={this.state.pick} refresh={this.getPickVids} />
+          )}
           {activeTab === "search" && <Search />}
           {activeTab === "playlist" && <Playlist />}
           <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />

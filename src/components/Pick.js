@@ -3,6 +3,7 @@ import React from "react";
 export default class Pick extends React.Component {
   render() {
     const {
+      refresh,
       vids: { vid1, vid2 },
     } = this.props;
     const vidId1 = vid1 ? vid1.vidId : "jNQXAC9IVRw";
@@ -48,7 +49,11 @@ export default class Pick extends React.Component {
           </div>
         </div>
         <div style={styles.refresh}>
-          <i style={styles.refreshIcon} class="material-icons">
+          <i
+            style={styles.refreshIcon}
+            class="material-icons"
+            onClick={() => refresh()}
+          >
             refresh
           </i>
         </div>
