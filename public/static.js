@@ -13,8 +13,10 @@
     SAMPLE_COUNT = 10;
 
   window.onresize = function () {
-    canvas.width = canvas.offsetWidth / scaleFactor;
-    canvas.height = canvas.width / (canvas.offsetWidth / canvas.offsetHeight);
+    // canvas.width = canvas.offsetWidth / scaleFactor;
+    // canvas.width = 200;
+    // canvas.height = canvas.width / (canvas.offsetWidth / canvas.offsetHeight);
+    // canvas.height = 200;
     scanSize = canvas.offsetHeight / scaleFactor / 3;
 
     samples = [];

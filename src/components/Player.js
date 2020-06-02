@@ -1,14 +1,24 @@
 import React from "react";
 import YouTube from "react-youtube";
 
+import Static from "./Static";
+
+const width = 375;
+const height = 200;
+
 class Player extends React.Component {
+  componentDidMount() {
+    const { getVid } = this.props;
+    getVid();
+  }
+
   render() {
     const { getVid, vidId, playNext } = this.props;
 
     const styles = {
       video: {
-        width: "375px",
-        height: "200px",
+        width: width,
+        height: height,
         backgroundColor: "darkgray",
       },
     };
@@ -23,12 +33,11 @@ class Player extends React.Component {
 
     return (
       <div style={styles.video}>
-        <YouTube
-          videoId={vidId}
-          opts={opts}
-          onReady={getVid}
-          onEnd={playNext}
-        />
+        {vidId ? (
+          <YouTube videoId={vidId} opts={opts} onEnd={playNext} />
+        ) : (
+          <Static height={height} width={width} />
+        )}
       </div>
     );
   }

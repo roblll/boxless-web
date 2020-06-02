@@ -21,6 +21,20 @@ export default class Static extends React.Component {
     }
   }
   render() {
-    return <canvas id="tv"></canvas>;
+    const { width, height } = this.props;
+    console.log(width);
+    return (
+      <div style={styles.container}>
+        <canvas id="tv" width={width} height={height}></canvas>
+      </div>
+    );
   }
 }
+
+const styles = {
+  container: {
+    flex: 1,
+    // width: 500,
+    // height: 500,
+  },
+};
