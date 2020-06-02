@@ -3,7 +3,9 @@ import React from "react";
 const MinControls = (props) => {
   const { title, artist, vidId, playNext } = props;
 
-  // const bgImage = vidId ? `url(https://i.ytimg.com/vi/${vidId}/hqdefault.jpg)` :
+  const bgImage = vidId
+    ? `url(https://i.ytimg.com/vi/${vidId}/hqdefault.jpg)`
+    : "none";
 
   const styles = {
     container: {
@@ -12,7 +14,7 @@ const MinControls = (props) => {
       flexDirection: "column",
       backgroundColor: "#3D3E3F",
       color: "white",
-      backgroundImage: `url(https://i.ytimg.com/vi/${vidId}/hqdefault.jpg)`,
+      backgroundImage: bgImage,
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center center",
       justifyContent: "space-evenly",
@@ -49,7 +51,7 @@ const MinControls = (props) => {
       <div style={styles.thumbnail}>
         <div style={styles.title}>
           <p style={styles.text}>
-            {title} - {artist}
+            {title && artist ? `${title} - ${artist}` : ""}
           </p>
         </div>
       </div>

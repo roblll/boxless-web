@@ -6,15 +6,17 @@ const FullControls = (props) => {
   return (
     <div style={styles.container}>
       <div>
-        <img
-          src={`https://i.ytimg.com/vi/${vidId}/hqdefault.jpg`}
-          alt="test"
-          style={styles.image}
-        />
+        {vidId && (
+          <img
+            src={`https://i.ytimg.com/vi/${vidId}/hqdefault.jpg`}
+            alt="test"
+            style={styles.image}
+          />
+        )}
       </div>
       <div style={styles.title}>
         <p style={styles.text}>
-          {title} - {artist}
+          {title && artist ? `${title} - ${artist}` : ""}
         </p>
       </div>
       <div style={styles.controls}>
