@@ -1,9 +1,12 @@
 import React from "react";
 
+import Static from "./Static";
+
 export default class Pick extends React.Component {
   render() {
     const {
       refresh,
+      addToPlaylist,
       vids: { vid1, vid2 },
     } = this.props;
     const vidId1 = vid1 ? vid1.vidId : "jNQXAC9IVRw";
@@ -16,7 +19,13 @@ export default class Pick extends React.Component {
     return (
       <div style={styles.container}>
         <div style={styles.pick}>
-          <div style={styles.left}>
+          <div
+            style={styles.left}
+            onClick={() => {
+              addToPlaylist(vid1);
+              refresh();
+            }}
+          >
             <div style={styles.thumbnail}>
               <img
                 src={`https://i.ytimg.com/vi/${vidId1}/hqdefault.jpg`}
@@ -35,7 +44,13 @@ export default class Pick extends React.Component {
               <p style={styles.or}>or</p>
             </div>
           </div>
-          <div style={styles.right}>
+          <div
+            style={styles.right}
+            onClick={() => {
+              addToPlaylist(vid2);
+              refresh();
+            }}
+          >
             <div style={styles.thumbnail}>
               <img
                 src={`https://i.ytimg.com/vi/${vidId2}/hqdefault.jpg`}

@@ -258,7 +258,11 @@ export default class App extends Component {
             />
           )}
           {activeTab === "pick" && (
-            <Pick vids={this.state.pick} refresh={this.getPickVids} />
+            <Pick
+              vids={this.state.pick}
+              refresh={this.getPickVids}
+              addToPlaylist={this.addToPlaylist}
+            />
           )}
           {activeTab === "search" && <Search />}
           {activeTab === "playlist" && <Playlist />}
