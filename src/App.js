@@ -226,6 +226,18 @@ export default class App extends Component {
     }
   };
 
+  refreshPickVids = () => {
+    this.setState(
+      {
+        pick: {
+          vid1: null,
+          vid2: null,
+        },
+      },
+      () => this.getPickVids()
+    );
+  };
+
   render() {
     const {
       activeTab,
@@ -258,7 +270,7 @@ export default class App extends Component {
           {activeTab === "pick" && (
             <Pick
               vids={this.state.pick}
-              refresh={this.getPickVids}
+              refresh={this.refreshPickVids}
               addToPlaylist={this.addToPlaylist}
             />
           )}
