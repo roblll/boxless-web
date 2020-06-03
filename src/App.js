@@ -238,6 +238,19 @@ export default class App extends Component {
     );
   };
 
+  getSearchVids = async () => {
+    try {
+      const response = await fetch(`http://localhost:3001/api/searchvids`, {
+        method: "GET",
+        headers: { "content-type": "application/json" },
+      });
+      const data = await response.json();
+      console.log(data);
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
   render() {
     const {
       activeTab,
@@ -274,7 +287,9 @@ export default class App extends Component {
               addToPlaylist={this.addToPlaylist}
             />
           )}
-          {activeTab === "search" && <Search />}
+          {activeTab === "search" && (
+            <Search getSearchVids={this.getSearchVids} />
+          )}
           {activeTab === "playlist" && <Playlist />}
           <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
         </div>

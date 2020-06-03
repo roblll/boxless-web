@@ -2,6 +2,7 @@ import React from "react";
 
 export default class Search extends React.Component {
   render() {
+    const { getSearchVids } = this.props;
     return (
       <div style={styles.container}>
         <div style={styles.carousel}>
@@ -33,7 +34,7 @@ export default class Search extends React.Component {
             placeholder="Search"
             style={styles.input}
           />
-          <div style={styles.button}>
+          <div style={styles.button} onClick={() => getSearchVids()}>
             <i style={styles.searchIcon} class="material-icons">
               search
             </i>
