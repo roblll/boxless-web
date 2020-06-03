@@ -1,6 +1,7 @@
 import React from "react";
 
 import Static from "./Static";
+import Static2 from "./Static2";
 
 export default class Pick extends React.Component {
   render() {
@@ -19,49 +20,59 @@ export default class Pick extends React.Component {
     return (
       <div style={styles.container}>
         <div style={styles.pick}>
-          <div
-            style={styles.left}
-            onClick={() => {
-              addToPlaylist(vid1);
-              refresh();
-            }}
-          >
-            <div style={styles.thumbnail}>
-              <img
-                src={`https://i.ytimg.com/vi/${vidId1}/hqdefault.jpg`}
-                alt="left"
-                style={styles.image}
-              />
-              <p style={styles.title}>
-                <p>
-                  {title1} - {artist1}
+          {vid1 ? (
+            <div
+              style={styles.left}
+              onClick={() => {
+                addToPlaylist(vid1);
+                refresh();
+              }}
+            >
+              <div style={styles.thumbnail}>
+                <img
+                  src={`https://i.ytimg.com/vi/${vidId1}/hqdefault.jpg`}
+                  alt="left"
+                  style={styles.image}
+                />
+                <p style={styles.title}>
+                  <p>
+                    {title1} - {artist1}
+                  </p>
                 </p>
-              </p>
+              </div>
             </div>
-          </div>
+          ) : (
+            <Static width={175} height={175} />
+          )}
+
           <div style={styles.middle}>
             <div style={styles.circle}>
               <p style={styles.or}>or</p>
             </div>
           </div>
-          <div
-            style={styles.right}
-            onClick={() => {
-              addToPlaylist(vid2);
-              refresh();
-            }}
-          >
-            <div style={styles.thumbnail}>
-              <img
-                src={`https://i.ytimg.com/vi/${vidId2}/hqdefault.jpg`}
-                alt="right"
-                style={styles.image}
-              />
-              <p style={styles.title}>
-                {title2} - {artist2}
-              </p>
+
+          {vid2 ? (
+            <div
+              style={styles.right}
+              onClick={() => {
+                addToPlaylist(vid2);
+                refresh();
+              }}
+            >
+              <div style={styles.thumbnail}>
+                <img
+                  src={`https://i.ytimg.com/vi/${vidId2}/hqdefault.jpg`}
+                  alt="right"
+                  style={styles.image}
+                />
+                <p style={styles.title}>
+                  {title2} - {artist2}
+                </p>
+              </div>
             </div>
-          </div>
+          ) : (
+            <Static2 width={175} height={175} />
+          )}
         </div>
         <div style={styles.refresh}>
           <i

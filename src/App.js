@@ -8,7 +8,6 @@ import Search from "./components/Search";
 import Playlist from "./components/Playlist";
 import MinControls from "./components/MinControls";
 import FullControls from "./components/FullControls";
-// import Static from "./components/Static";
 import { getFormattedDate } from "./utils/utils";
 
 const getDefaultDates = () => {
@@ -236,7 +235,6 @@ export default class App extends Component {
 
     return (
       <div style={styles.container}>
-        {/* <Static /> */}
         <div style={styles.sections}>
           <Player getVid={this.getVid} vidId={vidId} playNext={this.playNext} />
           {activeTab !== "none" && (
