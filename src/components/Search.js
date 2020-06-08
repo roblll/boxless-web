@@ -1,28 +1,60 @@
 import React from "react";
 
 export default class Search extends React.Component {
+  state = {
+    searchResults: [
+      {
+        vidId: "QYh6mYIJG2Y",
+        title: "Ariana Grande - 7 rings (Official Video)",
+      },
+      { vidId: "EOApBOHeBHg", title: "Ariana Grande - 7 rings (Lyrics)" },
+      { vidId: "InOCRXEsK3M", title: "Ariana Grande - 7 rings (Lyrics)" },
+      { vidId: "1BrAKVOjPG1I234", title: "Ariana Grande - 7 rings (Lyrics)" },
+    ],
+    current: 0,
+  };
+
+  handleNext = () => {
+    const { current } = this.state;
+    this.setState({ current: current + 1 });
+  };
+
+  handlePrev = () => {
+    const { current } = this.state;
+    this.setState({ current: current - 1 });
+  };
+
   render() {
     const { getSearchVids } = this.props;
+    const { searchResults, current } = this.state;
     return (
       <div style={styles.container}>
         <div style={styles.carousel}>
           <div style={styles.left}>
-            <i class="material-icons" style={styles.arrow}>
+            <i
+              class="material-icons"
+              style={styles.arrow}
+              onClick={this.handlePrev}
+            >
               chevron_left
             </i>
           </div>
           <div style={styles.center}>
             <div style={styles.thumbnail}>
               <img
-                src="https://i.ytimg.com/vi/jNQXAC9IVRw/hqdefault.jpg"
+                src={`https://i.ytimg.com/vi/${searchResults[current].vidId}/hqdefault.jpg`}
                 style={styles.image}
                 alt="thumbnail"
               />
-              <p style={styles.title}>Title - Artist</p>
+              <p style={styles.title}>{`${searchResults[current].title}`}</p>
             </div>
           </div>
           <div style={styles.right}>
-            <i class="material-icons" style={styles.arrow}>
+            <i
+              class="material-icons"
+              style={styles.arrow}
+              onClick={this.handleNext}
+            >
               chevron_right
             </i>
           </div>
