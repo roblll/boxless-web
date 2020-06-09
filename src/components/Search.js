@@ -2,26 +2,24 @@ import React from "react";
 
 export default class Search extends React.Component {
   state = {
-    // searchResults: [
-    //   {
-    //     vidId: "QYh6mYIJG2Y",
-    //     title: "Ariana Grande - 7 rings (Official Video)",
-    //   },
-    //   { vidId: "EOApBOHeBHg", title: "Ariana Grande - 7 rings (Lyrics)" },
-    //   { vidId: "InOCRXEsK3M", title: "Ariana Grande - 7 rings (Lyrics)" },
-    //   { vidId: "1BrAKVOjPG1I234", title: "Ariana Grande - 7 rings (Lyrics)" },
-    // ],
     current: 0,
   };
 
   handleNext = () => {
     const { current } = this.state;
-    this.setState({ current: current + 1 });
+    const {
+      searchResults: { vids },
+    } = this.props;
+    if (current < vids.length - 1) {
+      this.setState({ current: current + 1 });
+    }
   };
 
   handlePrev = () => {
     const { current } = this.state;
-    this.setState({ current: current - 1 });
+    if (current > 0) {
+      this.setState({ current: current - 1 });
+    }
   };
 
   render() {
