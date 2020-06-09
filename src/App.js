@@ -72,6 +72,7 @@ export default class App extends Component {
       vid1: null,
       vid2: null,
     },
+    searchResults: {},
   };
 
   handleTabClick = (e, { name }) => {
@@ -244,8 +245,8 @@ export default class App extends Component {
         method: "GET",
         headers: { "content-type": "application/json" },
       });
-      const data = await response.json();
-      console.log(data);
+      const { searchResults } = await response.json();
+      this.setState({ searchResults });
     } catch (err) {
       console.log(err);
     }
@@ -256,6 +257,7 @@ export default class App extends Component {
       activeTab,
       options,
       currentVid: { vidId, title, artist },
+      searchResults,
     } = this.state;
 
     return (
@@ -288,7 +290,10 @@ export default class App extends Component {
             />
           )}
           {activeTab === "search" && (
-            <Search getSearchVids={this.getSearchVids} />
+            <Search
+              getSearchVids={this.getSearchVids}
+              searchResults={searchResults}
+            />
           )}
           {activeTab === "playlist" && <Playlist />}
           <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />

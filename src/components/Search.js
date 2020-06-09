@@ -2,15 +2,15 @@ import React from "react";
 
 export default class Search extends React.Component {
   state = {
-    searchResults: [
-      {
-        vidId: "QYh6mYIJG2Y",
-        title: "Ariana Grande - 7 rings (Official Video)",
-      },
-      { vidId: "EOApBOHeBHg", title: "Ariana Grande - 7 rings (Lyrics)" },
-      { vidId: "InOCRXEsK3M", title: "Ariana Grande - 7 rings (Lyrics)" },
-      { vidId: "1BrAKVOjPG1I234", title: "Ariana Grande - 7 rings (Lyrics)" },
-    ],
+    // searchResults: [
+    //   {
+    //     vidId: "QYh6mYIJG2Y",
+    //     title: "Ariana Grande - 7 rings (Official Video)",
+    //   },
+    //   { vidId: "EOApBOHeBHg", title: "Ariana Grande - 7 rings (Lyrics)" },
+    //   { vidId: "InOCRXEsK3M", title: "Ariana Grande - 7 rings (Lyrics)" },
+    //   { vidId: "1BrAKVOjPG1I234", title: "Ariana Grande - 7 rings (Lyrics)" },
+    // ],
     current: 0,
   };
 
@@ -25,8 +25,9 @@ export default class Search extends React.Component {
   };
 
   render() {
-    const { getSearchVids } = this.props;
-    const { searchResults, current } = this.state;
+    const { getSearchVids, searchResults } = this.props;
+    const { searchTerm, vids } = searchResults;
+    const { current } = this.state;
     return (
       <div style={styles.container}>
         <div style={styles.carousel}>
@@ -39,16 +40,20 @@ export default class Search extends React.Component {
               chevron_left
             </i>
           </div>
-          <div style={styles.center}>
-            <div style={styles.thumbnail}>
-              <img
-                src={`https://i.ytimg.com/vi/${searchResults[current].vidId}/hqdefault.jpg`}
-                style={styles.image}
-                alt="thumbnail"
-              />
-              <p style={styles.title}>{`${searchResults[current].title}`}</p>
+          {vids ? (
+            <div style={styles.center}>
+              <div style={styles.thumbnail}>
+                <img
+                  src={`https://i.ytimg.com/vi/${vids[current].vidId}/hqdefault.jpg`}
+                  style={styles.image}
+                  alt="thumbnail"
+                />
+                <p style={styles.title}>{`${vids[current].title}`}</p>
+              </div>
             </div>
-          </div>
+          ) : (
+            <p>Nothing</p>
+          )}
           <div style={styles.right}>
             <i
               class="material-icons"
