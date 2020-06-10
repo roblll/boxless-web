@@ -2,10 +2,37 @@ import React from "react";
 
 export default class Playlist extends React.Component {
   render() {
+    const { playlist, playlistPosition } = this.props;
+    const list = playlist.map((vid, index) => {
+      let label = "";
+      if (vid.title && vid.artist) {
+        label = `${vid.title} - ${vid.artist}`;
+      } else if (vid.title) {
+        label = `${vid.title}`;
+      }
+      return (
+        <div style={styles.row} key={index.toString()}>
+          {index === playlistPosition ? (
+            <i class="material-icons" style={styles.play}>
+              music_note
+            </i>
+          ) : (
+            <i class="material-icons" style={styles.play}></i>
+          )}
+          <img
+            src={`https://i.ytimg.com/vi/${vid.vidId}/hqdefault.jpg`}
+            alt="thumbnail"
+            style={styles.image}
+          />
+          <p style={styles.title}>{label}</p>
+        </div>
+      );
+    });
+
     return (
       <div style={styles.container}>
         <div style={styles.scrollable}>
-          <div style={styles.row}>
+          {/* <div style={styles.row}>
             <i class="material-icons" style={styles.play}>
               music_note
             </i>
@@ -142,7 +169,8 @@ export default class Playlist extends React.Component {
               style={styles.image}
             />
             <p style={styles.title}>Title - Artist</p>
-          </div>
+          </div> */}
+          {list}
         </div>
       </div>
     );

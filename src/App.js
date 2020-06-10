@@ -145,7 +145,6 @@ export default class App extends Component {
   };
 
   addToPlaylist = (vid) => {
-    console.log(vid);
     const { playlist } = this.state;
     if (playlist.length === 0) {
       this.setState({ playlist: [...playlist, vid] }, () => this.play());
@@ -265,6 +264,8 @@ export default class App extends Component {
       options,
       currentVid: { vidId, title, artist },
       searchResults,
+      playlist,
+      playlistPosition,
     } = this.state;
 
     return (
@@ -303,7 +304,9 @@ export default class App extends Component {
               addToPlaylist={this.addToPlaylist}
             />
           )}
-          {activeTab === "playlist" && <Playlist />}
+          {activeTab === "playlist" && (
+            <Playlist playlist={playlist} playlistPosition={playlistPosition} />
+          )}
           <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
         </div>
       </div>
