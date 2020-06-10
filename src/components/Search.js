@@ -3,6 +3,7 @@ import React from "react";
 export default class Search extends React.Component {
   state = {
     current: 0,
+    search: "",
   };
 
   handleNext = () => {
@@ -22,10 +23,15 @@ export default class Search extends React.Component {
     }
   };
 
+  handleChange = (event) => {
+    const value = event.target.value;
+    this.setState({ search: value });
+  };
+
   render() {
     const { getSearchVids, searchResults } = this.props;
     const { searchTerm, vids } = searchResults;
-    const { current } = this.state;
+    const { current, search } = this.state;
     return (
       <div style={styles.container}>
         <div style={styles.carousel}>
@@ -68,6 +74,8 @@ export default class Search extends React.Component {
             name="search"
             placeholder="Search"
             style={styles.input}
+            value={search}
+            onChange={this.handleChange}
           />
           <div style={styles.button} onClick={() => getSearchVids()}>
             <i style={styles.searchIcon} class="material-icons">
