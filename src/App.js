@@ -145,6 +145,7 @@ export default class App extends Component {
   };
 
   addToPlaylist = (vid) => {
+    console.log(vid);
     const { playlist } = this.state;
     if (playlist.length === 0) {
       this.setState({ playlist: [...playlist, vid] }, () => this.play());

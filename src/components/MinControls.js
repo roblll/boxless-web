@@ -46,13 +46,18 @@ const MinControls = (props) => {
     },
   };
 
+  let text = "";
+  if (title && artist) {
+    text = `${title} - ${artist}`;
+  } else if (title) {
+    text = `${title}`;
+  }
+
   return (
     <div style={styles.container}>
       <div style={styles.thumbnail}>
         <div style={styles.title}>
-          <p style={styles.text}>
-            {title && artist ? `${title} - ${artist}` : ""}
-          </p>
+          <p style={styles.text}>{text}</p>
         </div>
       </div>
       <div style={styles.controls}>

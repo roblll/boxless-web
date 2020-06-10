@@ -3,6 +3,13 @@ import React from "react";
 const FullControls = (props) => {
   const { title, artist, vidId } = props;
 
+  let text = "";
+  if (title && artist) {
+    text = `${title} - ${artist}`;
+  } else if (title) {
+    text = `${title}`;
+  }
+
   return (
     <div style={styles.container}>
       <div>
@@ -15,9 +22,7 @@ const FullControls = (props) => {
         )}
       </div>
       <div style={styles.title}>
-        <p style={styles.text}>
-          {title && artist ? `${title} - ${artist}` : ""}
-        </p>
+        <p style={styles.text}>{text}</p>
       </div>
       <div style={styles.controls}>
         <i className="material-icons" style={styles.controlsIcon}>
