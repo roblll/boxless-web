@@ -77,7 +77,7 @@ export default class Search extends React.Component {
             value={search}
             onChange={this.handleChange}
           />
-          <div style={styles.button} onClick={() => getSearchVids()}>
+          <div style={styles.button} onClick={() => getSearchVids(search)}>
             <i style={styles.searchIcon} class="material-icons">
               search
             </i>

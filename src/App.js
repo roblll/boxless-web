@@ -239,12 +239,18 @@ export default class App extends Component {
     );
   };
 
-  getSearchVids = async () => {
+  getSearchVids = async (searchTerm) => {
     try {
-      const response = await fetch(`http://localhost:3001/api/searchvids`, {
-        method: "GET",
-        headers: { "content-type": "application/json" },
-      });
+      const response = await fetch(
+        `http://localhost:3001/api/searchvids?search=${searchTerm.replace(
+          / /g,
+          "%"
+        )}`,
+        {
+          method: "GET",
+          headers: { "content-type": "application/json" },
+        }
+      );
       const { searchResults } = await response.json();
       this.setState({ searchResults });
     } catch (err) {
