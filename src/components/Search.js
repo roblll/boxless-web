@@ -29,7 +29,7 @@ export default class Search extends React.Component {
   };
 
   render() {
-    const { getSearchVids, searchResults } = this.props;
+    const { getSearchVids, searchResults, addToPlaylist } = this.props;
     const { searchTerm, vids } = searchResults;
     const { current, search } = this.state;
     return (
@@ -45,7 +45,15 @@ export default class Search extends React.Component {
             </i>
           </div>
           {vids ? (
-            <div style={styles.center}>
+            <div
+              style={styles.center}
+              onClick={() =>
+                addToPlaylist({
+                  vidId: vids[current].vidId,
+                  title: vids[current].title,
+                })
+              }
+            >
               <div style={styles.thumbnail}>
                 <img
                   src={`https://i.ytimg.com/vi/${vids[current].vidId}/hqdefault.jpg`}

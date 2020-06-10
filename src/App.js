@@ -299,6 +299,7 @@ export default class App extends Component {
             <Search
               getSearchVids={this.getSearchVids}
               searchResults={searchResults}
+              addToPlaylist={this.addToPlaylist}
             />
           )}
           {activeTab === "playlist" && <Playlist />}
