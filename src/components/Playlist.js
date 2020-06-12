@@ -209,8 +209,8 @@ const styles = {
     textAlign: "center",
   },
   image: {
-    height: "33px",
-    margin: "10px 15px 10px 0",
+    height: "50px",
+    margin: "2px 15px 2px 0",
   },
   title: {
     margin: "0px",
