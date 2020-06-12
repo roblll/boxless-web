@@ -4,6 +4,11 @@ export default class Playlist extends React.Component {
   state = {
     selected: 3,
   };
+
+  handleSelect = (id) => {
+    this.setState({ selected: id });
+  };
+
   render() {
     const { playlist, playlistPosition } = this.props;
     const { selected } = this.state;
@@ -15,24 +20,67 @@ export default class Playlist extends React.Component {
         label = `${vid.title}`;
       }
       return (
-        <div
-          style={styles.row}
-          key={index.toString()}
-          onClick={() => alert("aaa")}
-        >
-          {index === playlistPosition ? (
-            <i class="material-icons" style={styles.play}>
-              music_note
-            </i>
+        <div>
+          {selected === index ? (
+            <div
+              style={styles.rowSelected}
+              key={index.toString()}
+              onClick={() => this.handleSelect(index)}
+            >
+              <div style={styles.rowTop}>
+                {index === playlistPosition ? (
+                  <i class="material-icons" style={styles.play}>
+                    music_note
+                  </i>
+                ) : (
+                  <i class="material-icons" style={styles.play}></i>
+                )}
+                <img
+                  src={`https://i.ytimg.com/vi/${vid.vidId}/hqdefault.jpg`}
+                  alt="thumbnail"
+                  style={styles.image}
+                />
+                <p style={styles.title}>{label}</p>
+              </div>
+              <div style={styles.rowBottom}>
+                <i class="material-icons" style={styles.button}>
+                  play_arrow
+                </i>
+                <i class="material-icons" style={styles.button}>
+                  keyboard_arrow_down
+                </i>
+                <i class="material-icons" style={styles.button}>
+                  keyboard_arrow_up
+                </i>
+                <i class="material-icons" style={styles.button}>
+                  add
+                </i>
+                <i class="material-icons" style={styles.button}>
+                  remove
+                </i>
+              </div>
+            </div>
           ) : (
-            <i class="material-icons" style={styles.play}></i>
+            <div
+              style={styles.row}
+              key={index.toString()}
+              onClick={() => this.handleSelect(index)}
+            >
+              {index === playlistPosition ? (
+                <i class="material-icons" style={styles.play}>
+                  music_note
+                </i>
+              ) : (
+                <i class="material-icons" style={styles.play}></i>
+              )}
+              <img
+                src={`https://i.ytimg.com/vi/${vid.vidId}/hqdefault.jpg`}
+                alt="thumbnail"
+                style={styles.image}
+              />
+              <p style={styles.title}>{label}</p>
+            </div>
           )}
-          <img
-            src={`https://i.ytimg.com/vi/${vid.vidId}/hqdefault.jpg`}
-            alt="thumbnail"
-            style={styles.image}
-          />
-          <p style={styles.title}>{label}</p>
         </div>
       );
     });
