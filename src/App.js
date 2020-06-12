@@ -8,19 +8,7 @@ import Search from "./components/Search";
 import Playlist from "./components/Playlist";
 import MinControls from "./components/MinControls";
 import FullControls from "./components/FullControls";
-import { getFormattedDate } from "./utils/utils";
-
-const getDefaultDates = () => {
-  const today = new Date();
-  const decadeAgo = new Date(today.getTime() - 315400000000);
-  const yearMax = today.getFullYear();
-  const monthMax = today.getMonth();
-  const dayMax = today.getDate();
-  const yearMin = decadeAgo.getFullYear();
-  const monthMin = decadeAgo.getMonth();
-  const dayMin = decadeAgo.getDate();
-  return { yearMax, monthMax, dayMax, yearMin, monthMin, dayMin };
-};
+import { getFormattedDate, getDefaultDates } from "./utils/utils";
 
 const {
   dayMin,
@@ -58,7 +46,7 @@ export default class App extends Component {
       yearMin,
       yearMax,
       rankMin: 1,
-      rankMax: 10,
+      rankMax: 100,
     },
     currentVid: {
       vidId: null,
