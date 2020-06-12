@@ -1,8 +1,12 @@
 import React from "react";
 
 export default class Playlist extends React.Component {
+  state = {
+    selected: 3,
+  };
   render() {
     const { playlist, playlistPosition } = this.props;
+    const { selected } = this.state;
     const list = playlist.map((vid, index) => {
       let label = "";
       if (vid.title && vid.artist) {
@@ -11,7 +15,11 @@ export default class Playlist extends React.Component {
         label = `${vid.title}`;
       }
       return (
-        <div style={styles.row} key={index.toString()}>
+        <div
+          style={styles.row}
+          key={index.toString()}
+          onClick={() => alert("aaa")}
+        >
           {index === playlistPosition ? (
             <i class="material-icons" style={styles.play}>
               music_note

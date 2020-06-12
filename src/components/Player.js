@@ -9,7 +9,7 @@ const height = 200;
 class Player extends React.Component {
   componentDidMount() {
     const { getVid } = this.props;
-    // getVid();
+    getVid();
   }
 
   render() {

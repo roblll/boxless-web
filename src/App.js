@@ -214,13 +214,16 @@ export default class App extends Component {
           headers: { "content-type": "application/json" },
         }
       );
+      console.log("aaa");
       const data = await response.json();
+      console.log(data);
       if (data.vid1.vidId && data.vid2.vidId) {
         const { vid1, vid2 } = data;
         this.setState({ pick: { vid1, vid2 } });
       } else {
         // console.log("no data");
-        this.getVid();
+        // this.getVid();
+        this.setState({ pick: { vid1: null, vid2: null } });
       }
     } catch (err) {
       console.log(err);
