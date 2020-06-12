@@ -2,11 +2,16 @@ import React from "react";
 
 export default class Playlist extends React.Component {
   state = {
-    selected: 3,
+    selected: null,
   };
 
   handleSelect = (id) => {
-    this.setState({ selected: id });
+    const { selected } = this.state;
+    if (id === selected) {
+      this.setState({ selected: null });
+    } else {
+      this.setState({ selected: id });
+    }
   };
 
   render() {
