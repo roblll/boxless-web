@@ -61,6 +61,18 @@ export default class App extends Component {
       vid2: null,
     },
     searchResults: {},
+    cache: {
+      cachedVid: {
+        vidId: null,
+        title: null,
+        artist: null,
+        thumbnail: null,
+      },
+      cachedPick: {
+        vid1: null,
+        vid2: null,
+      },
+    },
   };
 
   componentDidMount() {
