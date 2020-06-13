@@ -7,11 +7,6 @@ const width = 375;
 const height = 200;
 
 class Player extends React.Component {
-  componentDidMount() {
-    const { getVid } = this.props;
-    getVid();
-  }
-
   render() {
     const { getVid, vidId, playNext } = this.props;
 

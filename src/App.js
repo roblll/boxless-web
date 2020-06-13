@@ -63,15 +63,24 @@ export default class App extends Component {
     searchResults: {},
   };
 
+  componentDidMount() {
+    const {
+      currentVid: { vidId },
+      pick: { vid1, vid2 },
+    } = this.state;
+    if (vidId === null) {
+      this.getVid();
+    }
+    if (vid1 === null || vid2 === null) {
+      this.refreshPickVids();
+    }
+  }
+
   handleTabClick = (e, { name }) => {
     if (this.state.activeTab === name) {
       this.setState({ activeTab: "none" });
     } else {
-      this.setState({ activeTab: name }, () => {
-        if (this.state.activeTab === "pick") {
-          this.getPickVids();
-        }
-      });
+      this.setState({ activeTab: name });
     }
   };
 
