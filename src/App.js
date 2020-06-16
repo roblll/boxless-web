@@ -253,6 +253,8 @@ export default class App extends Component {
             this.getVidToCache();
           }
         );
+      } else {
+        this.getVid();
       }
     }
   };
