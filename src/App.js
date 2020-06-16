@@ -52,7 +52,6 @@ export default class App extends Component {
       vidId: null,
       title: null,
       artist: null,
-      thumbnail: null,
     },
     playlist: [],
     playlistPosition: 0,
@@ -62,12 +61,7 @@ export default class App extends Component {
     },
     searchResults: {},
     cache: {
-      cachedVid: {
-        vidId: null,
-        title: null,
-        artist: null,
-        thumbnail: null,
-      },
+      cachedVid: null,
       cachedPick: {
         vid1: null,
         vid2: null,
@@ -114,6 +108,57 @@ export default class App extends Component {
 
   getVid = async () => {
     const {
+      playlistPosition,
+      cache: { cachedVid },
+    } = this.state;
+    if (cachedVid !== null) {
+      // add cached vid to playlist
+      //
+    } else {
+      const {
+        options: {
+          rankMin,
+          rankMax,
+          alternative,
+          country,
+          dance,
+          electronic,
+          hiphop,
+          house,
+          latin,
+          pop,
+          rap,
+          randb,
+          rock,
+          trance,
+        },
+      } = this.state;
+      const { dateMin, dateMax } = getFormattedDate(this.state);
+      try {
+        const response = await fetch(
+          `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&lyrics=false&clean=false&karaoke=false`,
+          {
+            method: "GET",
+            headers: { "content-type": "application/json" },
+          }
+        );
+        const data = await response.json();
+        if (data.vidId) {
+          const { vidId, title, artist } = data;
+          this.addToPlaylist({ vidId, title, artist });
+          this.getVidToCache();
+        } else {
+          // console.log("no data");
+          this.getVid();
+        }
+      } catch (err) {
+        console.log(err);
+      }
+    }
+  };
+
+  getVidToCache = async () => {
+    const {
       options: {
         rankMin,
         rankMax,
@@ -130,6 +175,7 @@ export default class App extends Component {
         rock,
         trance,
       },
+      cache: { cachedPick },
     } = this.state;
     const { dateMin, dateMax } = getFormattedDate(this.state);
     try {
@@ -143,10 +189,12 @@ export default class App extends Component {
       const data = await response.json();
       if (data.vidId) {
         const { vidId, title, artist } = data;
-        this.addToPlaylist({ vidId, title, artist });
+        this.setState({
+          cache: { cachedPick, cachedVid: { vidId, title, artist } },
+        });
       } else {
         // console.log("no data");
-        this.getVid();
+        this.getVidToCache();
       }
     } catch (err) {
       console.log(err);
@@ -166,7 +214,7 @@ export default class App extends Component {
     const { playlist, playlistPosition } = this.state;
     this.setState({ currentVid: { ...playlist[playlistPosition] } }, () => {
       if (this.checkPlaylistQueue()) {
-        this.getVid();
+        // this.getVid();
       }
     });
   };
@@ -177,7 +225,11 @@ export default class App extends Component {
   };
 
   playNext = () => {
-    let { playlist, playlistPosition } = this.state;
+    let {
+      playlist,
+      playlistPosition,
+      cache: { cachedVid },
+    } = this.state;
     if (playlist.length > playlistPosition + 1) {
       const { vidId, title, artist } = playlist[playlistPosition + 1];
       playlistPosition += 1;
@@ -192,6 +244,16 @@ export default class App extends Component {
           }
         }
       );
+    } else {
+      if (cachedVid !== null) {
+        this.setState(
+          { currentVid: cachedVid, playlistPosition: playlistPosition + 1 },
+          () => {
+            this.addToPlaylist(cachedVid);
+            this.getVidToCache();
+          }
+        );
+      }
     }
   };
 
@@ -223,15 +285,11 @@ export default class App extends Component {
           headers: { "content-type": "application/json" },
         }
       );
-      console.log("aaa");
       const data = await response.json();
-      console.log(data);
       if (data.vid1.vidId && data.vid2.vidId) {
         const { vid1, vid2 } = data;
         this.setState({ pick: { vid1, vid2 } });
       } else {
-        // console.log("no data");
-        // this.getVid();
         this.setState({ pick: { vid1: null, vid2: null } });
       }
     } catch (err) {
