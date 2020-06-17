@@ -148,7 +148,7 @@ export default class App extends Component {
           this.addToPlaylist({ vidId, title, artist });
           this.getVidToCache();
         } else {
-          // console.log("no data");
+          console.log("no data");
           this.getVid();
         }
       } catch (err) {
@@ -193,7 +193,7 @@ export default class App extends Component {
           cache: { cachedPick, cachedVid: { vidId, title, artist } },
         });
       } else {
-        // console.log("no data");
+        console.log("no data");
         this.getVidToCache();
       }
     } catch (err) {
@@ -288,11 +288,24 @@ export default class App extends Component {
         }
       );
       const data = await response.json();
-      if (data.vid1.vidId && data.vid2.vidId) {
-        const { vid1, vid2 } = data;
-        this.setState({ pick: { vid1, vid2 } });
+      if (data.vid1 && data.vid2) {
+        if (
+          data.vid1.vidId &&
+          data.vid1.title &&
+          data.vid1.artist &&
+          data.vid2.vidId &&
+          data.vid2.title &&
+          data.vid2.artist
+        ) {
+          const { vid1, vid2 } = data;
+          this.setState({ pick: { vid1, vid2 } });
+        } else {
+          console.log("no data 1");
+          this.getPickVids();
+        }
       } else {
-        this.setState({ pick: { vid1: null, vid2: null } });
+        console.log("no data 2");
+        this.getPickVids();
       }
     } catch (err) {
       console.log(err);
