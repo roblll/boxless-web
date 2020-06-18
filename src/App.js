@@ -148,8 +148,8 @@ export default class App extends Component {
           this.addToPlaylist({ vidId, title, artist });
           this.getVidToCache();
         } else {
-          console.log("no data");
-          this.getVid();
+          // console.log("no data");
+          // this.getVid();
         }
       } catch (err) {
         console.log(err);
@@ -193,8 +193,8 @@ export default class App extends Component {
           cache: { cachedPick, cachedVid: { vidId, title, artist } },
         });
       } else {
-        console.log("no data");
-        this.getVidToCache();
+        // console.log("no data");
+        // this.getVidToCache();
       }
     } catch (err) {
       console.log(err);
@@ -260,6 +260,7 @@ export default class App extends Component {
   };
 
   getPickVids = async () => {
+    let tries = 0;
     const {
       options: {
         rankMin,
@@ -300,7 +301,14 @@ export default class App extends Component {
         response1.json(),
         response2.json(),
       ]);
-      if (data1.vidId && data2.vidId) {
+      if (
+        data1.vidId &&
+        data1.title &&
+        data1.artist &&
+        data2.vidId &&
+        data2.title &&
+        data2.artist
+      ) {
         const vid1 = {
           vidId: data1.vidId,
           title: data1.title,
@@ -311,10 +319,17 @@ export default class App extends Component {
           title: data2.title,
           artist: data2.artist,
         };
+        tries = 0;
         this.setState({ pick: { vid1, vid2 } });
       } else {
+        // if (tries <= 4) {
+        //   console.log("no data 2");
+        //   tries += 1;
+        //   this.getPickVids();
+        // } else {
+        //   alert("try again");
+        // }
         console.log("no data 2");
-        this.getPickVids();
       }
     } catch (err) {
       console.log(err);
