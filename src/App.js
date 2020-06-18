@@ -280,29 +280,38 @@ export default class App extends Component {
     } = this.state;
     const { dateMin, dateMax } = getFormattedDate(this.state);
     try {
-      const response = await fetch(
-        `http://localhost:3001/api/pickvids?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&lyrics=false&clean=false&karaoke=false`,
-        {
-          method: "GET",
-          headers: { "content-type": "application/json" },
-        }
-      );
-      const data = await response.json();
-      if (data.vid1 && data.vid2) {
-        if (
-          data.vid1.vidId &&
-          data.vid1.title &&
-          data.vid1.artist &&
-          data.vid2.vidId &&
-          data.vid2.title &&
-          data.vid2.artist
-        ) {
-          const { vid1, vid2 } = data;
-          this.setState({ pick: { vid1, vid2 } });
-        } else {
-          console.log("no data 1");
-          this.getPickVids();
-        }
+      const [response1, response2] = await Promise.all([
+        fetch(
+          `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&lyrics=false&clean=false&karaoke=false`,
+          {
+            method: "GET",
+            headers: { "content-type": "application/json" },
+          }
+        ),
+        fetch(
+          `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&lyrics=false&clean=false&karaoke=false`,
+          {
+            method: "GET",
+            headers: { "content-type": "application/json" },
+          }
+        ),
+      ]);
+      const [data1, data2] = await Promise.all([
+        response1.json(),
+        response2.json(),
+      ]);
+      if (data1.vidId && data2.vidId) {
+        const vid1 = {
+          vidId: data1.vidId,
+          title: data1.title,
+          artist: data1.artist,
+        };
+        const vid2 = {
+          vidId: data2.vidId,
+          title: data2.title,
+          artist: data2.artist,
+        };
+        this.setState({ pick: { vid1, vid2 } });
       } else {
         console.log("no data 2");
         this.getPickVids();
