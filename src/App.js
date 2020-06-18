@@ -148,8 +148,12 @@ export default class App extends Component {
           this.addToPlaylist({ vidId, title, artist });
           this.getVidToCache();
         } else {
-          // console.log("no data");
-          // this.getVid();
+          // console.log("getVid() - no data");
+          // // this.getVid();
+          console.log("getVid() - no data");
+          setTimeout(() => {
+            this.getVid();
+          }, 4000);
         }
       } catch (err) {
         console.log(err);
@@ -195,6 +199,10 @@ export default class App extends Component {
       } else {
         // console.log("no data");
         // this.getVidToCache();
+        console.log("getVidToCache() - no data");
+        setTimeout(() => {
+          this.getVidToCache();
+        }, 4000);
       }
     } catch (err) {
       console.log(err);
@@ -329,7 +337,10 @@ export default class App extends Component {
         // } else {
         //   alert("try again");
         // }
-        console.log("no data 2");
+        console.log("getPickVids() - no data");
+        setTimeout(() => {
+          this.getPickVids();
+        }, 4000);
       }
     } catch (err) {
       console.log(err);
