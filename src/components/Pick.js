@@ -5,38 +5,34 @@ import Static2 from "./Static2";
 
 export default class Pick extends React.Component {
   render() {
-    const {
-      refresh,
-      addToPlaylist,
-      vids: { vid1, vid2 },
-    } = this.props;
-    const vidId1 = vid1 ? vid1.vidId : "jNQXAC9IVRw";
-    const vidId2 = vid2 ? vid2.vidId : "jNQXAC9IVRw";
-    const title1 = vid1 ? vid1.title : "";
-    const title2 = vid2 ? vid2.title : "";
-    const artist1 = vid1 ? vid1.artist : "";
-    const artist2 = vid2 ? vid2.artist : "";
+    const { refresh, addToPlaylist, pickVid1, pickVid2 } = this.props;
+    // const vidId1 = vid1 ? vid1.vidId : "jNQXAC9IVRw";
+    // const vidId2 = vid2 ? vid2.vidId : "jNQXAC9IVRw";
+    // const title1 = vid1 ? vid1.title : "";
+    // const title2 = vid2 ? vid2.title : "";
+    // const artist1 = vid1 ? vid1.artist : "";
+    // const artist2 = vid2 ? vid2.artist : "";
 
     return (
       <div style={styles.container}>
         <div style={styles.pick}>
-          {vid1 ? (
+          {pickVid1 && pickVid2 ? (
             <div
               style={styles.left}
               onClick={() => {
-                addToPlaylist(vid1);
+                addToPlaylist(pickVid1);
                 refresh();
               }}
             >
               <div style={styles.thumbnail}>
                 <img
-                  src={`https://i.ytimg.com/vi/${vidId1}/hqdefault.jpg`}
+                  src={`https://i.ytimg.com/vi/${pickVid1.vidId}/hqdefault.jpg`}
                   alt="left"
                   style={styles.image}
                 />
                 <p style={styles.title}>
                   <p>
-                    {title1} - {artist1}
+                    {pickVid1.title} - {pickVid1.artist}
                   </p>
                 </p>
               </div>
@@ -51,22 +47,22 @@ export default class Pick extends React.Component {
             </div>
           </div>
 
-          {vid2 ? (
+          {pickVid1 && pickVid2 ? (
             <div
               style={styles.right}
               onClick={() => {
-                addToPlaylist(vid2);
+                addToPlaylist(pickVid2);
                 refresh();
               }}
             >
               <div style={styles.thumbnail}>
                 <img
-                  src={`https://i.ytimg.com/vi/${vidId2}/hqdefault.jpg`}
+                  src={`https://i.ytimg.com/vi/${pickVid2.vidId}/hqdefault.jpg`}
                   alt="right"
                   style={styles.image}
                 />
                 <p style={styles.title}>
-                  {title2} - {artist2}
+                  {pickVid2.title} - {pickVid2.artist}
                 </p>
               </div>
             </div>

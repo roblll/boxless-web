@@ -55,30 +55,26 @@ export default class App extends Component {
     },
     playlist: [],
     playlistPosition: 0,
-    pick: {
-      vid1: null,
-      vid2: null,
-    },
+    pickVid1: null,
+    pickVid2: null,
     searchResults: {},
-    cache: {
-      cachedVid: null,
-      cachedPick: {
-        vid1: null,
-        vid2: null,
-      },
-    },
+    cachedVid: null,
+    cachedPickVid1: null,
+    cachedPickVid2: null,
   };
 
   componentDidMount() {
     const {
       currentVid: { vidId },
-      pick: { vid1, vid2 },
+      cachedPickVid1,
+      cachedPickVid2,
     } = this.state;
     if (vidId === null) {
       this.getVid();
     }
-    if (vid1 === null || vid2 === null) {
-      this.refreshPickVids();
+    if (cachedPickVid1 === null || cachedPickVid2 === null) {
+      this.getPickVid1();
+      this.getPickVid2();
     }
   }
 
@@ -107,13 +103,9 @@ export default class App extends Component {
   };
 
   getVid = async () => {
-    const {
-      playlistPosition,
-      cache: { cachedVid },
-    } = this.state;
+    const { playlistPosition, cachedVid } = this.state;
     if (cachedVid !== null) {
       // add cached vid to playlist
-      //
     } else {
       const {
         options: {
@@ -179,7 +171,6 @@ export default class App extends Component {
         rock,
         trance,
       },
-      cache: { cachedPick },
     } = this.state;
     const { dateMin, dateMax } = getFormattedDate(this.state);
     try {
@@ -194,7 +185,7 @@ export default class App extends Component {
       if (data.vidId) {
         const { vidId, title, artist } = data;
         this.setState({
-          cache: { cachedPick, cachedVid: { vidId, title, artist } },
+          cachedVid: { vidId, title, artist },
         });
       } else {
         // console.log("no data");
@@ -233,11 +224,7 @@ export default class App extends Component {
   };
 
   playNext = () => {
-    let {
-      playlist,
-      playlistPosition,
-      cache: { cachedVid },
-    } = this.state;
+    let { playlist, playlistPosition, cachedVid } = this.state;
     if (playlist.length > playlistPosition + 1) {
       const { vidId, title, artist } = playlist[playlistPosition + 1];
       playlistPosition += 1;
@@ -267,8 +254,7 @@ export default class App extends Component {
     }
   };
 
-  getPickVids = async () => {
-    let tries = 0;
+  getPickVid1 = async () => {
     const {
       options: {
         rankMin,
@@ -289,57 +275,68 @@ export default class App extends Component {
     } = this.state;
     const { dateMin, dateMax } = getFormattedDate(this.state);
     try {
-      const [response1, response2] = await Promise.all([
-        fetch(
-          `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&lyrics=false&clean=false&karaoke=false`,
-          {
-            method: "GET",
-            headers: { "content-type": "application/json" },
-          }
-        ),
-        fetch(
-          `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&lyrics=false&clean=false&karaoke=false`,
-          {
-            method: "GET",
-            headers: { "content-type": "application/json" },
-          }
-        ),
-      ]);
-      const [data1, data2] = await Promise.all([
-        response1.json(),
-        response2.json(),
-      ]);
-      if (
-        data1.vidId &&
-        data1.title &&
-        data1.artist &&
-        data2.vidId &&
-        data2.title &&
-        data2.artist
-      ) {
-        const vid1 = {
-          vidId: data1.vidId,
-          title: data1.title,
-          artist: data1.artist,
-        };
-        const vid2 = {
-          vidId: data2.vidId,
-          title: data2.title,
-          artist: data2.artist,
-        };
-        tries = 0;
-        this.setState({ pick: { vid1, vid2 } });
+      const response = await fetch(
+        `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&lyrics=false&clean=false&karaoke=false`,
+        {
+          method: "GET",
+          headers: { "content-type": "application/json" },
+        }
+      );
+      const data = await response.json();
+      if (data.vidId && data.title && data.artist) {
+        const { vidId, title, artist } = data;
+        this.setState({ pickVid1: { vidId, title, artist } });
       } else {
-        // if (tries <= 4) {
-        //   console.log("no data 2");
-        //   tries += 1;
-        //   this.getPickVids();
-        // } else {
-        //   alert("try again");
-        // }
-        console.log("getPickVids() - no data");
+        // console.log("getVid() - no data");
+        // // this.getVid();
+        // console.log("getVid() - no data");
         setTimeout(() => {
-          this.getPickVids();
+          this.getPickVid1();
+        }, 4000);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  getPickVid2 = async () => {
+    const {
+      options: {
+        rankMin,
+        rankMax,
+        alternative,
+        country,
+        dance,
+        electronic,
+        hiphop,
+        house,
+        latin,
+        pop,
+        rap,
+        randb,
+        rock,
+        trance,
+      },
+    } = this.state;
+    const { dateMin, dateMax } = getFormattedDate(this.state);
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&lyrics=false&clean=false&karaoke=false`,
+        {
+          method: "GET",
+          headers: { "content-type": "application/json" },
+        }
+      );
+      const data = await response.json();
+      if (data.vidId && data.title && data.artist) {
+        const { vidId, title, artist } = data;
+        this.setState({ pickVid2: { vidId, title, artist } });
+      } else {
+        // console.log("getVid() - no data");
+        // // this.getVid();
+        // console.log("getVid() - no data");
+        setTimeout(() => {
+          this.getPickVid2();
         }, 4000);
       }
     } catch (err) {
@@ -350,12 +347,13 @@ export default class App extends Component {
   refreshPickVids = () => {
     this.setState(
       {
-        pick: {
-          vid1: null,
-          vid2: null,
-        },
+        pickVid1: null,
+        pickVid2: null,
       },
-      () => this.getPickVids()
+      () => {
+        this.getPickVid1();
+        this.getPickVid2();
+      }
     );
   };
 
@@ -386,6 +384,8 @@ export default class App extends Component {
       searchResults,
       playlist,
       playlistPosition,
+      pickVid1,
+      pickVid2,
     } = this.state;
 
     return (
@@ -412,7 +412,8 @@ export default class App extends Component {
           )}
           {activeTab === "pick" && (
             <Pick
-              vids={this.state.pick}
+              pickVid1={pickVid1}
+              pickVid2={pickVid2}
               refresh={this.refreshPickVids}
               addToPlaylist={this.addToPlaylist}
             />
