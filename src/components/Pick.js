@@ -6,12 +6,6 @@ import Static2 from "./Static2";
 export default class Pick extends React.Component {
   render() {
     const { refresh, addToPlaylist, pickVid1, pickVid2 } = this.props;
-    // const vidId1 = vid1 ? vid1.vidId : "jNQXAC9IVRw";
-    // const vidId2 = vid2 ? vid2.vidId : "jNQXAC9IVRw";
-    // const title1 = vid1 ? vid1.title : "";
-    // const title2 = vid2 ? vid2.title : "";
-    // const artist1 = vid1 ? vid1.artist : "";
-    // const artist2 = vid2 ? vid2.artist : "";
 
     return (
       <div style={styles.container}>
@@ -38,7 +32,11 @@ export default class Pick extends React.Component {
               </div>
             </div>
           ) : (
-            <Static width={175} height={175} />
+            <div style={styles.left}>
+              <div style={styles.thumbnail}>
+                <div style={styles.blank}></div>
+              </div>
+            </div>
           )}
 
           <div style={styles.middle}>
@@ -67,7 +65,11 @@ export default class Pick extends React.Component {
               </div>
             </div>
           ) : (
-            <Static2 width={175} height={175} />
+            <div style={styles.right}>
+              <div style={styles.thumbnail}>
+                <div style={styles.blank}></div>
+              </div>
+            </div>
           )}
         </div>
         <div style={styles.refresh}>
@@ -148,5 +150,10 @@ const styles = {
   },
   refreshIcon: {
     cursor: "pointer",
+  },
+  blank: {
+    backgroundColor: "black",
+    height: "175px",
+    width: "175px",
   },
 };
