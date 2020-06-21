@@ -63,20 +63,20 @@ export default class App extends Component {
     cachedPickVid2: null,
   };
 
-  componentDidMount() {
-    const {
-      currentVid: { vidId },
-      cachedPickVid1,
-      cachedPickVid2,
-    } = this.state;
-    if (vidId === null) {
-      this.getVid();
-    }
-    if (cachedPickVid1 === null || cachedPickVid2 === null) {
-      this.getPickVid1();
-      this.getPickVid2();
-    }
-  }
+  // componentDidMount() {
+  //   const {
+  //     currentVid: { vidId },
+  //     cachedPickVid1,
+  //     cachedPickVid2,
+  //   } = this.state;
+  //   if (vidId === null) {
+  //     this.getVid();
+  //   }
+  //   if (cachedPickVid1 === null || cachedPickVid2 === null) {
+  //     this.getPickVid1();
+  //     this.getPickVid2();
+  //   }
+  // }
 
   handleTabClick = (e, { name }) => {
     if (this.state.activeTab === name) {
@@ -290,6 +290,7 @@ export default class App extends Component {
         // console.log("getVid() - no data");
         // // this.getVid();
         // console.log("getVid() - no data");
+        console.log("getPickVid1 failed");
         setTimeout(() => {
           this.getPickVid1();
         }, 4000);
@@ -335,6 +336,7 @@ export default class App extends Component {
         // console.log("getVid() - no data");
         // // this.getVid();
         // console.log("getVid() - no data");
+        console.log("getPickVid2 failed");
         setTimeout(() => {
           this.getPickVid2();
         }, 4000);

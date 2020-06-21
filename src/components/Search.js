@@ -34,17 +34,17 @@ export default class Search extends React.Component {
     const { current, search } = this.state;
     return (
       <div style={styles.container}>
-        <div style={styles.carousel}>
-          <div style={styles.left}>
-            <i
-              class="material-icons"
-              style={styles.arrow}
-              onClick={this.handlePrev}
-            >
-              chevron_left
-            </i>
-          </div>
-          {vids ? (
+        {vids && (
+          <div style={styles.carousel}>
+            <div style={styles.left}>
+              <i
+                class="material-icons"
+                style={styles.arrow}
+                onClick={this.handlePrev}
+              >
+                chevron_left
+              </i>
+            </div>
             <div
               style={styles.center}
               onClick={() =>
@@ -63,19 +63,17 @@ export default class Search extends React.Component {
                 <p style={styles.title}>{`${vids[current].title}`}</p>
               </div>
             </div>
-          ) : (
-            <p>Nothing</p>
-          )}
-          <div style={styles.right}>
-            <i
-              class="material-icons"
-              style={styles.arrow}
-              onClick={this.handleNext}
-            >
-              chevron_right
-            </i>
+            <div style={styles.right}>
+              <i
+                class="material-icons"
+                style={styles.arrow}
+                onClick={this.handleNext}
+              >
+                chevron_right
+              </i>
+            </div>
           </div>
-        </div>
+        )}
         <div style={styles.search}>
           <input
             type="text"
@@ -146,8 +144,10 @@ const styles = {
     justifyContent: "center",
   },
   search: {
+    flex: 1,
     display: "flex",
     justifyContent: "center",
+    alignItems: "center",
     marginBottom: "33px",
   },
   input: {
@@ -166,6 +166,7 @@ const styles = {
     justifyContent: "center",
     alignItems: "center",
     cursor: "pointer",
+    height: "45px",
   },
   searchIcon: {
     margin: "0 13px",
