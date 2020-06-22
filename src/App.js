@@ -103,53 +103,48 @@ export default class App extends Component {
   };
 
   getVid = async () => {
-    const { playlistPosition, cachedVid } = this.state;
-    if (cachedVid !== null) {
-      // add cached vid to playlist
-    } else {
-      const {
-        options: {
-          rankMin,
-          rankMax,
-          alternative,
-          country,
-          dance,
-          electronic,
-          hiphop,
-          house,
-          latin,
-          pop,
-          rap,
-          randb,
-          rock,
-          trance,
-        },
-      } = this.state;
-      const { dateMin, dateMax } = getFormattedDate(this.state);
-      try {
-        const response = await fetch(
-          `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&lyrics=false&clean=false&karaoke=false`,
-          {
-            method: "GET",
-            headers: { "content-type": "application/json" },
-          }
-        );
-        const data = await response.json();
-        if (data.vidId) {
-          const { vidId, title, artist } = data;
-          this.addToPlaylist({ vidId, title, artist });
-          this.getVidToCache();
-        } else {
-          // console.log("getVid() - no data");
-          // // this.getVid();
-          console.log("getVid() - no data");
-          setTimeout(() => {
-            this.getVid();
-          }, 4000);
+    const {
+      options: {
+        rankMin,
+        rankMax,
+        alternative,
+        country,
+        dance,
+        electronic,
+        hiphop,
+        house,
+        latin,
+        pop,
+        rap,
+        randb,
+        rock,
+        trance,
+      },
+    } = this.state;
+    const { dateMin, dateMax } = getFormattedDate(this.state);
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&lyrics=false&clean=false&karaoke=false`,
+        {
+          method: "GET",
+          headers: { "content-type": "application/json" },
         }
-      } catch (err) {
-        console.log(err);
+      );
+      const data = await response.json();
+      if (data.vidId) {
+        const { vidId, title, artist } = data;
+        this.addToPlaylist({ vidId, title, artist });
+        this.getVidToCache();
+      } else {
+        // console.log("getVid() - no data");
+        // // this.getVid();
+        console.log("getVid() - no data");
+        setTimeout(() => {
+          this.getVid();
+        }, 4000);
       }
+    } catch (err) {
+      console.log(err);
     }
   };
 
