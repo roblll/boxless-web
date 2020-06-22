@@ -72,10 +72,10 @@ export default class App extends Component {
     if (vidId === null) {
       this.getVid();
     }
-    if (cachedPickVid1 === null || cachedPickVid2 === null) {
-      this.getPickVid1();
-      this.getPickVid2();
-    }
+    // if (cachedPickVid1 === null || cachedPickVid2 === null) {
+    //   this.getPickVid1();
+    //   this.getPickVid2();
+    // }
   }
 
   handleTabClick = (e, { name }) => {
@@ -280,7 +280,9 @@ export default class App extends Component {
       const data = await response.json();
       if (data.vidId && data.title && data.artist) {
         const { vidId, title, artist } = data;
-        this.setState({ pickVid1: { vidId, title, artist } });
+        this.setState({ pickVid1: { vidId, title, artist } }, () =>
+          this.getCachedPickVid1()
+        );
       } else {
         // console.log("getVid() - no data");
         // // this.getVid();
@@ -288,6 +290,52 @@ export default class App extends Component {
         console.log("getPickVid1 failed");
         setTimeout(() => {
           this.getPickVid1();
+        }, 4000);
+      }
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  getCachedPickVid1 = async () => {
+    const {
+      options: {
+        rankMin,
+        rankMax,
+        alternative,
+        country,
+        dance,
+        electronic,
+        hiphop,
+        house,
+        latin,
+        pop,
+        rap,
+        randb,
+        rock,
+        trance,
+      },
+    } = this.state;
+    const { dateMin, dateMax } = getFormattedDate(this.state);
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&lyrics=false&clean=false&karaoke=false`,
+        {
+          method: "GET",
+          headers: { "content-type": "application/json" },
+        }
+      );
+      const data = await response.json();
+      if (data.vidId && data.title && data.artist) {
+        const { vidId, title, artist } = data;
+        this.setState({ cachedPickVid1: { vidId, title, artist } });
+      } else {
+        // console.log("getVid() - no data");
+        // // this.getVid();
+        // console.log("getVid() - no data");
+        console.log("getCachedPickVid1 failed");
+        setTimeout(() => {
+          this.getCachedPickVid1();
         }, 4000);
       }
     } catch (err) {
@@ -326,7 +374,9 @@ export default class App extends Component {
       const data = await response.json();
       if (data.vidId && data.title && data.artist) {
         const { vidId, title, artist } = data;
-        this.setState({ pickVid2: { vidId, title, artist } });
+        this.setState({ pickVid2: { vidId, title, artist } }, () =>
+          this.getCachedPickVid2()
+        );
       } else {
         // console.log("getVid() - no data");
         // // this.getVid();
@@ -341,17 +391,79 @@ export default class App extends Component {
     }
   };
 
-  refreshPickVids = () => {
-    this.setState(
-      {
-        pickVid1: null,
-        pickVid2: null,
+  getCachedPickVid2 = async () => {
+    const {
+      options: {
+        rankMin,
+        rankMax,
+        alternative,
+        country,
+        dance,
+        electronic,
+        hiphop,
+        house,
+        latin,
+        pop,
+        rap,
+        randb,
+        rock,
+        trance,
       },
-      () => {
-        this.getPickVid1();
-        this.getPickVid2();
+    } = this.state;
+    const { dateMin, dateMax } = getFormattedDate(this.state);
+    try {
+      const response = await fetch(
+        `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&lyrics=false&clean=false&karaoke=false`,
+        {
+          method: "GET",
+          headers: { "content-type": "application/json" },
+        }
+      );
+      const data = await response.json();
+      if (data.vidId && data.title && data.artist) {
+        const { vidId, title, artist } = data;
+        this.setState({ cachedPickVid2: { vidId, title, artist } });
+      } else {
+        // console.log("getVid() - no data");
+        // // this.getVid();
+        // console.log("getVid() - no data");
+        console.log("getCachedPickVid2 failed");
+        setTimeout(() => {
+          this.getCachedPickVid2();
+        }, 4000);
       }
-    );
+    } catch (err) {
+      console.log(err);
+    }
+  };
+
+  refreshPickVids = () => {
+    const { cachedPickVid1, cachedPickVid2 } = this.state;
+    if (cachedPickVid1 && cachedPickVid2) {
+      this.setState(
+        {
+          pickVid1: { ...cachedPickVid1 },
+          pickVid2: { ...cachedPickVid2 },
+          cachedPickVid1: null,
+          cachedPickVid2: null,
+        },
+        () => {
+          this.getCachedPickVid1();
+          this.getCachedPickVid2();
+        }
+      );
+    } else {
+      this.setState(
+        {
+          pickVid1: null,
+          pickVid2: null,
+        },
+        () => {
+          this.getPickVid1();
+          this.getPickVid2();
+        }
+      );
+    }
   };
 
   getSearchVids = async (searchTerm) => {
