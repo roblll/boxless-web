@@ -223,17 +223,10 @@ export default class App extends Component {
     if (playlist.length > playlistPosition + 1) {
       const { vidId, title, artist } = playlist[playlistPosition + 1];
       playlistPosition += 1;
-      this.setState(
-        {
-          currentVid: { vidId, title, artist },
-          playlistPosition,
-        },
-        () => {
-          if (this.checkPlaylistQueue()) {
-            this.getVid();
-          }
-        }
-      );
+      this.setState({
+        currentVid: { vidId, title, artist },
+        playlistPosition,
+      });
     } else {
       if (cachedVid !== null) {
         this.setState(
