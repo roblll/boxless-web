@@ -98,6 +98,16 @@ const Options = (props) => {
           name="electronic"
           label="Electronic"
         />
+        <OptionsButton toggle={toggle} on={latin} name="latin" label="Latin" />
+        <OptionsButton toggle={toggle} on={pop} name="pop" label="Pop" />
+      </div>
+      <div style={styles.genreRow}>
+        <OptionsButton toggle={toggle} on={rap} name="rap" label="Rap" />
+        <OptionsButton toggle={toggle} on={randb} name="randb" label="R&B" />
+        <OptionsButton toggle={toggle} on={rock} name="rock" label="Rock" />
+      </div>
+      <div style={styles.divider}></div>
+      <div style={styles.genreRow}>
         <OptionsButton
           toggle={toggle}
           on={hiphop}
@@ -105,15 +115,6 @@ const Options = (props) => {
           label="Hip Hop"
         />
         <OptionsButton toggle={toggle} on={house} name="house" label="House" />
-      </div>
-      <div style={styles.genreRow}>
-        <OptionsButton toggle={toggle} on={latin} name="latin" label="Latin" />
-        <OptionsButton toggle={toggle} on={pop} name="pop" label="Pop" />
-        <OptionsButton toggle={toggle} on={rap} name="rap" label="Rap" />
-      </div>
-      <div style={styles.genreRow}>
-        <OptionsButton toggle={toggle} on={randb} name="randb" label="R&B" />
-        <OptionsButton toggle={toggle} on={rock} name="rock" label="Rock" />
         <OptionsButton
           toggle={toggle}
           on={trance}
@@ -146,6 +147,8 @@ const styles = {
     width: "100%",
     display: "flex",
     flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
   },
   divider: {
     width: "82%",

@@ -72,10 +72,6 @@ export default class App extends Component {
     if (vidId === null) {
       this.getVid();
     }
-    // if (cachedPickVid1 === null || cachedPickVid2 === null) {
-    //   this.getPickVid1();
-    //   this.getPickVid2();
-    // }
   }
 
   handleTabClick = (e, { name }) => {
