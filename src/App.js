@@ -61,6 +61,12 @@ export default class App extends Component {
     cachedVid: null,
     cachedPickVid1: null,
     cachedPickVid2: null,
+    hiphopAfter: "",
+    hiphopCount: "",
+    houseAfter: "",
+    houseCount: "",
+    tranceAfter: "",
+    tranceCount: "",
   };
 
   componentDidMount() {
@@ -116,11 +122,17 @@ export default class App extends Component {
         rock,
         trance,
       },
+      hiphopAfter,
+      hiphopCount,
+      houseAfter,
+      houseCount,
+      tranceAfter,
+      tranceCount,
     } = this.state;
     const { dateMin, dateMax } = getFormattedDate(this.state);
     try {
       const response = await fetch(
-        `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&hiphop=${hiphop}&house=${house}&trance=${trance}&lyrics=false&clean=false&karaoke=false`,
+        `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&hiphop=${hiphop}&house=${house}&trance=${trance}&lyrics=false&clean=false&karaoke=false&hiphopAfter=${hiphopAfter}&hiphopCount=${hiphopCount}&houseAfter=${houseAfter}&houseCount=${houseCount}&tranceAfter=${tranceAfter}&tranceCount=${tranceCount}`,
         {
           method: "GET",
           headers: { "content-type": "application/json" },
@@ -131,6 +143,9 @@ export default class App extends Component {
         const { vidId, title, artist } = data;
         this.addToPlaylist({ vidId, title, artist });
         this.getVidToCache();
+        if (data.nextPage) {
+          console.log(data.nextPage);
+        }
       } else {
         // console.log("getVid() - no data");
         // // this.getVid();
@@ -162,11 +177,17 @@ export default class App extends Component {
         rock,
         trance,
       },
+      hiphopAfter,
+      hiphopCount,
+      houseAfter,
+      houseCount,
+      tranceAfter,
+      tranceCount,
     } = this.state;
     const { dateMin, dateMax } = getFormattedDate(this.state);
     try {
       const response = await fetch(
-        `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&hiphop=${hiphop}&house=${house}&trance=${trance}&lyrics=false&clean=false&karaoke=false`,
+        `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&hiphop=${hiphop}&house=${house}&trance=${trance}&lyrics=false&clean=false&karaoke=false&hiphopAfter=${hiphopAfter}&hiphopCount=${hiphopCount}&houseAfter=${houseAfter}&houseCount=${houseCount}&tranceAfter=${tranceAfter}&tranceCount=${tranceCount}`,
         {
           method: "GET",
           headers: { "content-type": "application/json" },
@@ -174,10 +195,14 @@ export default class App extends Component {
       );
       const data = await response.json();
       if (data.vidId) {
-        const { vidId, title, artist } = data;
-        this.setState({
-          cachedVid: { vidId, title, artist },
-        });
+        const { vidId, title, artist, hiphopAfter, hiphopCount } = data;
+        console.log("hiphopAfter");
+        console.log(hiphopAfter);
+        console.log("hiphopCount");
+        console.log(hiphopCount);
+        const newState = { cachedVid: { vidId, title, artist } };
+        // if (hiphop) newState.hiphopPage = hiphopPage;
+        this.setState({ ...newState }, () => console.log(this.state));
       } else {
         // console.log("no data");
         // this.getVidToCache();
