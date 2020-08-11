@@ -195,13 +195,12 @@ export default class App extends Component {
       );
       const data = await response.json();
       if (data.vidId) {
-        const { vidId, title, artist, hiphopAfter, hiphopCount } = data;
-        console.log("hiphopAfter");
-        console.log(hiphopAfter);
-        console.log("hiphopCount");
-        console.log(hiphopCount);
+        const { vidId, title, artist } = data;
         const newState = { cachedVid: { vidId, title, artist } };
-        // if (hiphop) newState.hiphopPage = hiphopPage;
+        if (data.hiphopAfter) {
+          newState.hiphopAfter = data.hiphopAfter;
+          newState.hiphopCount = data.hiphopCount;
+        }
         this.setState({ ...newState }, () => console.log(this.state));
       } else {
         // console.log("no data");
