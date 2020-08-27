@@ -201,6 +201,14 @@ export default class App extends Component {
           newState.hiphopAfter = data.hiphopAfter;
           newState.hiphopCount = data.hiphopCount;
         }
+        if (data.houseAfter) {
+          newState.houseAfter = data.houseAfter;
+          newState.houseCount = data.houseCount;
+        }
+        if (data.tranceAfter) {
+          newState.tranceAfter = data.tranceAfter;
+          newState.tranceCount = data.tranceCount;
+        }
         this.setState({ ...newState }, () => console.log(this.state));
       } else {
         // console.log("no data");
