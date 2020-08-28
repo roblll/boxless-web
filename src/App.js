@@ -72,8 +72,6 @@ export default class App extends Component {
   componentDidMount() {
     const {
       currentVid: { vidId },
-      cachedPickVid1,
-      cachedPickVid2,
     } = this.state;
     if (vidId === null) {
       this.getVid();
@@ -288,20 +286,40 @@ export default class App extends Component {
         rock,
         trance,
       },
+      hiphopAfter,
+      hiphopCount,
+      houseAfter,
+      houseCount,
+      tranceAfter,
+      tranceCount,
     } = this.state;
     const { dateMin, dateMax } = getFormattedDate(this.state);
     try {
       const response = await fetch(
-        `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&lyrics=false&clean=false&karaoke=false`,
+        `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&hiphop=${hiphop}&house=${house}&trance=${trance}&lyrics=false&clean=false&karaoke=false&hiphopAfter=${hiphopAfter}&hiphopCount=${hiphopCount}&houseAfter=${houseAfter}&houseCount=${houseCount}&tranceAfter=${tranceAfter}&tranceCount=${tranceCount}`,
         {
           method: "GET",
           headers: { "content-type": "application/json" },
         }
       );
       const data = await response.json();
-      if (data.vidId && data.title && data.artist) {
+      if (data.vidId && data.title) {
         const { vidId, title, artist } = data;
-        this.setState({ pickVid1: { vidId, title, artist } }, () =>
+        let newState = {};
+        if (data.hiphopAfter) {
+          newState.hiphopAfter = data.hiphopAfter;
+          newState.hiphopCount = data.hiphopCount;
+        }
+        if (data.houseAfter) {
+          newState.houseAfter = data.houseAfter;
+          newState.houseCount = data.houseCount;
+        }
+        if (data.tranceAfter) {
+          newState.tranceAfter = data.tranceAfter;
+          newState.tranceCount = data.tranceCount;
+        }
+
+        this.setState({ ...newState, pickVid1: { vidId, title, artist } }, () =>
           this.getCachedPickVid1()
         );
       } else {
@@ -336,20 +354,42 @@ export default class App extends Component {
         rock,
         trance,
       },
+      hiphopAfter,
+      hiphopCount,
+      houseAfter,
+      houseCount,
+      tranceAfter,
+      tranceCount,
     } = this.state;
     const { dateMin, dateMax } = getFormattedDate(this.state);
     try {
       const response = await fetch(
-        `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&lyrics=false&clean=false&karaoke=false`,
+        `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&hiphop=${hiphop}&house=${house}&trance=${trance}&lyrics=false&clean=false&karaoke=false&hiphopAfter=${hiphopAfter}&hiphopCount=${hiphopCount}&houseAfter=${houseAfter}&houseCount=${houseCount}&tranceAfter=${tranceAfter}&tranceCount=${tranceCount}`,
         {
           method: "GET",
           headers: { "content-type": "application/json" },
         }
       );
       const data = await response.json();
-      if (data.vidId && data.title && data.artist) {
+      if (data.vidId && data.title) {
         const { vidId, title, artist } = data;
-        this.setState({ cachedPickVid1: { vidId, title, artist } });
+        let newState = {};
+        if (data.hiphopAfter) {
+          newState.hiphopAfter = data.hiphopAfter;
+          newState.hiphopCount = data.hiphopCount;
+        }
+        if (data.houseAfter) {
+          newState.houseAfter = data.houseAfter;
+          newState.houseCount = data.houseCount;
+        }
+        if (data.tranceAfter) {
+          newState.tranceAfter = data.tranceAfter;
+          newState.tranceCount = data.tranceCount;
+        }
+        this.setState({
+          ...newState,
+          cachedPickVid1: { vidId, title, artist },
+        });
       } else {
         // console.log("getVid() - no data");
         // // this.getVid();
@@ -382,20 +422,39 @@ export default class App extends Component {
         rock,
         trance,
       },
+      hiphopAfter,
+      hiphopCount,
+      houseAfter,
+      houseCount,
+      tranceAfter,
+      tranceCount,
     } = this.state;
     const { dateMin, dateMax } = getFormattedDate(this.state);
     try {
       const response = await fetch(
-        `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&lyrics=false&clean=false&karaoke=false`,
+        `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&hiphop=${hiphop}&house=${house}&trance=${trance}&lyrics=false&clean=false&karaoke=false&hiphopAfter=${hiphopAfter}&hiphopCount=${hiphopCount}&houseAfter=${houseAfter}&houseCount=${houseCount}&tranceAfter=${tranceAfter}&tranceCount=${tranceCount}`,
         {
           method: "GET",
           headers: { "content-type": "application/json" },
         }
       );
       const data = await response.json();
-      if (data.vidId && data.title && data.artist) {
+      if (data.vidId && data.title) {
         const { vidId, title, artist } = data;
-        this.setState({ pickVid2: { vidId, title, artist } }, () =>
+        let newState = {};
+        if (data.hiphopAfter) {
+          newState.hiphopAfter = data.hiphopAfter;
+          newState.hiphopCount = data.hiphopCount;
+        }
+        if (data.houseAfter) {
+          newState.houseAfter = data.houseAfter;
+          newState.houseCount = data.houseCount;
+        }
+        if (data.tranceAfter) {
+          newState.tranceAfter = data.tranceAfter;
+          newState.tranceCount = data.tranceCount;
+        }
+        this.setState({ ...newState, pickVid2: { vidId, title, artist } }, () =>
           this.getCachedPickVid2()
         );
       } else {
@@ -430,20 +489,42 @@ export default class App extends Component {
         rock,
         trance,
       },
+      hiphopAfter,
+      hiphopCount,
+      houseAfter,
+      houseCount,
+      tranceAfter,
+      tranceCount,
     } = this.state;
     const { dateMin, dateMax } = getFormattedDate(this.state);
     try {
       const response = await fetch(
-        `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&lyrics=false&clean=false&karaoke=false`,
+        `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&hiphop=${hiphop}&house=${house}&trance=${trance}&lyrics=false&clean=false&karaoke=false&hiphopAfter=${hiphopAfter}&hiphopCount=${hiphopCount}&houseAfter=${houseAfter}&houseCount=${houseCount}&tranceAfter=${tranceAfter}&tranceCount=${tranceCount}`,
         {
           method: "GET",
           headers: { "content-type": "application/json" },
         }
       );
       const data = await response.json();
-      if (data.vidId && data.title && data.artist) {
+      if (data.vidId && data.title) {
         const { vidId, title, artist } = data;
-        this.setState({ cachedPickVid2: { vidId, title, artist } });
+        let newState = {};
+        if (data.hiphopAfter) {
+          newState.hiphopAfter = data.hiphopAfter;
+          newState.hiphopCount = data.hiphopCount;
+        }
+        if (data.houseAfter) {
+          newState.houseAfter = data.houseAfter;
+          newState.houseCount = data.houseCount;
+        }
+        if (data.tranceAfter) {
+          newState.tranceAfter = data.tranceAfter;
+          newState.tranceCount = data.tranceCount;
+        }
+        this.setState({
+          ...newState,
+          cachedPickVid2: { vidId, title, artist },
+        });
       } else {
         // console.log("getVid() - no data");
         // // this.getVid();
