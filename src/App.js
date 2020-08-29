@@ -196,18 +196,42 @@ export default class App extends Component {
         const { vidId, title, artist } = data;
         const newState = { cachedVid: { vidId, title, artist } };
         if (data.hiphopAfter) {
-          newState.hiphopAfter = data.hiphopAfter;
-          newState.hiphopCount = data.hiphopCount;
+          if (
+            hiphopAfter === data.hiphopAfter &&
+            hiphopCount === data.hiphopCount
+          ) {
+            newState.hiphopAfter = "";
+            newState.hiphopCount = "";
+          } else {
+            newState.hiphopAfter = data.hiphopAfter;
+            newState.hiphopCount = data.hiphopCount;
+          }
         }
         if (data.houseAfter) {
-          newState.houseAfter = data.houseAfter;
-          newState.houseCount = data.houseCount;
+          if (
+            houseAfter === data.houseAfter &&
+            houseCount === data.houseCount
+          ) {
+            newState.houseAfter = "";
+            newState.houseCount = "";
+          } else {
+            newState.houseAfter = data.houseAfter;
+            newState.houseCount = data.houseCount;
+          }
         }
         if (data.tranceAfter) {
-          newState.tranceAfter = data.tranceAfter;
-          newState.tranceCount = data.tranceCount;
+          if (
+            tranceAfter === data.tranceAfter &&
+            tranceCount === data.tranceCount
+          ) {
+            newState.tranceAfter = "";
+            newState.tranceCount = "";
+          } else {
+            newState.tranceAfter = data.tranceAfter;
+            newState.tranceCount = data.tranceCount;
+          }
         }
-        this.setState({ ...newState }, () => console.log(this.state));
+        this.setState({ ...newState });
       } else {
         // console.log("no data");
         // this.getVidToCache();
