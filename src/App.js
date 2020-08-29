@@ -331,18 +331,41 @@ export default class App extends Component {
         const { vidId, title, artist } = data;
         let newState = {};
         if (data.hiphopAfter) {
-          newState.hiphopAfter = data.hiphopAfter;
-          newState.hiphopCount = data.hiphopCount;
+          if (
+            hiphopAfter === data.hiphopAfter &&
+            hiphopCount === data.hiphopCount
+          ) {
+            newState.hiphopAfter = "";
+            newState.hiphopCount = "";
+          } else {
+            newState.hiphopAfter = data.hiphopAfter;
+            newState.hiphopCount = data.hiphopCount;
+          }
         }
         if (data.houseAfter) {
-          newState.houseAfter = data.houseAfter;
-          newState.houseCount = data.houseCount;
+          if (
+            houseAfter === data.houseAfter &&
+            houseCount === data.houseCount
+          ) {
+            newState.houseAfter = "";
+            newState.houseCount = "";
+          } else {
+            newState.houseAfter = data.houseAfter;
+            newState.houseCount = data.houseCount;
+          }
         }
         if (data.tranceAfter) {
-          newState.tranceAfter = data.tranceAfter;
-          newState.tranceCount = data.tranceCount;
+          if (
+            tranceAfter === data.tranceAfter &&
+            tranceCount === data.tranceCount
+          ) {
+            newState.tranceAfter = "";
+            newState.tranceCount = "";
+          } else {
+            newState.tranceAfter = data.tranceAfter;
+            newState.tranceCount = data.tranceCount;
+          }
         }
-
         this.setState({ ...newState, pickVid1: { vidId, title, artist } }, () =>
           this.getCachedPickVid1()
         );
@@ -399,16 +422,40 @@ export default class App extends Component {
         const { vidId, title, artist } = data;
         let newState = {};
         if (data.hiphopAfter) {
-          newState.hiphopAfter = data.hiphopAfter;
-          newState.hiphopCount = data.hiphopCount;
+          if (
+            hiphopAfter === data.hiphopAfter &&
+            hiphopCount === data.hiphopCount
+          ) {
+            newState.hiphopAfter = "";
+            newState.hiphopCount = "";
+          } else {
+            newState.hiphopAfter = data.hiphopAfter;
+            newState.hiphopCount = data.hiphopCount;
+          }
         }
         if (data.houseAfter) {
-          newState.houseAfter = data.houseAfter;
-          newState.houseCount = data.houseCount;
+          if (
+            houseAfter === data.houseAfter &&
+            houseCount === data.houseCount
+          ) {
+            newState.houseAfter = "";
+            newState.houseCount = "";
+          } else {
+            newState.houseAfter = data.houseAfter;
+            newState.houseCount = data.houseCount;
+          }
         }
         if (data.tranceAfter) {
-          newState.tranceAfter = data.tranceAfter;
-          newState.tranceCount = data.tranceCount;
+          if (
+            tranceAfter === data.tranceAfter &&
+            tranceCount === data.tranceCount
+          ) {
+            newState.tranceAfter = "";
+            newState.tranceCount = "";
+          } else {
+            newState.tranceAfter = data.tranceAfter;
+            newState.tranceCount = data.tranceCount;
+          }
         }
         this.setState({
           ...newState,
@@ -467,16 +514,40 @@ export default class App extends Component {
         const { vidId, title, artist } = data;
         let newState = {};
         if (data.hiphopAfter) {
-          newState.hiphopAfter = data.hiphopAfter;
-          newState.hiphopCount = data.hiphopCount;
+          if (
+            hiphopAfter === data.hiphopAfter &&
+            hiphopCount === data.hiphopCount
+          ) {
+            newState.hiphopAfter = "";
+            newState.hiphopCount = "";
+          } else {
+            newState.hiphopAfter = data.hiphopAfter;
+            newState.hiphopCount = data.hiphopCount;
+          }
         }
         if (data.houseAfter) {
-          newState.houseAfter = data.houseAfter;
-          newState.houseCount = data.houseCount;
+          if (
+            houseAfter === data.houseAfter &&
+            houseCount === data.houseCount
+          ) {
+            newState.houseAfter = "";
+            newState.houseCount = "";
+          } else {
+            newState.houseAfter = data.houseAfter;
+            newState.houseCount = data.houseCount;
+          }
         }
         if (data.tranceAfter) {
-          newState.tranceAfter = data.tranceAfter;
-          newState.tranceCount = data.tranceCount;
+          if (
+            tranceAfter === data.tranceAfter &&
+            tranceCount === data.tranceCount
+          ) {
+            newState.tranceAfter = "";
+            newState.tranceCount = "";
+          } else {
+            newState.tranceAfter = data.tranceAfter;
+            newState.tranceCount = data.tranceCount;
+          }
         }
         this.setState({ ...newState, pickVid2: { vidId, title, artist } }, () =>
           this.getCachedPickVid2()
@@ -534,21 +605,48 @@ export default class App extends Component {
         const { vidId, title, artist } = data;
         let newState = {};
         if (data.hiphopAfter) {
-          newState.hiphopAfter = data.hiphopAfter;
-          newState.hiphopCount = data.hiphopCount;
+          if (
+            hiphopAfter === data.hiphopAfter &&
+            hiphopCount === data.hiphopCount
+          ) {
+            newState.hiphopAfter = "";
+            newState.hiphopCount = "";
+          } else {
+            newState.hiphopAfter = data.hiphopAfter;
+            newState.hiphopCount = data.hiphopCount;
+          }
         }
         if (data.houseAfter) {
-          newState.houseAfter = data.houseAfter;
-          newState.houseCount = data.houseCount;
+          if (
+            houseAfter === data.houseAfter &&
+            houseCount === data.houseCount
+          ) {
+            newState.houseAfter = "";
+            newState.houseCount = "";
+          } else {
+            newState.houseAfter = data.houseAfter;
+            newState.houseCount = data.houseCount;
+          }
         }
         if (data.tranceAfter) {
-          newState.tranceAfter = data.tranceAfter;
-          newState.tranceCount = data.tranceCount;
+          if (
+            tranceAfter === data.tranceAfter &&
+            tranceCount === data.tranceCount
+          ) {
+            newState.tranceAfter = "";
+            newState.tranceCount = "";
+          } else {
+            newState.tranceAfter = data.tranceAfter;
+            newState.tranceCount = data.tranceCount;
+          }
         }
-        this.setState({
-          ...newState,
-          cachedPickVid2: { vidId, title, artist },
-        });
+        this.setState(
+          {
+            ...newState,
+            cachedPickVid2: { vidId, title, artist },
+          },
+          () => console.log(this.state.hiphopAfter, this.state.hiphopCount)
+        );
       } else {
         // console.log("getVid() - no data");
         // // this.getVid();
