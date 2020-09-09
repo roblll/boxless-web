@@ -8,6 +8,7 @@ import Search from "./components/Search";
 import Playlist from "./components/Playlist";
 import MinControls from "./components/MinControls";
 import FullControls from "./components/FullControls";
+import Login from "./components/Login";
 import { getFormattedDate, getDefaultDates } from "./utils/utils";
 
 const {
@@ -722,48 +723,49 @@ export default class App extends Component {
     } = this.state;
 
     return (
-      <div style={styles.container}>
-        <div style={styles.sections}>
-          <Player getVid={this.getVid} vidId={vidId} playNext={this.playNext} />
-          {activeTab !== "none" && (
-            <MinControls
-              title={title}
-              artist={artist}
-              vidId={vidId}
-              playNext={this.playNext}
-            />
-          )}
-          {activeTab === "none" && (
-            <FullControls title={title} artist={artist} vidId={vidId} />
-          )}
-          {activeTab === "options" && (
-            <Options
-              options={options}
-              toggle={this.handleOptionClick}
-              handleChange={this.handleDropDownChange}
-            />
-          )}
-          {activeTab === "pick" && (
-            <Pick
-              pickVid1={pickVid1}
-              pickVid2={pickVid2}
-              refresh={this.refreshPickVids}
-              addToPlaylist={this.addToPlaylist}
-            />
-          )}
-          {activeTab === "search" && (
-            <Search
-              getSearchVids={this.getSearchVids}
-              searchResults={searchResults}
-              addToPlaylist={this.addToPlaylist}
-            />
-          )}
-          {activeTab === "playlist" && (
-            <Playlist playlist={playlist} playlistPosition={playlistPosition} />
-          )}
-          <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
-        </div>
-      </div>
+      <Login />
+      // <div style={styles.container}>
+      //   <div style={styles.sections}>
+      //     <Player getVid={this.getVid} vidId={vidId} playNext={this.playNext} />
+      //     {activeTab !== "none" && (
+      //       <MinControls
+      //         title={title}
+      //         artist={artist}
+      //         vidId={vidId}
+      //         playNext={this.playNext}
+      //       />
+      //     )}
+      //     {activeTab === "none" && (
+      //       <FullControls title={title} artist={artist} vidId={vidId} />
+      //     )}
+      //     {activeTab === "options" && (
+      //       <Options
+      //         options={options}
+      //         toggle={this.handleOptionClick}
+      //         handleChange={this.handleDropDownChange}
+      //       />
+      //     )}
+      //     {activeTab === "pick" && (
+      //       <Pick
+      //         pickVid1={pickVid1}
+      //         pickVid2={pickVid2}
+      //         refresh={this.refreshPickVids}
+      //         addToPlaylist={this.addToPlaylist}
+      //       />
+      //     )}
+      //     {activeTab === "search" && (
+      //       <Search
+      //         getSearchVids={this.getSearchVids}
+      //         searchResults={searchResults}
+      //         addToPlaylist={this.addToPlaylist}
+      //       />
+      //     )}
+      //     {activeTab === "playlist" && (
+      //       <Playlist playlist={playlist} playlistPosition={playlistPosition} />
+      //     )}
+      //     <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
+      //   </div>
+      // </div>
     );
   }
 }
