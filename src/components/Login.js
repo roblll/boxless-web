@@ -25,6 +25,13 @@ export default class Login extends React.Component {
     if (response.ok) {
       const data = await response.json();
       console.log(data);
+      if (data.token) {
+        localStorage.setItem("token", data.token);
+        const { handleLogin } = this.props;
+        handleLogin();
+      } else {
+        console.log("out");
+      }
     } else {
       const errMessage = await response.text();
       console.log(errMessage);

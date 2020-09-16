@@ -72,11 +72,15 @@ export default class App extends Component {
   };
 
   componentDidMount() {
-    const {
-      currentVid: { vidId },
-    } = this.state;
-    if (vidId === null) {
-      this.getVid();
+    if (localStorage.getItem("token")) {
+      this.setState({ loggedIn: true }, () => {
+        const {
+          currentVid: { vidId },
+        } = this.state;
+        if (vidId === null) {
+          this.getVid();
+        }
+      });
     }
   }
 
@@ -711,6 +715,21 @@ export default class App extends Component {
     }
   };
 
+  handleLogin = () => {
+    this.setState({ loggedIn: true }, () => {
+      if (localStorage.getItem("token")) {
+        this.setState({ loggedIn: true }, () => {
+          const {
+            currentVid: { vidId },
+          } = this.state;
+          if (vidId === null) {
+            this.getVid();
+          }
+        });
+      }
+    });
+  };
+
   render() {
     const {
       loggedIn,
@@ -768,7 +787,7 @@ export default class App extends Component {
         </div>
       </div>
     ) : (
-      <Login />
+      <Login handleLogin={this.handleLogin} />
     );
   }
 }
