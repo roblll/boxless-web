@@ -22,6 +22,7 @@ const {
 
 export default class App extends Component {
   state = {
+    loggedIn: false,
     activeTab: "options",
     options: {
       lyrics: false,
@@ -712,6 +713,7 @@ export default class App extends Component {
 
   render() {
     const {
+      loggedIn,
       activeTab,
       options,
       currentVid: { vidId, title, artist },
@@ -722,50 +724,51 @@ export default class App extends Component {
       pickVid2,
     } = this.state;
 
-    return (
+    return loggedIn ? (
+      <div style={styles.container}>
+        <div style={styles.sections}>
+          <Player getVid={this.getVid} vidId={vidId} playNext={this.playNext} />
+          {activeTab !== "none" && (
+            <MinControls
+              title={title}
+              artist={artist}
+              vidId={vidId}
+              playNext={this.playNext}
+            />
+          )}
+          {activeTab === "none" && (
+            <FullControls title={title} artist={artist} vidId={vidId} />
+          )}
+          {activeTab === "options" && (
+            <Options
+              options={options}
+              toggle={this.handleOptionClick}
+              handleChange={this.handleDropDownChange}
+            />
+          )}
+          {activeTab === "pick" && (
+            <Pick
+              pickVid1={pickVid1}
+              pickVid2={pickVid2}
+              refresh={this.refreshPickVids}
+              addToPlaylist={this.addToPlaylist}
+            />
+          )}
+          {activeTab === "search" && (
+            <Search
+              getSearchVids={this.getSearchVids}
+              searchResults={searchResults}
+              addToPlaylist={this.addToPlaylist}
+            />
+          )}
+          {activeTab === "playlist" && (
+            <Playlist playlist={playlist} playlistPosition={playlistPosition} />
+          )}
+          <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
+        </div>
+      </div>
+    ) : (
       <Login />
-      // <div style={styles.container}>
-      //   <div style={styles.sections}>
-      //     <Player getVid={this.getVid} vidId={vidId} playNext={this.playNext} />
-      //     {activeTab !== "none" && (
-      //       <MinControls
-      //         title={title}
-      //         artist={artist}
-      //         vidId={vidId}
-      //         playNext={this.playNext}
-      //       />
-      //     )}
-      //     {activeTab === "none" && (
-      //       <FullControls title={title} artist={artist} vidId={vidId} />
-      //     )}
-      //     {activeTab === "options" && (
-      //       <Options
-      //         options={options}
-      //         toggle={this.handleOptionClick}
-      //         handleChange={this.handleDropDownChange}
-      //       />
-      //     )}
-      //     {activeTab === "pick" && (
-      //       <Pick
-      //         pickVid1={pickVid1}
-      //         pickVid2={pickVid2}
-      //         refresh={this.refreshPickVids}
-      //         addToPlaylist={this.addToPlaylist}
-      //       />
-      //     )}
-      //     {activeTab === "search" && (
-      //       <Search
-      //         getSearchVids={this.getSearchVids}
-      //         searchResults={searchResults}
-      //         addToPlaylist={this.addToPlaylist}
-      //       />
-      //     )}
-      //     {activeTab === "playlist" && (
-      //       <Playlist playlist={playlist} playlistPosition={playlistPosition} />
-      //     )}
-      //     <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
-      //   </div>
-      // </div>
     );
   }
 }
