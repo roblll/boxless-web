@@ -37,6 +37,12 @@
   }
 } */
 
+html,
+body {
+  height: 100%;
+  margin: 0;
+}
+
 .dropdown .icon {
   display: none;
 }
@@ -64,4 +70,16 @@
   transform: translate3d(0, 0, 0);
   -webkit-backface-visibility: hidden;
   -webkit-perspective: 1000; */
+}
+
+.login-container {
+  display: flex;
+  justify-content: center;
+  background-color: darkgray;
+  height: 100%;
+}
+
+.login-container2 {
+  display: flex;
+  flex: 1;
 }

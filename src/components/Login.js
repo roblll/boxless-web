@@ -1,10 +1,26 @@
 import React from "react";
+import "../App.css";
+
+import Static from "./Static";
 
 export default class Login extends React.Component {
   state = {
     initials: "",
     phone: "",
+    width: 0,
+    height: 0,
   };
+
+  updateDimensions = () => {
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
+  };
+  componentDidMount() {
+    window.addEventListener("resize", this.updateDimensions);
+    this.setState({ width: window.innerWidth, height: window.innerHeight });
+  }
+  componentWillUnmount() {
+    window.removeEventListener("resize", this.updateDimensions);
+  }
 
   handleChange = (key) => (event) => {
     this.setState({ [key]: event.target.value });
@@ -39,28 +55,52 @@ export default class Login extends React.Component {
   };
 
   render() {
+    const { height, width } = this.state;
     return (
-      <form onSubmit={this.handleSubmit}>
-        <label>
-          <input
-            type="text"
-            value={this.state.initials}
-            onChange={this.handleChange("initials")}
-            placeholder="Initials"
-          />
-        </label>
-        <br></br>
-        <label>
-          <input
-            type="text"
-            value={this.state.phone}
-            onChange={this.handleChange("phone")}
-            placeholder="Phone"
-          />
-        </label>
-        <br></br>
-        <input type="submit" value="Enter" />
-      </form>
+      <div class="login-container">
+        <Static width={width} height={height} />
+        <div style={styles.loginContainer}>
+          <form style={styles.login} onSubmit={this.handleSubmit}>
+            <label>
+              <input
+                style={styles.input}
+                type="text"
+                value={this.state.initials}
+                onChange={this.handleChange("initials")}
+                placeholder="Initials"
+              />
+            </label>
+            <br></br>
+            <label>
+              <input
+                style={styles.input}
+                type="text"
+                value={this.state.phone}
+                onChange={this.handleChange("phone")}
+                placeholder="Phone"
+              />
+            </label>
+            <br></br>
+            <input type="submit" value="Enter" />
+          </form>
+        </div>
+      </div>
     );
   }
 }
+
+const styles = {
+  login: { display: "flex", justifyContent: "center", flexDirection: "column" },
+  input: {
+    width: "100px",
+  },
+  loginContainer: {
+    height: "100px",
+    width: "100px",
+    position: "absolute",
+    left: "50%",
+    marginLeft: "-50px",
+    top: "50%",
+    marginTop: "-50px",
+  },
+};
