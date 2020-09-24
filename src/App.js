@@ -135,11 +135,12 @@ export default class App extends Component {
     } = this.state;
     const { dateMin, dateMax } = getFormattedDate(this.state);
     try {
+      const token = localStorage.getItem("token");
       const response = await fetch(
         `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&hiphop=${hiphop}&house=${house}&trance=${trance}&lyrics=false&clean=false&karaoke=false&hiphopAfter=${hiphopAfter}&hiphopCount=${hiphopCount}&houseAfter=${houseAfter}&houseCount=${houseCount}&tranceAfter=${tranceAfter}&tranceCount=${tranceCount}`,
         {
           method: "GET",
-          headers: { "content-type": "application/json" },
+          headers: { "content-type": "application/json", Authorization: token },
         }
       );
       const data = await response.json();
@@ -190,11 +191,12 @@ export default class App extends Component {
     } = this.state;
     const { dateMin, dateMax } = getFormattedDate(this.state);
     try {
+      const token = localStorage.getItem("token");
       const response = await fetch(
         `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&hiphop=${hiphop}&house=${house}&trance=${trance}&lyrics=false&clean=false&karaoke=false&hiphopAfter=${hiphopAfter}&hiphopCount=${hiphopCount}&houseAfter=${houseAfter}&houseCount=${houseCount}&tranceAfter=${tranceAfter}&tranceCount=${tranceCount}`,
         {
           method: "GET",
-          headers: { "content-type": "application/json" },
+          headers: { "content-type": "application/json", Authorization: token },
         }
       );
       const data = await response.json();
