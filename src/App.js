@@ -736,6 +736,7 @@ export default class App extends Component {
 
   getSearchVids = async (searchTerm) => {
     try {
+      const token = localStorage.getItem("token");
       const response = await fetch(
         `http://localhost:3001/api/searchvids?search=${searchTerm.replace(
           / /g,
@@ -743,11 +744,16 @@ export default class App extends Component {
         )}`,
         {
           method: "GET",
-          headers: { "content-type": "application/json" },
+          headers: { "content-type": "application/json", Authorization: token },
         }
       );
-      const { searchResults } = await response.json();
-      this.setState({ searchResults });
+      if (response.ok) {
+        const { searchResults } = await response.json();
+        this.setState({ searchResults });
+      } else {
+        localStorage.clear();
+        this.setState({ loggedIn: false });
+      }
     } catch (err) {
       console.log(err);
     }
