@@ -143,21 +143,26 @@ export default class App extends Component {
           headers: { "content-type": "application/json", Authorization: token },
         }
       );
-      const data = await response.json();
-      if (data.vidId) {
-        const { vidId, title, artist } = data;
-        this.addToPlaylist({ vidId, title, artist });
-        this.getVidToCache();
-        if (data.nextPage) {
-          console.log(data.nextPage);
+      if (response.ok) {
+        const data = await response.json();
+        if (data.vidId) {
+          const { vidId, title, artist } = data;
+          this.addToPlaylist({ vidId, title, artist });
+          this.getVidToCache();
+          if (data.nextPage) {
+            console.log(data.nextPage);
+          }
+        } else {
+          // console.log("getVid() - no data");
+          // // this.getVid();
+          console.log("getVid() - no data");
+          setTimeout(() => {
+            this.getVid();
+          }, 4000);
         }
       } else {
-        // console.log("getVid() - no data");
-        // // this.getVid();
-        console.log("getVid() - no data");
-        setTimeout(() => {
-          this.getVid();
-        }, 4000);
+        localStorage.clear();
+        this.setState({ loggedIn: false });
       }
     } catch (err) {
       console.log(err);
@@ -199,54 +204,59 @@ export default class App extends Component {
           headers: { "content-type": "application/json", Authorization: token },
         }
       );
-      const data = await response.json();
-      if (data.vidId) {
-        const { vidId, title, artist } = data;
-        const newState = { cachedVid: { vidId, title, artist } };
-        if (data.hiphopAfter) {
-          if (
-            hiphopAfter === data.hiphopAfter &&
-            hiphopCount === data.hiphopCount
-          ) {
-            newState.hiphopAfter = "";
-            newState.hiphopCount = "";
-          } else {
-            newState.hiphopAfter = data.hiphopAfter;
-            newState.hiphopCount = data.hiphopCount;
+      if (response.ok) {
+        const data = await response.json();
+        if (data.vidId) {
+          const { vidId, title, artist } = data;
+          const newState = { cachedVid: { vidId, title, artist } };
+          if (data.hiphopAfter) {
+            if (
+              hiphopAfter === data.hiphopAfter &&
+              hiphopCount === data.hiphopCount
+            ) {
+              newState.hiphopAfter = "";
+              newState.hiphopCount = "";
+            } else {
+              newState.hiphopAfter = data.hiphopAfter;
+              newState.hiphopCount = data.hiphopCount;
+            }
           }
-        }
-        if (data.houseAfter) {
-          if (
-            houseAfter === data.houseAfter &&
-            houseCount === data.houseCount
-          ) {
-            newState.houseAfter = "";
-            newState.houseCount = "";
-          } else {
-            newState.houseAfter = data.houseAfter;
-            newState.houseCount = data.houseCount;
+          if (data.houseAfter) {
+            if (
+              houseAfter === data.houseAfter &&
+              houseCount === data.houseCount
+            ) {
+              newState.houseAfter = "";
+              newState.houseCount = "";
+            } else {
+              newState.houseAfter = data.houseAfter;
+              newState.houseCount = data.houseCount;
+            }
           }
-        }
-        if (data.tranceAfter) {
-          if (
-            tranceAfter === data.tranceAfter &&
-            tranceCount === data.tranceCount
-          ) {
-            newState.tranceAfter = "";
-            newState.tranceCount = "";
-          } else {
-            newState.tranceAfter = data.tranceAfter;
-            newState.tranceCount = data.tranceCount;
+          if (data.tranceAfter) {
+            if (
+              tranceAfter === data.tranceAfter &&
+              tranceCount === data.tranceCount
+            ) {
+              newState.tranceAfter = "";
+              newState.tranceCount = "";
+            } else {
+              newState.tranceAfter = data.tranceAfter;
+              newState.tranceCount = data.tranceCount;
+            }
           }
+          this.setState({ ...newState });
+        } else {
+          // console.log("no data");
+          // this.getVidToCache();
+          console.log("getVidToCache() - no data");
+          setTimeout(() => {
+            this.getVidToCache();
+          }, 4000);
         }
-        this.setState({ ...newState });
       } else {
-        // console.log("no data");
-        // this.getVidToCache();
-        console.log("getVidToCache() - no data");
-        setTimeout(() => {
-          this.getVidToCache();
-        }, 4000);
+        localStorage.clear();
+        this.setState({ loggedIn: false });
       }
     } catch (err) {
       console.log(err);
