@@ -35,7 +35,7 @@ export default class Login extends React.Component {
       body: JSON.stringify({ initials, phone }),
     };
     const response = await fetch(
-      "http://localhost:3001/api/test",
+      "http://localhost:3001/api/login",
       requestOptions
     );
     if (response.ok) {
