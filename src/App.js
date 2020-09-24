@@ -337,56 +337,63 @@ export default class App extends Component {
     } = this.state;
     const { dateMin, dateMax } = getFormattedDate(this.state);
     try {
+      const token = localStorage.getItem("token");
       const response = await fetch(
         `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&hiphop=${hiphop}&house=${house}&trance=${trance}&lyrics=false&clean=false&karaoke=false&hiphopAfter=${hiphopAfter}&hiphopCount=${hiphopCount}&houseAfter=${houseAfter}&houseCount=${houseCount}&tranceAfter=${tranceAfter}&tranceCount=${tranceCount}`,
         {
           method: "GET",
-          headers: { "content-type": "application/json" },
+          headers: { "content-type": "application/json", Authorization: token },
         }
       );
-      const data = await response.json();
-      if (data.vidId && data.title) {
-        const { vidId, title, artist } = data;
-        let newState = {};
-        if (data.hiphopAfter) {
-          if (
-            hiphopAfter === data.hiphopAfter &&
-            hiphopCount === data.hiphopCount
-          ) {
-            newState.hiphopAfter = "";
-            newState.hiphopCount = "";
-          } else {
-            newState.hiphopAfter = data.hiphopAfter;
-            newState.hiphopCount = data.hiphopCount;
+      if (response.ok) {
+        const data = await response.json();
+        if (data.vidId && data.title) {
+          const { vidId, title, artist } = data;
+          let newState = {};
+          if (data.hiphopAfter) {
+            if (
+              hiphopAfter === data.hiphopAfter &&
+              hiphopCount === data.hiphopCount
+            ) {
+              newState.hiphopAfter = "";
+              newState.hiphopCount = "";
+            } else {
+              newState.hiphopAfter = data.hiphopAfter;
+              newState.hiphopCount = data.hiphopCount;
+            }
           }
-        }
-        if (data.houseAfter) {
-          if (
-            houseAfter === data.houseAfter &&
-            houseCount === data.houseCount
-          ) {
-            newState.houseAfter = "";
-            newState.houseCount = "";
-          } else {
-            newState.houseAfter = data.houseAfter;
-            newState.houseCount = data.houseCount;
+          if (data.houseAfter) {
+            if (
+              houseAfter === data.houseAfter &&
+              houseCount === data.houseCount
+            ) {
+              newState.houseAfter = "";
+              newState.houseCount = "";
+            } else {
+              newState.houseAfter = data.houseAfter;
+              newState.houseCount = data.houseCount;
+            }
           }
-        }
-        if (data.tranceAfter) {
-          if (
-            tranceAfter === data.tranceAfter &&
-            tranceCount === data.tranceCount
-          ) {
-            newState.tranceAfter = "";
-            newState.tranceCount = "";
-          } else {
-            newState.tranceAfter = data.tranceAfter;
-            newState.tranceCount = data.tranceCount;
+          if (data.tranceAfter) {
+            if (
+              tranceAfter === data.tranceAfter &&
+              tranceCount === data.tranceCount
+            ) {
+              newState.tranceAfter = "";
+              newState.tranceCount = "";
+            } else {
+              newState.tranceAfter = data.tranceAfter;
+              newState.tranceCount = data.tranceCount;
+            }
           }
+          this.setState(
+            { ...newState, pickVid1: { vidId, title, artist } },
+            () => this.getCachedPickVid1()
+          );
+        } else {
+          localStorage.clear();
+          this.setState({ loggedIn: false });
         }
-        this.setState({ ...newState, pickVid1: { vidId, title, artist } }, () =>
-          this.getCachedPickVid1()
-        );
       } else {
         // console.log("getVid() - no data");
         // // this.getVid();
@@ -428,65 +435,71 @@ export default class App extends Component {
     } = this.state;
     const { dateMin, dateMax } = getFormattedDate(this.state);
     try {
+      const token = localStorage.getItem("token");
       const response = await fetch(
         `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&hiphop=${hiphop}&house=${house}&trance=${trance}&lyrics=false&clean=false&karaoke=false&hiphopAfter=${hiphopAfter}&hiphopCount=${hiphopCount}&houseAfter=${houseAfter}&houseCount=${houseCount}&tranceAfter=${tranceAfter}&tranceCount=${tranceCount}`,
         {
           method: "GET",
-          headers: { "content-type": "application/json" },
+          headers: { "content-type": "application/json", Authorization: token },
         }
       );
-      const data = await response.json();
-      if (data.vidId && data.title) {
-        const { vidId, title, artist } = data;
-        let newState = {};
-        if (data.hiphopAfter) {
-          if (
-            hiphopAfter === data.hiphopAfter &&
-            hiphopCount === data.hiphopCount
-          ) {
-            newState.hiphopAfter = "";
-            newState.hiphopCount = "";
-          } else {
-            newState.hiphopAfter = data.hiphopAfter;
-            newState.hiphopCount = data.hiphopCount;
+      if (response.ok) {
+        const data = await response.json();
+        if (data.vidId && data.title) {
+          const { vidId, title, artist } = data;
+          let newState = {};
+          if (data.hiphopAfter) {
+            if (
+              hiphopAfter === data.hiphopAfter &&
+              hiphopCount === data.hiphopCount
+            ) {
+              newState.hiphopAfter = "";
+              newState.hiphopCount = "";
+            } else {
+              newState.hiphopAfter = data.hiphopAfter;
+              newState.hiphopCount = data.hiphopCount;
+            }
           }
-        }
-        if (data.houseAfter) {
-          if (
-            houseAfter === data.houseAfter &&
-            houseCount === data.houseCount
-          ) {
-            newState.houseAfter = "";
-            newState.houseCount = "";
-          } else {
-            newState.houseAfter = data.houseAfter;
-            newState.houseCount = data.houseCount;
+          if (data.houseAfter) {
+            if (
+              houseAfter === data.houseAfter &&
+              houseCount === data.houseCount
+            ) {
+              newState.houseAfter = "";
+              newState.houseCount = "";
+            } else {
+              newState.houseAfter = data.houseAfter;
+              newState.houseCount = data.houseCount;
+            }
           }
-        }
-        if (data.tranceAfter) {
-          if (
-            tranceAfter === data.tranceAfter &&
-            tranceCount === data.tranceCount
-          ) {
-            newState.tranceAfter = "";
-            newState.tranceCount = "";
-          } else {
-            newState.tranceAfter = data.tranceAfter;
-            newState.tranceCount = data.tranceCount;
+          if (data.tranceAfter) {
+            if (
+              tranceAfter === data.tranceAfter &&
+              tranceCount === data.tranceCount
+            ) {
+              newState.tranceAfter = "";
+              newState.tranceCount = "";
+            } else {
+              newState.tranceAfter = data.tranceAfter;
+              newState.tranceCount = data.tranceCount;
+            }
           }
+          this.setState({
+            ...newState,
+            cachedPickVid1: { vidId, title, artist },
+          });
+        } else {
+          // console.log("getVid() - no data");
+          // // this.getVid();
+          // console.log("getVid() - no data");
+          console.log("getCachedPickVid1 failed");
+          setTimeout(() => {
+            this.getCachedPickVid1();
+          }, 4000);
         }
-        this.setState({
-          ...newState,
-          cachedPickVid1: { vidId, title, artist },
-        });
       } else {
-        // console.log("getVid() - no data");
-        // // this.getVid();
-        // console.log("getVid() - no data");
-        console.log("getCachedPickVid1 failed");
-        setTimeout(() => {
-          this.getCachedPickVid1();
-        }, 4000);
+        localStorage.clear();
+        this.setState({ loggedIn: false });
       }
     } catch (err) {
       console.log(err);
@@ -520,64 +533,71 @@ export default class App extends Component {
     } = this.state;
     const { dateMin, dateMax } = getFormattedDate(this.state);
     try {
+      const token = localStorage.getItem("token");
       const response = await fetch(
         `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&hiphop=${hiphop}&house=${house}&trance=${trance}&lyrics=false&clean=false&karaoke=false&hiphopAfter=${hiphopAfter}&hiphopCount=${hiphopCount}&houseAfter=${houseAfter}&houseCount=${houseCount}&tranceAfter=${tranceAfter}&tranceCount=${tranceCount}`,
         {
           method: "GET",
-          headers: { "content-type": "application/json" },
+          headers: { "content-type": "application/json", Authorization: token },
         }
       );
-      const data = await response.json();
-      if (data.vidId && data.title) {
-        const { vidId, title, artist } = data;
-        let newState = {};
-        if (data.hiphopAfter) {
-          if (
-            hiphopAfter === data.hiphopAfter &&
-            hiphopCount === data.hiphopCount
-          ) {
-            newState.hiphopAfter = "";
-            newState.hiphopCount = "";
-          } else {
-            newState.hiphopAfter = data.hiphopAfter;
-            newState.hiphopCount = data.hiphopCount;
+      if (response.ok) {
+        const data = await response.json();
+        if (data.vidId && data.title) {
+          const { vidId, title, artist } = data;
+          let newState = {};
+          if (data.hiphopAfter) {
+            if (
+              hiphopAfter === data.hiphopAfter &&
+              hiphopCount === data.hiphopCount
+            ) {
+              newState.hiphopAfter = "";
+              newState.hiphopCount = "";
+            } else {
+              newState.hiphopAfter = data.hiphopAfter;
+              newState.hiphopCount = data.hiphopCount;
+            }
           }
-        }
-        if (data.houseAfter) {
-          if (
-            houseAfter === data.houseAfter &&
-            houseCount === data.houseCount
-          ) {
-            newState.houseAfter = "";
-            newState.houseCount = "";
-          } else {
-            newState.houseAfter = data.houseAfter;
-            newState.houseCount = data.houseCount;
+          if (data.houseAfter) {
+            if (
+              houseAfter === data.houseAfter &&
+              houseCount === data.houseCount
+            ) {
+              newState.houseAfter = "";
+              newState.houseCount = "";
+            } else {
+              newState.houseAfter = data.houseAfter;
+              newState.houseCount = data.houseCount;
+            }
           }
-        }
-        if (data.tranceAfter) {
-          if (
-            tranceAfter === data.tranceAfter &&
-            tranceCount === data.tranceCount
-          ) {
-            newState.tranceAfter = "";
-            newState.tranceCount = "";
-          } else {
-            newState.tranceAfter = data.tranceAfter;
-            newState.tranceCount = data.tranceCount;
+          if (data.tranceAfter) {
+            if (
+              tranceAfter === data.tranceAfter &&
+              tranceCount === data.tranceCount
+            ) {
+              newState.tranceAfter = "";
+              newState.tranceCount = "";
+            } else {
+              newState.tranceAfter = data.tranceAfter;
+              newState.tranceCount = data.tranceCount;
+            }
           }
+          this.setState(
+            { ...newState, pickVid2: { vidId, title, artist } },
+            () => this.getCachedPickVid2()
+          );
+        } else {
+          // console.log("getVid() - no data");
+          // // this.getVid();
+          // console.log("getVid() - no data");
+          console.log("getPickVid2 failed");
+          setTimeout(() => {
+            this.getPickVid2();
+          }, 4000);
         }
-        this.setState({ ...newState, pickVid2: { vidId, title, artist } }, () =>
-          this.getCachedPickVid2()
-        );
       } else {
-        // console.log("getVid() - no data");
-        // // this.getVid();
-        // console.log("getVid() - no data");
-        console.log("getPickVid2 failed");
-        setTimeout(() => {
-          this.getPickVid2();
-        }, 4000);
+        localStorage.clear();
+        this.setState({ loggedIn: false });
       }
     } catch (err) {
       console.log(err);
@@ -611,68 +631,74 @@ export default class App extends Component {
     } = this.state;
     const { dateMin, dateMax } = getFormattedDate(this.state);
     try {
+      const token = localStorage.getItem("token");
       const response = await fetch(
         `http://localhost:3001/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&hiphop=${hiphop}&house=${house}&trance=${trance}&lyrics=false&clean=false&karaoke=false&hiphopAfter=${hiphopAfter}&hiphopCount=${hiphopCount}&houseAfter=${houseAfter}&houseCount=${houseCount}&tranceAfter=${tranceAfter}&tranceCount=${tranceCount}`,
         {
           method: "GET",
-          headers: { "content-type": "application/json" },
+          headers: { "content-type": "application/json", Authorization: token },
         }
       );
-      const data = await response.json();
-      if (data.vidId && data.title) {
-        const { vidId, title, artist } = data;
-        let newState = {};
-        if (data.hiphopAfter) {
-          if (
-            hiphopAfter === data.hiphopAfter &&
-            hiphopCount === data.hiphopCount
-          ) {
-            newState.hiphopAfter = "";
-            newState.hiphopCount = "";
-          } else {
-            newState.hiphopAfter = data.hiphopAfter;
-            newState.hiphopCount = data.hiphopCount;
+      if (response.ok) {
+        const data = await response.json();
+        if (data.vidId && data.title) {
+          const { vidId, title, artist } = data;
+          let newState = {};
+          if (data.hiphopAfter) {
+            if (
+              hiphopAfter === data.hiphopAfter &&
+              hiphopCount === data.hiphopCount
+            ) {
+              newState.hiphopAfter = "";
+              newState.hiphopCount = "";
+            } else {
+              newState.hiphopAfter = data.hiphopAfter;
+              newState.hiphopCount = data.hiphopCount;
+            }
           }
-        }
-        if (data.houseAfter) {
-          if (
-            houseAfter === data.houseAfter &&
-            houseCount === data.houseCount
-          ) {
-            newState.houseAfter = "";
-            newState.houseCount = "";
-          } else {
-            newState.houseAfter = data.houseAfter;
-            newState.houseCount = data.houseCount;
+          if (data.houseAfter) {
+            if (
+              houseAfter === data.houseAfter &&
+              houseCount === data.houseCount
+            ) {
+              newState.houseAfter = "";
+              newState.houseCount = "";
+            } else {
+              newState.houseAfter = data.houseAfter;
+              newState.houseCount = data.houseCount;
+            }
           }
-        }
-        if (data.tranceAfter) {
-          if (
-            tranceAfter === data.tranceAfter &&
-            tranceCount === data.tranceCount
-          ) {
-            newState.tranceAfter = "";
-            newState.tranceCount = "";
-          } else {
-            newState.tranceAfter = data.tranceAfter;
-            newState.tranceCount = data.tranceCount;
+          if (data.tranceAfter) {
+            if (
+              tranceAfter === data.tranceAfter &&
+              tranceCount === data.tranceCount
+            ) {
+              newState.tranceAfter = "";
+              newState.tranceCount = "";
+            } else {
+              newState.tranceAfter = data.tranceAfter;
+              newState.tranceCount = data.tranceCount;
+            }
           }
+          this.setState(
+            {
+              ...newState,
+              cachedPickVid2: { vidId, title, artist },
+            },
+            () => console.log(this.state.hiphopAfter, this.state.hiphopCount)
+          );
+        } else {
+          // console.log("getVid() - no data");
+          // // this.getVid();
+          // console.log("getVid() - no data");
+          console.log("getCachedPickVid2 failed");
+          setTimeout(() => {
+            this.getCachedPickVid2();
+          }, 4000);
         }
-        this.setState(
-          {
-            ...newState,
-            cachedPickVid2: { vidId, title, artist },
-          },
-          () => console.log(this.state.hiphopAfter, this.state.hiphopCount)
-        );
       } else {
-        // console.log("getVid() - no data");
-        // // this.getVid();
-        // console.log("getVid() - no data");
-        console.log("getCachedPickVid2 failed");
-        setTimeout(() => {
-          this.getCachedPickVid2();
-        }, 4000);
+        localStorage.clear();
+        this.setState({ loggedIn: false });
       }
     } catch (err) {
       console.log(err);
