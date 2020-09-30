@@ -19,3 +19,7 @@ export const getDefaultDates = () => {
   const dayMin = weekAgo.getDate();
   return { yearMax, monthMax, dayMax, yearMin, monthMin, dayMin };
 };
+
+export const getRandNum = (min, max) => {
+  return Math.floor(Math.random() * (max - min + 1)) + min;
+};

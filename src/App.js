@@ -52,6 +52,7 @@ export default class App extends Component {
     },
     currentVid: {
       vidId: null,
+      vidLength: null,
       title: null,
       artist: null,
     },
@@ -146,8 +147,8 @@ export default class App extends Component {
       if (response.ok) {
         const data = await response.json();
         if (data.vidId) {
-          const { vidId, title, artist } = data;
-          this.addToPlaylist({ vidId, title, artist });
+          const { vidId, vidLength, title, artist } = data;
+          this.addToPlaylist({ vidId, vidLength, title, artist });
           this.getVidToCache();
           if (data.nextPage) {
             console.log(data.nextPage);
@@ -207,8 +208,8 @@ export default class App extends Component {
       if (response.ok) {
         const data = await response.json();
         if (data.vidId) {
-          const { vidId, title, artist } = data;
-          const newState = { cachedVid: { vidId, title, artist } };
+          const { vidId, vidLength, title, artist } = data;
+          const newState = { cachedVid: { vidId, vidLength, title, artist } };
           if (data.hiphopAfter) {
             if (
               hiphopAfter === data.hiphopAfter &&
@@ -289,7 +290,9 @@ export default class App extends Component {
   playNext = () => {
     let { playlist, playlistPosition, cachedVid } = this.state;
     if (playlist.length > playlistPosition + 1) {
-      const { vidId, title, artist } = playlist[playlistPosition + 1];
+      const { vidId, vidLength, title, artist } = playlist[
+        playlistPosition + 1
+      ];
       playlistPosition += 1;
       this.setState({
         currentVid: { vidId, title, artist },
@@ -779,7 +782,7 @@ export default class App extends Component {
       loggedIn,
       activeTab,
       options,
-      currentVid: { vidId, title, artist },
+      currentVid: { vidId, vidLength, title, artist },
       searchResults,
       playlist,
       playlistPosition,
@@ -790,7 +793,12 @@ export default class App extends Component {
     return loggedIn ? (
       <div style={styles.container}>
         <div style={styles.sections}>
-          <Player getVid={this.getVid} vidId={vidId} playNext={this.playNext} />
+          <Player
+            getVid={this.getVid}
+            vidId={vidId}
+            vidLength={vidLength}
+            playNext={this.playNext}
+          />
           {activeTab !== "none" && (
             <MinControls
               title={title}
