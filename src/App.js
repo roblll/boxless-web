@@ -210,7 +210,7 @@ export default class App extends Component {
         if (data.vidId) {
           const { vidId, vidLength, title, artist } = data;
           const newState = { cachedVid: { vidId, vidLength, title, artist } };
-          if (data.hiphopAfter) {
+          if (data.genre === "hiphop") {
             if (
               hiphopAfter === data.hiphopAfter &&
               hiphopCount === data.hiphopCount
@@ -222,7 +222,7 @@ export default class App extends Component {
               newState.hiphopCount = data.hiphopCount;
             }
           }
-          if (data.houseAfter) {
+          if (data.genre === "house") {
             if (
               houseAfter === data.houseAfter &&
               houseCount === data.houseCount
@@ -234,7 +234,7 @@ export default class App extends Component {
               newState.houseCount = data.houseCount;
             }
           }
-          if (data.tranceAfter) {
+          if (data.genre === "trance") {
             if (
               tranceAfter === data.tranceAfter &&
               tranceCount === data.tranceCount
@@ -353,7 +353,7 @@ export default class App extends Component {
         if (data.vidId && data.title) {
           const { vidId, title, artist } = data;
           let newState = {};
-          if (data.hiphopAfter) {
+          if (data.genre === "hiphop") {
             if (
               hiphopAfter === data.hiphopAfter &&
               hiphopCount === data.hiphopCount
@@ -365,7 +365,7 @@ export default class App extends Component {
               newState.hiphopCount = data.hiphopCount;
             }
           }
-          if (data.houseAfter) {
+          if (data.genre === "house") {
             if (
               houseAfter === data.houseAfter &&
               houseCount === data.houseCount
@@ -377,7 +377,7 @@ export default class App extends Component {
               newState.houseCount = data.houseCount;
             }
           }
-          if (data.tranceAfter) {
+          if (data.genre === "trance") {
             if (
               tranceAfter === data.tranceAfter &&
               tranceCount === data.tranceCount
@@ -451,7 +451,7 @@ export default class App extends Component {
         if (data.vidId && data.title) {
           const { vidId, title, artist } = data;
           let newState = {};
-          if (data.hiphopAfter) {
+          if (data.genre === "hiphop") {
             if (
               hiphopAfter === data.hiphopAfter &&
               hiphopCount === data.hiphopCount
@@ -463,7 +463,7 @@ export default class App extends Component {
               newState.hiphopCount = data.hiphopCount;
             }
           }
-          if (data.houseAfter) {
+          if (data.genre === "house") {
             if (
               houseAfter === data.houseAfter &&
               houseCount === data.houseCount
@@ -475,7 +475,7 @@ export default class App extends Component {
               newState.houseCount = data.houseCount;
             }
           }
-          if (data.tranceAfter) {
+          if (data.genre === "trance") {
             if (
               tranceAfter === data.tranceAfter &&
               tranceCount === data.tranceCount
@@ -549,7 +549,7 @@ export default class App extends Component {
         if (data.vidId && data.title) {
           const { vidId, title, artist } = data;
           let newState = {};
-          if (data.hiphopAfter) {
+          if (data.genre === "hiphop") {
             if (
               hiphopAfter === data.hiphopAfter &&
               hiphopCount === data.hiphopCount
@@ -561,7 +561,7 @@ export default class App extends Component {
               newState.hiphopCount = data.hiphopCount;
             }
           }
-          if (data.houseAfter) {
+          if (data.genre === "house") {
             if (
               houseAfter === data.houseAfter &&
               houseCount === data.houseCount
@@ -573,7 +573,7 @@ export default class App extends Component {
               newState.houseCount = data.houseCount;
             }
           }
-          if (data.tranceAfter) {
+          if (data.genre === "trance") {
             if (
               tranceAfter === data.tranceAfter &&
               tranceCount === data.tranceCount
@@ -647,7 +647,7 @@ export default class App extends Component {
         if (data.vidId && data.title) {
           const { vidId, title, artist } = data;
           let newState = {};
-          if (data.hiphopAfter) {
+          if (data.genre === "hiphop") {
             if (
               hiphopAfter === data.hiphopAfter &&
               hiphopCount === data.hiphopCount
@@ -659,7 +659,7 @@ export default class App extends Component {
               newState.hiphopCount = data.hiphopCount;
             }
           }
-          if (data.houseAfter) {
+          if (data.genre === "house") {
             if (
               houseAfter === data.houseAfter &&
               houseCount === data.houseCount
@@ -671,7 +671,7 @@ export default class App extends Component {
               newState.houseCount = data.houseCount;
             }
           }
-          if (data.tranceAfter) {
+          if (data.genre === "trance") {
             if (
               tranceAfter === data.tranceAfter &&
               tranceCount === data.tranceCount
