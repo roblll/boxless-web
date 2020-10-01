@@ -54,7 +54,7 @@ class Player extends React.Component {
 
     let start = 60;
     let end = 120;
-    if (vidLength) {
+    if (vidLength && vidLength > 60) {
       const minStart = Math.round(vidLength * 0.1);
       const maxStart = Math.round(vidLength * 0.9) - 60;
       start = getRandNum(minStart, maxStart);
@@ -79,7 +79,7 @@ class Player extends React.Component {
             opts={opts}
             onEnd={playNext}
             onPlay={this.fade}
-            onError={playNext}
+            onError={(e) => console.log(e)}
           />
         ) : (
           <Static height={height} width={width} />
