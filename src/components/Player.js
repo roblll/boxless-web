@@ -73,12 +73,13 @@ class Player extends React.Component {
 
     return (
       <div style={styles.video}>
-        {vidId && vidLength ? (
+        {vidId ? (
           <YouTube
             videoId={vidId}
             opts={opts}
             onEnd={playNext}
             onPlay={this.fade}
+            onError={playNext}
           />
         ) : (
           <Static height={height} width={width} />
