@@ -29,24 +29,21 @@ export default class Login extends React.Component {
   handleSubmit = async (event) => {
     event.preventDefault();
     const { initials, phone } = this.state;
-    const requestOptions = {
+    const api_url =
+      process.env.NODE_ENV === "production"
+        ? "https://boxless.herokuapp.com"
+        : "http://localhost:3001";
+    const response = await fetch(`${api_url}/api/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
       body: JSON.stringify({ initials, phone }),
-    };
-    const response = await fetch(
-      "http://localhost:3001/api/login",
-      requestOptions
-    );
+    });
     if (response.ok) {
       const data = await response.json();
-      console.log(data);
       if (data.token) {
         localStorage.setItem("token", data.token);
         const { handleLogin } = this.props;
         handleLogin();
-      } else {
-        console.log("out");
       }
     } else {
       const errMessage = await response.text();
