@@ -18,6 +18,7 @@ const MinControls = (props) => {
       backgroundRepeat: "no-repeat",
       backgroundPosition: "center center",
       justifyContent: "space-evenly",
+      minHeight: "200px",
     },
     title: {
       flex: 1,
