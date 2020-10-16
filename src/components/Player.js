@@ -68,6 +68,7 @@ class Player extends React.Component {
         autoplay: 1,
         start: start,
         end: end,
+        playsinline: 1,
       },
     };
 
