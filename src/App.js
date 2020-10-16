@@ -872,6 +872,7 @@ export default class App extends Component {
     const {
       activeTab,
       currentVid: { vidId, vidLength, title, artist },
+      options,
     } = this.state;
     return (
       <div style={styles.container}>
@@ -891,6 +892,13 @@ export default class App extends Component {
         )}
         {activeTab === "none" && (
           <FullControls title={title} artist={artist} vidId={vidId} />
+        )}
+        {activeTab === "options" && (
+          <Options
+            options={options}
+            toggle={this.handleOptionClick}
+            handleChange={this.handleDropDownChange}
+          />
         )}
         <div style={styles.bottomPadding}></div>
         <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
