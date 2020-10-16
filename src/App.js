@@ -873,6 +873,11 @@ export default class App extends Component {
       activeTab,
       currentVid: { vidId, vidLength, title, artist },
       options,
+      pickVid1,
+      pickVid2,
+      searchResults,
+      playlist,
+      playlistPosition,
     } = this.state;
     return (
       <div style={styles.container}>
@@ -900,6 +905,24 @@ export default class App extends Component {
             handleChange={this.handleDropDownChange}
           />
         )}
+        {activeTab === "pick" && (
+          <Pick
+            pickVid1={pickVid1}
+            pickVid2={pickVid2}
+            refresh={this.refreshPickVids}
+            addToPlaylist={this.addToPlaylist}
+          />
+        )}
+        {activeTab === "search" && (
+          <Search
+            getSearchVids={this.getSearchVids}
+            searchResults={searchResults}
+            addToPlaylist={this.addToPlaylist}
+          />
+        )}
+        {activeTab === "playlist" && (
+          <Playlist playlist={playlist} playlistPosition={playlistPosition} />
+        )}
         <div style={styles.bottomPadding}></div>
         <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
       </div>
@@ -908,18 +931,6 @@ export default class App extends Component {
 }
 
 const styles = {
-  // container: {
-  //   display: "flex",
-  //   justifyContent: "center",
-  // },
-  // sections: {
-  //   display: "flex",
-  //   // flex: 1,
-  //   flexDirection: "column",
-  //   justifyContent: "space-between",
-  //   backgroundColor: "blue",
-  //   // height: "100vh",
-  // },
   container: {
     display: "flex",
     justifyContent: "center",
@@ -929,24 +940,5 @@ const styles = {
   bottomPadding: {
     height: "50px",
     backgroundColor: "#3D3E3F",
-  },
-  section1: {
-    backgroundColor: "lightgrey",
-    minHeight: "100px",
-  },
-  section2: {
-    backgroundColor: "beige",
-    minHeight: "100px",
-  },
-  section3: {
-    backgroundColor: "lightblue",
-    minHeight: "100px",
-  },
-  section4: {
-    backgroundColor: "grey",
-    height: "50px",
-    width: "100vw",
-    position: "fixed",
-    bottom: 0,
   },
 };
