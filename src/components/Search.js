@@ -102,7 +102,6 @@ const styles = {
     textAlign: "center",
     backgroundColor: "#3D3E3F",
     color: "white",
-    width: 375,
   },
   carousel: {
     display: "flex",
