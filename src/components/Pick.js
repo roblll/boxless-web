@@ -95,6 +95,7 @@ const styles = {
     backgroundColor: "#3D3E3F",
     color: "white",
     padding: "20px 0 0 0",
+    minWidth: "375px",
   },
   pick: {
     display: "flex",
