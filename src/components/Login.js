@@ -55,16 +55,17 @@ export default class Login extends React.Component {
     const { height, width } = this.state;
     return (
       <div class="login-container">
-        <Static width={width} height={height} />
+        <Static width={width} height={height + 100} />
         <div style={styles.loginContainer}>
           <form style={styles.login} onSubmit={this.handleSubmit}>
+            <h1>boxless</h1>
             <label>
               <input
                 style={styles.input}
                 type="text"
                 value={this.state.initials}
                 onChange={this.handleChange("initials")}
-                placeholder="Initials"
+                placeholder="initials"
                 autoComplete="off"
                 autoCorrect="off"
                 autoCapitalize="off"
@@ -78,7 +79,7 @@ export default class Login extends React.Component {
                 type="text"
                 value={this.state.phone}
                 onChange={this.handleChange("phone")}
-                placeholder="Phone"
+                placeholder="phone"
                 autoComplete="off"
                 autoCorrect="off"
                 autoCapitalize="off"
@@ -86,7 +87,7 @@ export default class Login extends React.Component {
               />
             </label>
             <br></br>
-            <input type="submit" value="Enter" />
+            <input style={styles.button} type="submit" value="enter" />
           </form>
         </div>
       </div>
@@ -95,9 +96,36 @@ export default class Login extends React.Component {
 }
 
 const styles = {
-  login: { display: "flex", justifyContent: "center", flexDirection: "column" },
+  title: {
+    color: "white",
+    height: "100px",
+  },
+  login: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+    flexDirection: "column",
+  },
   input: {
-    width: "100px",
+    fontSize: "16px",
+    width: "123px",
+    height: "48px",
+    backgroundColor: "rgba(0,0,0,0.5)",
+    border: "none",
+    color: "white",
+    padding: "0 20px",
+    borderRadius: "0px",
+    textAlign: "center",
+  },
+  button: {
+    fontSize: "16px",
+    width: "123px",
+    height: "48px",
+    backgroundColor: "rgba(0,0,0,0.5)",
+    border: "none",
+    color: "white",
+    padding: "0 20px",
+    borderRadius: "0px",
   },
   loginContainer: {
     height: "100px",
