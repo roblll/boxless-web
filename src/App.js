@@ -869,13 +869,18 @@ export default class App extends Component {
   //   }
 
   render() {
-    const { activeTab } = this.state;
+    const {
+      activeTab,
+      currentVid: { vidId, vidLength, title, artist },
+    } = this.state;
     return (
       <div style={styles.container}>
-        <div style={styles.section1}></div>
-        <div style={styles.section2}></div>
-        <div style={styles.section3}></div>
-        {/* <div style={styles.section4}></div> */}
+        <Player
+          getVid={this.getVid}
+          vidId={vidId}
+          vidLength={vidLength}
+          playNext={this.playNext}
+        />
         <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
       </div>
     );

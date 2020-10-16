@@ -46,7 +46,7 @@ class Player extends React.Component {
 
     const styles = {
       video: {
-        width: width,
+        width: "100vw",
         height: height,
         backgroundColor: "darkgray",
       },
@@ -82,7 +82,7 @@ class Player extends React.Component {
             onError={(e) => console.log(e)}
           />
         ) : (
-          <Static height={height} width={width} />
+          <Static height={height} width={"100vw"} />
         )}
       </div>
     );

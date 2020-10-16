@@ -24,7 +24,7 @@ export default class Static extends React.Component {
     const { width, height } = this.props;
     return (
       <div style={styles.container}>
-        <canvas id="tv" width={width} height={height}></canvas>
+        <canvas id="tv" style={{ height: height, width: width }}></canvas>
       </div>
     );
   }
