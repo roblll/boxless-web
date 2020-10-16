@@ -889,6 +889,9 @@ export default class App extends Component {
             playNext={this.playNext}
           />
         )}
+        {activeTab === "none" && (
+          <FullControls title={title} artist={artist} vidId={vidId} />
+        )}
         <div style={styles.bottomPadding}></div>
         <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
       </div>
