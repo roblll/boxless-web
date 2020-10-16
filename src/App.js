@@ -928,6 +928,7 @@ const styles = {
   },
   bottomPadding: {
     height: "50px",
+    backgroundColor: "#3D3E3F",
   },
   section1: {
     backgroundColor: "lightgrey",
