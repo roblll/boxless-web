@@ -878,55 +878,61 @@ export default class App extends Component {
       searchResults,
       playlist,
       playlistPosition,
+      loggedIn,
     } = this.state;
-    return (
-      <div style={styles.container}>
-        <Player
-          getVid={this.getVid}
-          vidId={vidId}
-          vidLength={vidLength}
-          playNext={this.playNext}
-        />
-        {activeTab !== "none" && (
-          <MinControls
-            title={title}
-            artist={artist}
+
+    if (loggedIn) {
+      return (
+        <div style={styles.container}>
+          <Player
+            getVid={this.getVid}
             vidId={vidId}
+            vidLength={vidLength}
             playNext={this.playNext}
           />
-        )}
-        {activeTab === "none" && (
-          <FullControls title={title} artist={artist} vidId={vidId} />
-        )}
-        {activeTab === "options" && (
-          <Options
-            options={options}
-            toggle={this.handleOptionClick}
-            handleChange={this.handleDropDownChange}
-          />
-        )}
-        {activeTab === "pick" && (
-          <Pick
-            pickVid1={pickVid1}
-            pickVid2={pickVid2}
-            refresh={this.refreshPickVids}
-            addToPlaylist={this.addToPlaylist}
-          />
-        )}
-        {activeTab === "search" && (
-          <Search
-            getSearchVids={this.getSearchVids}
-            searchResults={searchResults}
-            addToPlaylist={this.addToPlaylist}
-          />
-        )}
-        {activeTab === "playlist" && (
-          <Playlist playlist={playlist} playlistPosition={playlistPosition} />
-        )}
-        <div style={styles.bottomPadding}></div>
-        <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
-      </div>
-    );
+          {activeTab !== "none" && (
+            <MinControls
+              title={title}
+              artist={artist}
+              vidId={vidId}
+              playNext={this.playNext}
+            />
+          )}
+          {activeTab === "none" && (
+            <FullControls title={title} artist={artist} vidId={vidId} />
+          )}
+          {activeTab === "options" && (
+            <Options
+              options={options}
+              toggle={this.handleOptionClick}
+              handleChange={this.handleDropDownChange}
+            />
+          )}
+          {activeTab === "pick" && (
+            <Pick
+              pickVid1={pickVid1}
+              pickVid2={pickVid2}
+              refresh={this.refreshPickVids}
+              addToPlaylist={this.addToPlaylist}
+            />
+          )}
+          {activeTab === "search" && (
+            <Search
+              getSearchVids={this.getSearchVids}
+              searchResults={searchResults}
+              addToPlaylist={this.addToPlaylist}
+            />
+          )}
+          {activeTab === "playlist" && (
+            <Playlist playlist={playlist} playlistPosition={playlistPosition} />
+          )}
+          <div style={styles.bottomPadding}></div>
+          <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
+        </div>
+      );
+    } else {
+      return <Login handleLogin={this.handleLogin} />;
+    }
   }
 }
 
