@@ -75,12 +75,12 @@ export default class App extends Component {
   componentDidMount() {
     if (localStorage.getItem("token")) {
       this.setState({ loggedIn: true }, () => {
-        const {
-          currentVid: { vidId },
-        } = this.state;
-        if (vidId === null) {
-          this.getVid();
-        }
+        // const {
+        //   currentVid: { vidId },
+        // } = this.state;
+        // if (vidId === null) {
+        //   this.getVid();
+        // }
       });
     }
   }
@@ -802,83 +802,122 @@ export default class App extends Component {
     });
   };
 
-  render() {
-    const {
-      loggedIn,
-      activeTab,
-      options,
-      currentVid: { vidId, vidLength, title, artist },
-      searchResults,
-      playlist,
-      playlistPosition,
-      pickVid1,
-      pickVid2,
-    } = this.state;
+  //   render() {
+  //     const {
+  //       loggedIn,
+  //       activeTab,
+  //       options,
+  //       currentVid: { vidId, vidLength, title, artist },
+  //       searchResults,
+  //       playlist,
+  //       playlistPosition,
+  //       pickVid1,
+  //       pickVid2,
+  //     } = this.state;
 
-    return loggedIn ? (
+  //     return loggedIn ? (
+  //       <div style={styles.container}>
+  //         <div style={styles.sections}>
+  //           <Player
+  //             getVid={this.getVid}
+  //             vidId={vidId}
+  //             vidLength={vidLength}
+  //             playNext={this.playNext}
+  //           />
+  //           {activeTab !== "none" && (
+  //             <MinControls
+  //               title={title}
+  //               artist={artist}
+  //               vidId={vidId}
+  //               playNext={this.playNext}
+  //             />
+  //           )}
+  //           {activeTab === "none" && (
+  //             <FullControls title={title} artist={artist} vidId={vidId} />
+  //           )}
+  //           {activeTab === "options" && (
+  //             <Options
+  //               options={options}
+  //               toggle={this.handleOptionClick}
+  //               handleChange={this.handleDropDownChange}
+  //             />
+  //           )}
+  //           {activeTab === "pick" && (
+  //             <Pick
+  //               pickVid1={pickVid1}
+  //               pickVid2={pickVid2}
+  //               refresh={this.refreshPickVids}
+  //               addToPlaylist={this.addToPlaylist}
+  //             />
+  //           )}
+  //           {activeTab === "search" && (
+  //             <Search
+  //               getSearchVids={this.getSearchVids}
+  //               searchResults={searchResults}
+  //               addToPlaylist={this.addToPlaylist}
+  //             />
+  //           )}
+  //           {activeTab === "playlist" && (
+  //             <Playlist playlist={playlist} playlistPosition={playlistPosition} />
+  //           )}
+  //           <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
+  //         </div>
+  //       </div>
+  //     ) : (
+  //       <Login handleLogin={this.handleLogin} />
+  //     );
+  //   }
+
+  render() {
+    const { activeTab } = this.state;
+    return (
       <div style={styles.container}>
-        <div style={styles.sections}>
-          <Player
-            getVid={this.getVid}
-            vidId={vidId}
-            vidLength={vidLength}
-            playNext={this.playNext}
-          />
-          {activeTab !== "none" && (
-            <MinControls
-              title={title}
-              artist={artist}
-              vidId={vidId}
-              playNext={this.playNext}
-            />
-          )}
-          {activeTab === "none" && (
-            <FullControls title={title} artist={artist} vidId={vidId} />
-          )}
-          {activeTab === "options" && (
-            <Options
-              options={options}
-              toggle={this.handleOptionClick}
-              handleChange={this.handleDropDownChange}
-            />
-          )}
-          {activeTab === "pick" && (
-            <Pick
-              pickVid1={pickVid1}
-              pickVid2={pickVid2}
-              refresh={this.refreshPickVids}
-              addToPlaylist={this.addToPlaylist}
-            />
-          )}
-          {activeTab === "search" && (
-            <Search
-              getSearchVids={this.getSearchVids}
-              searchResults={searchResults}
-              addToPlaylist={this.addToPlaylist}
-            />
-          )}
-          {activeTab === "playlist" && (
-            <Playlist playlist={playlist} playlistPosition={playlistPosition} />
-          )}
-          <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
-        </div>
+        <div style={styles.section1}></div>
+        <div style={styles.section2}></div>
+        <div style={styles.section3}></div>
+        {/* <div style={styles.section4}></div> */}
+        <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
       </div>
-    ) : (
-      <Login handleLogin={this.handleLogin} />
     );
   }
 }
 
 const styles = {
+  // container: {
+  //   display: "flex",
+  //   justifyContent: "center",
+  // },
+  // sections: {
+  //   display: "flex",
+  //   // flex: 1,
+  //   flexDirection: "column",
+  //   justifyContent: "space-between",
+  //   backgroundColor: "blue",
+  //   // height: "100vh",
+  // },
   container: {
     display: "flex",
     justifyContent: "center",
-  },
-  sections: {
-    display: "flex",
     flexDirection: "column",
-    justifyContent: "space-between",
-    backgroundColor: "blue",
-    height: "100vh",
+    backgroundColor: "black",
+  },
+  section1: {
+    backgroundColor: "lightgrey",
+    minHeight: "100px",
+  },
+  section2: {
+    backgroundColor: "beige",
+    minHeight: "100px",
+  },
+  section3: {
+    backgroundColor: "lightblue",
+    minHeight: "100px",
+  },
+  section4: {
+    backgroundColor: "grey",
+    height: "50px",
+    width: "100vw",
+    position: "fixed",
+    bottom: 0,
   },
 };

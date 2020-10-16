@@ -5,7 +5,7 @@ const Tabs = (props) => {
   const { activeTab, handleTabClick } = props;
 
   return (
-    <div>
+    <div style={styles.container}>
       <Menu attached="bottom" inverted widths={4}>
         <Menu.Item
           name="options"
@@ -38,6 +38,14 @@ const Tabs = (props) => {
       </Menu>
     </div>
   );
+};
+
+const styles = {
+  container: {
+    position: "fixed",
+    width: "100vw",
+    bottom: 0,
+  },
 };
 
 export default Tabs;
