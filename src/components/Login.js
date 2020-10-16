@@ -65,6 +65,10 @@ export default class Login extends React.Component {
                 value={this.state.initials}
                 onChange={this.handleChange("initials")}
                 placeholder="Initials"
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="off"
+                spellCheck="false"
               />
             </label>
             <br></br>
@@ -75,6 +79,10 @@ export default class Login extends React.Component {
                 value={this.state.phone}
                 onChange={this.handleChange("phone")}
                 placeholder="Phone"
+                autoComplete="off"
+                autoCorrect="off"
+                autoCapitalize="off"
+                spellCheck="false"
               />
             </label>
             <br></br>
