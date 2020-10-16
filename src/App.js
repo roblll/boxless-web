@@ -881,6 +881,15 @@ export default class App extends Component {
           vidLength={vidLength}
           playNext={this.playNext}
         />
+        {activeTab !== "none" && (
+          <MinControls
+            title={title}
+            artist={artist}
+            vidId={vidId}
+            playNext={this.playNext}
+          />
+        )}
+        <div style={styles.bottomPadding}></div>
         <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
       </div>
     );
@@ -905,6 +914,9 @@ const styles = {
     justifyContent: "center",
     flexDirection: "column",
     backgroundColor: "black",
+  },
+  bottomPadding: {
+    height: "50px",
   },
   section1: {
     backgroundColor: "lightgrey",
