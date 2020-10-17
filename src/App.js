@@ -71,6 +71,7 @@ export default class App extends Component {
     tranceAfter: "",
     tranceCount: "",
     songLength: 100,
+    timers: null,
   };
 
   componentDidMount() {
@@ -297,7 +298,10 @@ export default class App extends Component {
   };
 
   playNext = () => {
-    let { playlist, playlistPosition, cachedVid } = this.state;
+    let { playlist, playlistPosition, cachedVid, timers } = this.state;
+    timers.forEach((timer) => {
+      clearTimeout(timer);
+    });
     if (playlist.length > playlistPosition + 1) {
       const { vidId, vidLength, title, artist } = playlist[
         playlistPosition + 1
@@ -803,6 +807,10 @@ export default class App extends Component {
     });
   };
 
+  getTimers = (timers) => {
+    this.setState({ timers });
+  };
+
   render() {
     const {
       activeTab,
@@ -826,6 +834,7 @@ export default class App extends Component {
             vidLength={vidLength}
             playNext={this.playNext}
             songLength={songLength}
+            getTimers={this.getTimers}
           />
           {activeTab !== "none" && (
             <MinControls

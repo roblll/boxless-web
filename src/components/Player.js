@@ -19,26 +19,48 @@ class Player extends React.Component {
   }
 
   fade = (e, seconds) => {
+    const { getTimers } = this.props;
+    const timers = [];
     e.target.setVolume(10);
-    setTimeout(() => e.target.setVolume(20), 500);
-    setTimeout(() => e.target.setVolume(30), 1000);
-    setTimeout(() => e.target.setVolume(40), 1500);
-    setTimeout(() => e.target.setVolume(50), 2000);
-    setTimeout(() => e.target.setVolume(60), 2500);
-    setTimeout(() => e.target.setVolume(70), 3000);
-    setTimeout(() => e.target.setVolume(80), 3500);
-    setTimeout(() => e.target.setVolume(90), 4000);
-    setTimeout(() => e.target.setVolume(100), 4500);
-    setTimeout(() => e.target.setVolume(90), seconds * 1000 - 4500);
-    setTimeout(() => e.target.setVolume(80), seconds * 1000 - 4000);
-    setTimeout(() => e.target.setVolume(70), seconds * 1000 - 3500);
-    setTimeout(() => e.target.setVolume(60), seconds * 1000 - 3000);
-    setTimeout(() => e.target.setVolume(50), seconds * 1000 - 2500);
-    setTimeout(() => e.target.setVolume(40), seconds * 1000 - 2000);
-    setTimeout(() => e.target.setVolume(30), seconds * 1000 - 1500);
-    setTimeout(() => e.target.setVolume(20), seconds * 1000 - 1000);
-    setTimeout(() => e.target.setVolume(10), seconds * 1000 - 500);
-    setTimeout(() => e.target.setVolume(0), seconds * 1000);
+    const t1 = setTimeout(() => e.target.setVolume(20), 500);
+    const t2 = setTimeout(() => e.target.setVolume(30), 1000);
+    const t3 = setTimeout(() => e.target.setVolume(40), 1500);
+    const t4 = setTimeout(() => e.target.setVolume(50), 2000);
+    const t5 = setTimeout(() => e.target.setVolume(60), 2500);
+    const t6 = setTimeout(() => e.target.setVolume(70), 3000);
+    const t7 = setTimeout(() => e.target.setVolume(80), 3500);
+    const t8 = setTimeout(() => e.target.setVolume(90), 4000);
+    const t9 = setTimeout(() => e.target.setVolume(100), 4500);
+    const t10 = setTimeout(() => e.target.setVolume(90), seconds * 1000 - 4500);
+    const t11 = setTimeout(() => e.target.setVolume(80), seconds * 1000 - 4000);
+    const t12 = setTimeout(() => e.target.setVolume(70), seconds * 1000 - 3500);
+    const t13 = setTimeout(() => e.target.setVolume(60), seconds * 1000 - 3000);
+    const t14 = setTimeout(() => e.target.setVolume(50), seconds * 1000 - 2500);
+    const t15 = setTimeout(() => e.target.setVolume(40), seconds * 1000 - 2000);
+    const t16 = setTimeout(() => e.target.setVolume(30), seconds * 1000 - 1500);
+    const t17 = setTimeout(() => e.target.setVolume(20), seconds * 1000 - 1000);
+    const t18 = setTimeout(() => e.target.setVolume(10), seconds * 1000 - 500);
+    const t19 = setTimeout(() => e.target.setVolume(0), seconds * 1000);
+    timers.push(t1);
+    timers.push(t2);
+    timers.push(t3);
+    timers.push(t4);
+    timers.push(t5);
+    timers.push(t6);
+    timers.push(t7);
+    timers.push(t8);
+    timers.push(t9);
+    timers.push(t10);
+    timers.push(t11);
+    timers.push(t12);
+    timers.push(t13);
+    timers.push(t14);
+    timers.push(t15);
+    timers.push(t16);
+    timers.push(t17);
+    timers.push(t18);
+    timers.push(t19);
+    getTimers(timers);
   };
 
   render() {
