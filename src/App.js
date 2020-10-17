@@ -135,6 +135,7 @@ export default class App extends Component {
       houseCount,
       tranceAfter,
       tranceCount,
+      playlist,
     } = this.state;
     const { dateMin, dateMax } = getFormattedDate(this.state);
     try {
@@ -193,6 +194,7 @@ export default class App extends Component {
         randb,
         rock,
         trance,
+        norepeats,
       },
       hiphopAfter,
       hiphopCount,
@@ -200,6 +202,7 @@ export default class App extends Component {
       houseCount,
       tranceAfter,
       tranceCount,
+      playlist,
     } = this.state;
     const { dateMin, dateMax } = getFormattedDate(this.state);
     try {
@@ -219,44 +222,58 @@ export default class App extends Component {
         const data = await response.json();
         if (data.vidId) {
           const { vidId, vidLength, title, artist } = data;
-          const newState = { cachedVid: { vidId, vidLength, title, artist } };
-          if (data.genre === "hiphop") {
-            if (
-              hiphopAfter === data.hiphopAfter &&
-              hiphopCount === data.hiphopCount
-            ) {
-              newState.hiphopAfter = "";
-              newState.hiphopCount = "";
-            } else {
-              newState.hiphopAfter = data.hiphopAfter;
-              newState.hiphopCount = data.hiphopCount;
+
+          let repeat = false;
+          playlist.forEach((vid) => {
+            if (vidId === vid.vidId) {
+              repeat = true;
             }
-          }
-          if (data.genre === "house") {
-            if (
-              houseAfter === data.houseAfter &&
-              houseCount === data.houseCount
-            ) {
-              newState.houseAfter = "";
-              newState.houseCount = "";
-            } else {
-              newState.houseAfter = data.houseAfter;
-              newState.houseCount = data.houseCount;
+          });
+          if (norepeats && repeat) {
+            console.log("repeat");
+            setTimeout(() => {
+              this.getVidToCache();
+            }, 4000);
+          } else {
+            const newState = { cachedVid: { vidId, vidLength, title, artist } };
+            if (data.genre === "hiphop") {
+              if (
+                hiphopAfter === data.hiphopAfter &&
+                hiphopCount === data.hiphopCount
+              ) {
+                newState.hiphopAfter = "";
+                newState.hiphopCount = "";
+              } else {
+                newState.hiphopAfter = data.hiphopAfter;
+                newState.hiphopCount = data.hiphopCount;
+              }
             }
-          }
-          if (data.genre === "trance") {
-            if (
-              tranceAfter === data.tranceAfter &&
-              tranceCount === data.tranceCount
-            ) {
-              newState.tranceAfter = "";
-              newState.tranceCount = "";
-            } else {
-              newState.tranceAfter = data.tranceAfter;
-              newState.tranceCount = data.tranceCount;
+            if (data.genre === "house") {
+              if (
+                houseAfter === data.houseAfter &&
+                houseCount === data.houseCount
+              ) {
+                newState.houseAfter = "";
+                newState.houseCount = "";
+              } else {
+                newState.houseAfter = data.houseAfter;
+                newState.houseCount = data.houseCount;
+              }
             }
+            if (data.genre === "trance") {
+              if (
+                tranceAfter === data.tranceAfter &&
+                tranceCount === data.tranceCount
+              ) {
+                newState.tranceAfter = "";
+                newState.tranceCount = "";
+              } else {
+                newState.tranceAfter = data.tranceAfter;
+                newState.tranceCount = data.tranceCount;
+              }
+            }
+            this.setState({ ...newState });
           }
-          this.setState({ ...newState });
         } else {
           // console.log("no data");
           // this.getVidToCache();
