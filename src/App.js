@@ -70,6 +70,7 @@ export default class App extends Component {
     houseCount: "",
     tranceAfter: "",
     tranceCount: "",
+    songLength: 100,
   };
 
   componentDidMount() {
@@ -813,6 +814,7 @@ export default class App extends Component {
       playlist,
       playlistPosition,
       loggedIn,
+      songLength,
     } = this.state;
 
     if (loggedIn) {
@@ -823,6 +825,7 @@ export default class App extends Component {
             vidId={vidId}
             vidLength={vidLength}
             playNext={this.playNext}
+            songLength={songLength}
           />
           {activeTab !== "none" && (
             <MinControls
