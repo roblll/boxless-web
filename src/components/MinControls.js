@@ -1,7 +1,7 @@
 import React from "react";
 
 const MinControls = (props) => {
-  const { title, artist, vidId, playNext } = props;
+  const { title, artist, vidId, playNext, cachedVid } = props;
 
   const bgImage = vidId
     ? `url(https://i.ytimg.com/vi/${vidId}/hqdefault.jpg)`
@@ -45,6 +45,11 @@ const MinControls = (props) => {
       fontSize: "36px",
       cursor: "pointer",
     },
+    disabledControlsIcons: {
+      opacity: 0,
+      fontSize: "36px",
+      cursor: "default",
+    },
   };
 
   let text = "";
@@ -68,13 +73,19 @@ const MinControls = (props) => {
         <i className="material-icons" style={styles.controlsIcons}>
           play_arrow
         </i>
-        <i
-          className="material-icons"
-          style={styles.controlsIcons}
-          onClick={playNext}
-        >
-          skip_next
-        </i>
+        {cachedVid && vidId === cachedVid.vidId ? (
+          <i className="material-icons" style={styles.disabledControlsIcons}>
+            skip_next
+          </i>
+        ) : (
+          <i
+            className="material-icons"
+            style={styles.controlsIcons}
+            onClick={playNext}
+          >
+            skip_next
+          </i>
+        )}
       </div>
     </div>
   );

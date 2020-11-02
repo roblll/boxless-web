@@ -840,6 +840,7 @@ export default class App extends Component {
       playlistPosition,
       loggedIn,
       songLength,
+      cachedVid,
     } = this.state;
 
     if (loggedIn) {
@@ -859,6 +860,7 @@ export default class App extends Component {
               artist={artist}
               vidId={vidId}
               playNext={this.playNext}
+              cachedVid={cachedVid}
             />
           )}
           {activeTab === "none" && (
