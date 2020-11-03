@@ -84,7 +84,7 @@ const MinControls = (props) => {
             style={styles.controlsIcons}
             onClick={togglePlayPause}
           >
-            play_arrow
+            pause
           </i>
         ) : (
           <i
@@ -92,7 +92,7 @@ const MinControls = (props) => {
             style={styles.controlsIcons}
             onClick={togglePlayPause}
           >
-            pause
+            play_arrow
           </i>
         )}
         {cachedVid && vidId === cachedVid.vidId ? (
