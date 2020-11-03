@@ -72,6 +72,8 @@ export default class App extends Component {
     tranceCount: "",
     songLength: 100,
     timers: null,
+    player: null,
+    playing: false,
   };
 
   componentDidMount() {
@@ -828,6 +830,29 @@ export default class App extends Component {
     this.setState({ timers });
   };
 
+  togglePlayPause = () => {
+    const { player, playing } = this.state;
+    if (player) {
+      if (playing) {
+        player.pauseVideo();
+      } else {
+        player.playVideo();
+      }
+    }
+  };
+
+  setPlayer = (event) => {
+    this.setState({ player: event.target });
+  };
+
+  onPlay = () => {
+    this.setState({ playing: true });
+  };
+
+  onPause = () => {
+    this.setState({ playing: false });
+  };
+
   render() {
     const {
       activeTab,
@@ -841,6 +866,7 @@ export default class App extends Component {
       loggedIn,
       songLength,
       cachedVid,
+      playing,
     } = this.state;
 
     if (loggedIn) {
@@ -853,6 +879,9 @@ export default class App extends Component {
             playNext={this.playNext}
             songLength={songLength}
             getTimers={this.getTimers}
+            setPlayer={this.setPlayer}
+            onPlay={this.onPlay}
+            onPause={this.onPause}
           />
           {activeTab !== "none" && (
             <MinControls
@@ -861,6 +890,8 @@ export default class App extends Component {
               vidId={vidId}
               playNext={this.playNext}
               cachedVid={cachedVid}
+              togglePlayPause={this.togglePlayPause}
+              playing={playing}
             />
           )}
           {activeTab === "none" && (

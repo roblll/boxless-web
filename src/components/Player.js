@@ -18,8 +18,9 @@ class Player extends React.Component {
     return true;
   }
 
-  fade = (e, seconds) => {
-    const { getTimers } = this.props;
+  play = (e, seconds) => {
+    const { getTimers, onPlay } = this.props;
+    onPlay();
     const timers = [];
     e.target.setVolume(10);
     const t1 = setTimeout(() => e.target.setVolume(20), 500);
@@ -63,8 +64,13 @@ class Player extends React.Component {
     getTimers(timers);
   };
 
+  pause = () => {
+    const { onPause } = this.props;
+    onPause();
+  };
+
   render() {
-    const { vidId, vidLength, playNext, songLength } = this.props;
+    const { vidId, vidLength, playNext, songLength, setPlayer } = this.props;
 
     const styles = {
       video: {
@@ -105,8 +111,10 @@ class Player extends React.Component {
             videoId={vidId}
             opts={opts}
             onEnd={playNext}
-            onPlay={(e) => this.fade(e, songLength)}
+            onPlay={(e) => this.play(e, songLength)}
+            onPause={(e) => this.pause()}
             onError={(e) => console.log(e)}
+            onReady={setPlayer}
           />
         ) : (
           <Static height={height} width={"100vw"} />

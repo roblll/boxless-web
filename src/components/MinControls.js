@@ -1,7 +1,15 @@
 import React from "react";
 
 const MinControls = (props) => {
-  const { title, artist, vidId, playNext, cachedVid } = props;
+  const {
+    title,
+    artist,
+    vidId,
+    playNext,
+    cachedVid,
+    togglePlayPause,
+    playing,
+  } = props;
 
   const bgImage = vidId
     ? `url(https://i.ytimg.com/vi/${vidId}/hqdefault.jpg)`
@@ -70,9 +78,23 @@ const MinControls = (props) => {
         <i className="material-icons" style={styles.controlsIcons}>
           skip_previous
         </i>
-        <i className="material-icons" style={styles.controlsIcons}>
-          play_arrow
-        </i>
+        {playing ? (
+          <i
+            className="material-icons"
+            style={styles.controlsIcons}
+            onClick={togglePlayPause}
+          >
+            play_arrow
+          </i>
+        ) : (
+          <i
+            className="material-icons"
+            style={styles.controlsIcons}
+            onClick={togglePlayPause}
+          >
+            pause
+          </i>
+        )}
         {cachedVid && vidId === cachedVid.vidId ? (
           <i className="material-icons" style={styles.disabledControlsIcons}>
             skip_next
