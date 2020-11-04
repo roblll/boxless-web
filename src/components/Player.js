@@ -97,7 +97,6 @@ class Player extends React.Component {
         start: start,
         end: end,
         playsinline: 1,
-        controls: 0,
         disablekb: 0,
         modestbranding: 1,
         rel: 0,
