@@ -332,13 +332,10 @@ export default class App extends Component {
       });
     } else {
       if (cachedVid !== null) {
-        this.setState(
-          { currentVid: cachedVid, playlistPosition: playlistPosition + 1 },
-          () => {
-            this.addToPlaylist(cachedVid);
-            this.getVidToCache();
-          }
-        );
+        this.setState({ currentVid: cachedVid }, () => {
+          this.addToPlaylist(cachedVid);
+          this.getVidToCache();
+        });
       } else {
         this.getVid();
       }
