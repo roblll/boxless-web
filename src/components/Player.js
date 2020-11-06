@@ -112,7 +112,7 @@ class Player extends React.Component {
             onEnd={playNext}
             onPlay={(e) => this.play(e, songLength)}
             onPause={(e) => this.pause()}
-            onError={(e) => console.log(e)}
+            onError={(e) => playNext()}
             onReady={setPlayer}
           />
         ) : (
