@@ -6,6 +6,7 @@ const MinControls = (props) => {
     artist,
     vidId,
     playNext,
+    playPrevious,
     cachedVid,
     togglePlayPause,
     playing,
@@ -75,7 +76,11 @@ const MinControls = (props) => {
         </div>
       </div>
       <div style={styles.controls}>
-        <i className="material-icons" style={styles.controlsIcons}>
+        <i
+          className="material-icons"
+          style={styles.controlsIcons}
+          onClick={playPrevious}
+        >
           skip_previous
         </i>
         {playing ? (

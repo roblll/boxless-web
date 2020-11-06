@@ -850,6 +850,18 @@ export default class App extends Component {
     this.setState({ playing: false });
   };
 
+  playPrevious = () => {
+    const { playlist, playlistPosition, timers } = this.state;
+    timers.forEach((timer) => {
+      clearTimeout(timer);
+    });
+    const previousVid = playlist[playlistPosition - 1];
+    this.setState({
+      currentVid: previousVid,
+      playlistPosition: playlistPosition - 1,
+    });
+  };
+
   render() {
     const {
       activeTab,
@@ -886,6 +898,7 @@ export default class App extends Component {
               artist={artist}
               vidId={vidId}
               playNext={this.playNext}
+              playPrevious={this.playPrevious}
               cachedVid={cachedVid}
               togglePlayPause={this.togglePlayPause}
               playing={playing}
