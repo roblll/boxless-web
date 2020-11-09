@@ -108,7 +108,7 @@ const styles = {
   },
   input: {
     fontSize: "16px",
-    width: "123px",
+    width: "200px",
     height: "48px",
     backgroundColor: "rgba(0,0,0,0.5)",
     border: "none",
@@ -119,7 +119,7 @@ const styles = {
   },
   button: {
     fontSize: "16px",
-    width: "123px",
+    width: "200px",
     height: "48px",
     backgroundColor: "rgba(0,0,0,0.5)",
     border: "none",
