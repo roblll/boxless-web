@@ -40,14 +40,9 @@ export const fetchVid = async (state, token) => {
     );
     if (response.ok) {
       const data = await response.json();
-      console.log("data", data);
-      return {
-        test: "test",
-      };
+      return data;
     } else {
-      return {
-        test: "test",
-      };
+      return {};
     }
   } catch (err) {
     return { error: "error" };
