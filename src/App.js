@@ -2,6 +2,18 @@ import React, { Component } from "react";
 
 import Player from "./components/Player";
 
+import { fetchVid } from "./api/api";
+import { getDefaultDates } from "./utils/utils";
+
+const {
+  dayMin,
+  monthMin,
+  yearMin,
+  dayMax,
+  monthMax,
+  yearMax,
+} = getDefaultDates();
+
 export default class App extends Component {
   state = {
     player: null,
@@ -19,12 +31,43 @@ export default class App extends Component {
         artist: "Twenty One Pilots",
       },
     ],
+    options: {
+      lyrics: false,
+      clean: false,
+      karaoke: false,
+      norepeats: true,
+      alternative: true,
+      country: true,
+      dance: true,
+      electronic: true,
+      hiphop: true,
+      house: true,
+      latin: true,
+      pop: true,
+      rap: true,
+      randb: true,
+      rock: true,
+      trance: true,
+      dayMin,
+      dayMax,
+      monthMin,
+      monthMax,
+      yearMin,
+      yearMax,
+      rankMin: 1,
+      rankMax: 100,
+    },
   };
 
   setPlayer = (event) => {
     this.setState({ player: event.target }, () => {
-      this.play();
+      this.getVid();
     });
+  };
+
+  getVid = async () => {
+    const token = localStorage.getItem("token");
+    const data = await fetchVid(this.state, token);
   };
 
   play = () => {
