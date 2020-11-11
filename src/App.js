@@ -1,5 +1,6 @@
 import React, { Component } from "react";
 
+import Login from "./components/Login";
 import Player from "./components/Player";
 
 import { fetchVid } from "./api/api";
@@ -16,6 +17,7 @@ const {
 
 export default class App extends Component {
   state = {
+    loggedIn: false,
     player: null,
     playlist: [
       {
@@ -59,6 +61,12 @@ export default class App extends Component {
     },
   };
 
+  componentDidMount() {
+    if (localStorage.getItem("token")) {
+      this.setState({ loggedIn: true });
+    }
+  }
+
   setPlayer = (event) => {
     this.setState({ player: event.target }, () => {
       this.getVid();
@@ -90,11 +98,20 @@ export default class App extends Component {
     });
   };
 
+  handleLogin = () => {
+    this.setState({ loggedIn: true });
+  };
+
   render() {
-    return (
-      <div>
-        <Player setPlayer={this.setPlayer} playNext={this.playNext} />
-      </div>
-    );
+    const { loggedIn } = this.state;
+    if (loggedIn) {
+      return (
+        <div>
+          <Player setPlayer={this.setPlayer} playNext={this.playNext} />
+        </div>
+      );
+    } else {
+      return <Login handleLogin={this.handleLogin} />;
+    }
   }
 }
