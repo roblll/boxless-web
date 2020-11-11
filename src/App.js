@@ -20,6 +20,7 @@ export default class App extends Component {
     loggedIn: false,
     player: null,
     playlist: [],
+    playlistPosition: 0,
     options: {
       lyrics: false,
       clean: false,
@@ -46,6 +47,7 @@ export default class App extends Component {
       rankMin: 1,
       rankMax: 100,
     },
+    cachedVid: null,
   };
 
   componentDidMount() {
@@ -64,7 +66,12 @@ export default class App extends Component {
     const token = localStorage.getItem("token");
     const data = await fetchVid(this.state, token);
     if (data.vidId) {
-      this.addToPlaylist(data);
+      const { playlist } = this.state;
+      if (playlist.length === 0) {
+        this.addToPlaylist(data);
+      } else {
+        this.cacheVid(data);
+      }
     } else {
       setTimeout(() => {
         this.getVid();
@@ -83,14 +90,28 @@ export default class App extends Component {
           startSeconds: 0,
           endSeconds: 15,
         });
+        this.getVid();
       }
     });
   };
 
+  cacheVid = (vid) => {
+    this.setState({ cachedVid: vid });
+  };
+
   playNext = () => {
-    const { player } = this.state;
+    const { player, playlist, playlistPosition, cachedVid } = this.state;
+    let videoId = "";
+    if (playlistPosition < playlist.length - 1) {
+      const { vidId } = playlist[playlistPosition];
+      videoId = vidId;
+    } else {
+      const { vidId } = cachedVid;
+      videoId = vidId;
+      this.getVid();
+    }
     player.loadVideoById({
-      videoId: "loOWKm8GW6A",
+      videoId,
       startSeconds: 0,
       endSeconds: 15,
     });
