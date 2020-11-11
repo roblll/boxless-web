@@ -8,7 +8,7 @@ const height = 200;
 
 class Player extends React.Component {
   render() {
-    const { playNext, setPlayer } = this.props;
+    const { playNext, setPlayer, handleError } = this.props;
 
     const opts = {
       width: "100%",
@@ -22,7 +22,14 @@ class Player extends React.Component {
       },
     };
 
-    return <YouTube opts={opts} onEnd={playNext} onReady={setPlayer} />;
+    return (
+      <YouTube
+        opts={opts}
+        onEnd={playNext}
+        onReady={setPlayer}
+        onError={handleError}
+      />
+    );
   }
 }
 

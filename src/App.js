@@ -87,8 +87,8 @@ export default class App extends Component {
         const { vidId } = playlist[0];
         player.loadVideoById({
           videoId: vidId,
-          startSeconds: 0,
-          endSeconds: 15,
+          startSeconds: 100,
+          endSeconds: 115,
         });
         this.getVid();
       }
@@ -112,9 +112,13 @@ export default class App extends Component {
     }
     player.loadVideoById({
       videoId,
-      startSeconds: 0,
-      endSeconds: 15,
+      startSeconds: 100,
+      endSeconds: 115,
     });
+  };
+
+  handleError = () => {
+    console.log("Error");
   };
 
   handleLogin = () => {
@@ -130,7 +134,9 @@ export default class App extends Component {
         </div>
       );
     } else {
-      return <Login handleLogin={this.handleLogin} />;
+      return (
+        <Login handleLogin={this.handleLogin} handleError={this.handleError} />
+      );
     }
   }
 }
