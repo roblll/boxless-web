@@ -4,6 +4,7 @@ import Login from "./components/Login";
 import Player from "./components/Player";
 import Tabs from "./components/Tabs";
 import Options from "./components/Options";
+import Pick from "./components/Pick";
 
 import { fetchVid } from "./api/api";
 import { getDefaultDates } from "./utils/utils";
@@ -51,6 +52,8 @@ export default class App extends Component {
     },
     cachedVid: null,
     activeTab: "options",
+    pickVid1: null,
+    pickVid2: null,
   };
 
   componentDidMount() {
@@ -158,8 +161,12 @@ export default class App extends Component {
     });
   };
 
+  refreshPickVids = () => {
+    console.log("refreshPickVids");
+  };
+
   render() {
-    const { loggedIn, activeTab, options } = this.state;
+    const { loggedIn, activeTab, options, pickVid1, pickVid2 } = this.state;
     if (loggedIn) {
       return (
         <div style={styles.container}>
@@ -173,6 +180,14 @@ export default class App extends Component {
               options={options}
               toggle={this.handleOptionClick}
               handleChange={this.handleDropDownChange}
+            />
+          )}
+          {activeTab === "pick" && (
+            <Pick
+              pickVid1={pickVid1}
+              pickVid2={pickVid2}
+              refresh={this.refreshPickVids}
+              addToPlaylist={this.addToPlaylist}
             />
           )}
           <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
