@@ -8,6 +8,7 @@ import Pick from "./components/Pick";
 import Search from "./components/Search";
 import Playlist from "./components/Playlist";
 import MinControls from "./components/MinControls";
+import FullControls from "./components/FullControls";
 
 import { fetchVid } from "./api/api";
 import { getDefaultDates } from "./utils/utils";
@@ -202,6 +203,13 @@ export default class App extends Component {
               // cachedVid={cachedVid}
               // togglePlayPause={this.togglePlayPause}
               // playing={playing}
+            />
+          )}
+          {activeTab === "none" && (
+            <FullControls
+            // title={title}
+            // artist={artist}
+            // vidId={vidId}
             />
           )}
           {activeTab === "options" && (
