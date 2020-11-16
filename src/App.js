@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import Login from "./components/Login";
 import Player from "./components/Player";
+import Tabs from "./components/Tabs";
 
 import { fetchVid } from "./api/api";
 import { getDefaultDates } from "./utils/utils";
@@ -48,6 +49,7 @@ export default class App extends Component {
       rankMax: 100,
     },
     cachedVid: null,
+    activeTab: "options",
   };
 
   componentDidMount() {
@@ -131,16 +133,25 @@ export default class App extends Component {
     this.setState({ loggedIn: true });
   };
 
+  handleTabClick = (e, { name }) => {
+    if (this.state.activeTab === name) {
+      this.setState({ activeTab: "none" });
+    } else {
+      this.setState({ activeTab: name });
+    }
+  };
+
   render() {
-    const { loggedIn } = this.state;
+    const { loggedIn, activeTab } = this.state;
     if (loggedIn) {
       return (
-        <div>
+        <div style={styles.container}>
           <Player
             setPlayer={this.setPlayer}
             playNext={this.playNext}
             handleError={this.handleError}
           />
+          <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
         </div>
       );
     } else {
@@ -148,3 +159,16 @@ export default class App extends Component {
     }
   }
 }
+
+const styles = {
+  container: {
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+    backgroundColor: "black",
+  },
+  bottomPadding: {
+    height: "50px",
+    backgroundColor: "#3D3E3F",
+  },
+};
