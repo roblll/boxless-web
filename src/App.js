@@ -7,6 +7,7 @@ import Options from "./components/Options";
 import Pick from "./components/Pick";
 import Search from "./components/Search";
 import Playlist from "./components/Playlist";
+import MinControls from "./components/MinControls";
 
 import { fetchVid } from "./api/api";
 import { getDefaultDates } from "./utils/utils";
@@ -191,6 +192,18 @@ export default class App extends Component {
             playNext={this.playNext}
             handleError={this.handleError}
           />
+          {activeTab !== "none" && (
+            <MinControls
+              // title={playlist[playlistPosition].title}
+              // artist={playlist[playlistPosition].artist}
+              // vidId={playlist[playlistPosition].vidId}
+              playNext={this.playNext}
+              // playPrevious={this.playPrevious}
+              // cachedVid={cachedVid}
+              // togglePlayPause={this.togglePlayPause}
+              // playing={playing}
+            />
+          )}
           {activeTab === "options" && (
             <Options
               options={options}
