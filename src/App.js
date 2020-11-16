@@ -6,6 +6,7 @@ import Tabs from "./components/Tabs";
 import Options from "./components/Options";
 import Pick from "./components/Pick";
 import Search from "./components/Search";
+import Playlist from "./components/Playlist";
 
 import { fetchVid } from "./api/api";
 import { getDefaultDates } from "./utils/utils";
@@ -179,6 +180,8 @@ export default class App extends Component {
       pickVid1,
       pickVid2,
       searchResults,
+      playlist,
+      playlistPosition,
     } = this.state;
     if (loggedIn) {
       return (
@@ -209,6 +212,9 @@ export default class App extends Component {
               searchResults={searchResults}
               addToPlaylist={this.addToPlaylist}
             />
+          )}
+          {activeTab === "playlist" && (
+            <Playlist playlist={playlist} playlistPosition={playlistPosition} />
           )}
           <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
         </div>
