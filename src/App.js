@@ -88,7 +88,7 @@ export default class App extends Component {
         player.loadVideoById({
           videoId: vidId,
           startSeconds: 100,
-          endSeconds: 115,
+          endSeconds: 160,
         });
         this.getVid();
       }
@@ -113,12 +113,18 @@ export default class App extends Component {
     player.loadVideoById({
       videoId,
       startSeconds: 100,
-      endSeconds: 115,
+      endSeconds: 160,
     });
   };
 
-  handleError = () => {
-    console.log("Error");
+  handleError = async () => {
+    const { player, cachedVid } = this.state;
+    if (player.getVideoData().video_id !== cachedVid.vidId) {
+      this.playNext();
+    } else {
+      await this.getVid();
+      this.playNext();
+    }
   };
 
   handleLogin = () => {
@@ -130,13 +136,15 @@ export default class App extends Component {
     if (loggedIn) {
       return (
         <div>
-          <Player setPlayer={this.setPlayer} playNext={this.playNext} />
+          <Player
+            setPlayer={this.setPlayer}
+            playNext={this.playNext}
+            handleError={this.handleError}
+          />
         </div>
       );
     } else {
-      return (
-        <Login handleLogin={this.handleLogin} handleError={this.handleError} />
-      );
+      return <Login handleLogin={this.handleLogin} />;
     }
   }
 }
