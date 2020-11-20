@@ -76,17 +76,22 @@ export default class App extends Component {
   getVid = async () => {
     const token = localStorage.getItem("token");
     const data = await fetchVid(this.state, token);
-    if (data.vidId) {
-      const { playlist } = this.state;
-      if (playlist.length === 0) {
-        this.addToPlaylist(data);
-      } else {
-        this.cacheVid(data);
-      }
+    if (data === null) {
+      localStorage.clear();
+      this.setState({ loggedIn: false });
     } else {
-      setTimeout(() => {
-        this.getVid();
-      }, 4000);
+      if (data.vidId) {
+        const { playlist } = this.state;
+        if (playlist.length === 0) {
+          this.addToPlaylist(data);
+        } else {
+          this.cacheVid(data);
+        }
+      } else {
+        setTimeout(() => {
+          this.getVid();
+        }, 4000);
+      }
     }
   };
 
@@ -110,7 +115,7 @@ export default class App extends Component {
     this.setState({ cachedVid: vid });
   };
 
-  playNext = () => {
+  playNext = async () => {
     const { player, playlist, playlistPosition, cachedVid } = this.state;
     let videoId = "";
     if (playlistPosition < playlist.length - 1) {
@@ -126,6 +131,10 @@ export default class App extends Component {
       startSeconds: 100,
       endSeconds: 123,
     });
+  };
+
+  loadVideo = async () => {
+    console.log("loadVideo");
   };
 
   handleError = async () => {

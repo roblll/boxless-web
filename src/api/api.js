@@ -42,7 +42,7 @@ export const fetchVid = async (state, token) => {
       const data = await response.json();
       return data;
     } else {
-      return {};
+      return null;
     }
   } catch (err) {
     return { error: "error" };
