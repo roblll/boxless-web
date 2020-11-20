@@ -116,7 +116,7 @@ export default class App extends Component {
   };
 
   playNext = async () => {
-    const { player, playlist, playlistPosition, cachedVid } = this.state;
+    const { playlist, playlistPosition, cachedVid } = this.state;
     let videoId = "";
     if (playlistPosition < playlist.length - 1) {
       const { vidId } = playlist[playlistPosition];
@@ -124,17 +124,28 @@ export default class App extends Component {
     } else {
       const { vidId } = cachedVid;
       videoId = vidId;
+    }
+    await this.loadVideo(videoId);
+    if (playlistPosition < playlist.length - 1) {
+      this.setState({ playlistPosition: playlistPosition + 1 });
+    } else {
+      if (playlist[playlistPosition].vidId !== cachedVid.vidId) {
+        this.setState({
+          playlistPosition: playlistPosition + 1,
+          playlist: [...playlist, cachedVid],
+        });
+      }
       this.getVid();
     }
+  };
+
+  loadVideo = (videoId) => {
+    const { player } = this.state;
     player.loadVideoById({
       videoId,
       startSeconds: 100,
       endSeconds: 123,
     });
-  };
-
-  loadVideo = async () => {
-    console.log("loadVideo");
   };
 
   handleError = async () => {
