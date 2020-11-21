@@ -2,15 +2,28 @@ import React from "react";
 
 const MinControls = (props) => {
   const {
-    title,
-    artist,
-    vidId,
+    info,
     playNext,
     playPrevious,
     cachedVid,
     togglePlayPause,
     playing,
   } = props;
+
+  let title = undefined;
+  let artist = undefined;
+  let vidId = undefined;
+  if (info) {
+    if (info.title) {
+      title = info.title;
+    }
+    if (info.artist) {
+      artist = info.artist;
+    }
+    if (info.vidId) {
+      vidId = info.vidId;
+    }
+  }
 
   const bgImage = vidId
     ? `url(https://i.ytimg.com/vi/${vidId}/hqdefault.jpg)`

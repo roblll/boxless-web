@@ -119,11 +119,11 @@ export default class App extends Component {
     const { playlist, playlistPosition, cachedVid } = this.state;
     if (playlistPosition < playlist.length - 1) {
       const { vidId } = playlist[playlistPosition];
-      await this.loadVideo(vidId);
+      this.loadVideo(vidId);
       this.setState({ playlistPosition: playlistPosition + 1 });
     } else if (cachedVid) {
       const { vidId } = cachedVid;
-      await this.loadVideo(vidId);
+      this.loadVideo(vidId);
       if (playlist[playlistPosition].vidId !== cachedVid.vidId) {
         this.setState({
           playlistPosition: playlistPosition + 1,
@@ -213,9 +213,7 @@ export default class App extends Component {
           />
           {activeTab !== "none" && (
             <MinControls
-              // title={playlist[playlistPosition].title}
-              // artist={playlist[playlistPosition].artist}
-              // vidId={playlist[playlistPosition].vidId}
+              info={playlist[playlistPosition]}
               playNext={this.playNext}
               // playPrevious={this.playPrevious}
               // cachedVid={cachedVid}
