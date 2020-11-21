@@ -60,6 +60,7 @@ export default class App extends Component {
     pickVid1: null,
     pickVid2: null,
     searchResults: {},
+    playing: false,
   };
 
   componentDidMount() {
@@ -205,6 +206,25 @@ export default class App extends Component {
     console.log("getSearchVids");
   };
 
+  onPlay = () => {
+    this.setState({ playing: true });
+  };
+
+  onPause = () => {
+    this.setState({ playing: false });
+  };
+
+  togglePlayPause = () => {
+    const { player, playing } = this.state;
+    if (player) {
+      if (playing) {
+        player.pauseVideo();
+      } else {
+        player.playVideo();
+      }
+    }
+  };
+
   render() {
     const {
       loggedIn,
@@ -216,6 +236,7 @@ export default class App extends Component {
       playlist,
       playlistPosition,
       cachedVid,
+      playing,
     } = this.state;
     if (loggedIn) {
       return (
@@ -224,6 +245,8 @@ export default class App extends Component {
             setPlayer={this.setPlayer}
             playNext={this.playNext}
             handleError={this.handleError}
+            onPlay={this.onPlay}
+            onPause={this.onPause}
           />
           {activeTab !== "none" && (
             <MinControls
@@ -231,8 +254,8 @@ export default class App extends Component {
               playNext={this.playNext}
               // playPrevious={this.playPrevious}
               cachedVid={cachedVid}
-              // togglePlayPause={this.togglePlayPause}
-              // playing={playing}
+              togglePlayPause={this.togglePlayPause}
+              playing={playing}
             />
           )}
           {activeTab === "none" && (

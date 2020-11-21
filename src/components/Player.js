@@ -8,7 +8,7 @@ const height = 200;
 
 class Player extends React.Component {
   render() {
-    const { playNext, setPlayer, handleError } = this.props;
+    const { playNext, setPlayer, handleError, onPlay, onPause } = this.props;
 
     const opts = {
       width: "100%",
@@ -28,6 +28,8 @@ class Player extends React.Component {
         onEnd={playNext}
         onReady={setPlayer}
         onError={handleError}
+        onPlay={onPlay}
+        onPause={onPause}
       />
     );
   }
