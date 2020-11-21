@@ -222,11 +222,7 @@ export default class App extends Component {
             />
           )}
           {activeTab === "none" && (
-            <FullControls
-            // title={title}
-            // artist={artist}
-            // vidId={vidId}
-            />
+            <FullControls info={playlist[playlistPosition]} />
           )}
           {activeTab === "options" && (
             <Options

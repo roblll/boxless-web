@@ -1,7 +1,22 @@
 import React from "react";
 
 const FullControls = (props) => {
-  const { title, artist, vidId } = props;
+  const { info } = props;
+
+  let title = undefined;
+  let artist = undefined;
+  let vidId = undefined;
+  if (info) {
+    if (info.title) {
+      title = info.title;
+    }
+    if (info.artist) {
+      artist = info.artist;
+    }
+    if (info.vidId) {
+      vidId = info.vidId;
+    }
+  }
 
   let text = "";
   if (title && artist) {
