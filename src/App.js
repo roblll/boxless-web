@@ -55,6 +55,7 @@ export default class App extends Component {
       rankMax: 100,
     },
     cachedVid: null,
+    loadingCachedVid: false,
     activeTab: "options",
     pickVid1: null,
     pickVid2: null,
@@ -112,11 +113,16 @@ export default class App extends Component {
   };
 
   cacheVid = (vid) => {
-    this.setState({ cachedVid: vid });
+    this.setState({ cachedVid: vid, loadingCachedVid: false });
   };
 
   playNext = async () => {
-    const { playlist, playlistPosition, cachedVid } = this.state;
+    const {
+      playlist,
+      playlistPosition,
+      cachedVid,
+      loadingCachedVid,
+    } = this.state;
     if (playlistPosition < playlist.length - 1) {
       const { vidId } = playlist[playlistPosition];
       this.loadVideo(vidId);
@@ -124,14 +130,8 @@ export default class App extends Component {
     } else if (cachedVid) {
       const { vidId } = cachedVid;
       this.loadVideo(vidId);
-      if (playlist[playlistPosition].vidId !== cachedVid.vidId) {
-        this.setState({
-          playlistPosition: playlistPosition + 1,
-          playlist: [...playlist, cachedVid],
-        });
-        this.getVid();
-      }
-    } else {
+      this.useCachedVid();
+    } else if (cachedVid === null && !loadingCachedVid) {
       await this.getVid();
       this.playNext();
     }
@@ -144,6 +144,19 @@ export default class App extends Component {
       startSeconds: 100,
       endSeconds: 123,
     });
+  };
+
+  useCachedVid = () => {
+    const { playlist, playlistPosition, cachedVid } = this.state;
+    if (playlist[playlistPosition].vidId !== cachedVid.vidId) {
+      this.setState({
+        playlistPosition: playlistPosition + 1,
+        playlist: [...playlist, cachedVid],
+        cachedVid: null,
+        loadingCachedVid: true,
+      });
+      this.getVid();
+    }
   };
 
   handleError = async () => {
@@ -202,6 +215,7 @@ export default class App extends Component {
       searchResults,
       playlist,
       playlistPosition,
+      cachedVid,
     } = this.state;
     if (loggedIn) {
       return (
@@ -216,7 +230,7 @@ export default class App extends Component {
               info={playlist[playlistPosition]}
               playNext={this.playNext}
               // playPrevious={this.playPrevious}
-              // cachedVid={cachedVid}
+              cachedVid={cachedVid}
               // togglePlayPause={this.togglePlayPause}
               // playing={playing}
             />

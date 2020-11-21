@@ -113,7 +113,7 @@ const MinControls = (props) => {
             play_arrow
           </i>
         )}
-        {cachedVid && vidId === cachedVid.vidId ? (
+        {cachedVid === null ? (
           <i className="material-icons" style={styles.disabledControlsIcons}>
             skip_next
           </i>
