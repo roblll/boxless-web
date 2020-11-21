@@ -225,6 +225,16 @@ export default class App extends Component {
     }
   };
 
+  playPrevious = () => {
+    const { playlist, playlistPosition } = this.state;
+    if (playlistPosition > 0) {
+      const prevVid = playlist[playlistPosition - 1];
+      const { vidId } = prevVid;
+      this.loadVideo(vidId);
+      this.setState({ playlistPosition: playlistPosition - 1 });
+    }
+  };
+
   render() {
     const {
       loggedIn,
@@ -252,7 +262,7 @@ export default class App extends Component {
             <MinControls
               info={playlist[playlistPosition]}
               playNext={this.playNext}
-              // playPrevious={this.playPrevious}
+              playPrevious={this.playPrevious}
               cachedVid={cachedVid}
               togglePlayPause={this.togglePlayPause}
               playing={playing}
