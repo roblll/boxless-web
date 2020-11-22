@@ -10,6 +10,7 @@ const MinControls = (props) => {
     playing,
     playlistPosition,
     playlist,
+    player,
   } = props;
 
   let title = undefined;
@@ -83,6 +84,31 @@ const MinControls = (props) => {
     text = `${title}`;
   }
 
+  let playButton = (
+    <i className="material-icons" style={styles.disabledControlsIcons}>
+      play_arrow
+    </i>
+  );
+  if (player) {
+    playButton = playing ? (
+      <i
+        className="material-icons"
+        style={styles.controlsIcons}
+        onClick={togglePlayPause}
+      >
+        pause
+      </i>
+    ) : (
+      <i
+        className="material-icons"
+        style={styles.controlsIcons}
+        onClick={togglePlayPause}
+      >
+        play_arrow
+      </i>
+    );
+  }
+
   return (
     <div style={styles.container}>
       <div style={styles.thumbnail}>
@@ -105,33 +131,18 @@ const MinControls = (props) => {
           </i>
         )}
 
-        {playing ? (
-          <i
-            className="material-icons"
-            style={styles.controlsIcons}
-            onClick={togglePlayPause}
-          >
-            pause
-          </i>
-        ) : (
-          <i
-            className="material-icons"
-            style={styles.controlsIcons}
-            onClick={togglePlayPause}
-          >
-            play_arrow
-          </i>
-        )}
-        {cachedVid === null && playlistPosition === playlist.length - 1 ? (
-          <i className="material-icons" style={styles.disabledControlsIcons}>
-            skip_next
-          </i>
-        ) : (
+        {playButton}
+
+        {cachedVid !== null && playlistPosition < playlist.length - 1 ? (
           <i
             className="material-icons"
             style={styles.controlsIcons}
             onClick={() => playNext("manual")}
           >
+            skip_next
+          </i>
+        ) : (
+          <i className="material-icons" style={styles.disabledControlsIcons}>
             skip_next
           </i>
         )}
