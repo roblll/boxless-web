@@ -25,7 +25,7 @@ class Player extends React.Component {
     return (
       <YouTube
         opts={opts}
-        onEnd={playNext}
+        onEnd={() => playNext("automatic")}
         onReady={setPlayer}
         onError={handleError}
         onPlay={onPlay}

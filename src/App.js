@@ -26,7 +26,19 @@ export default class App extends Component {
   state = {
     loggedIn: false,
     player: null,
-    playlist: [],
+    // playlist: [],
+    playlist: [
+      { title: "7 Rings", artist: "Ariana Grande", vidId: "QYh6mYIJG2Y" },
+      {
+        title: "Level of Concern",
+        artist: "Twenty One Pilots",
+        vidId: "loOWKm8GW6A",
+      },
+      { title: "Popstar", artist: "Drake", vidId: "3CxtK7-XtE0" },
+      { title: "WAP", artist: "Cardi B", vidId: "Wc5IbN4xw70" },
+      { title: "Forget Me Too", artist: "MGK", vidId: "0tn6nWYNK3Q" },
+      { title: "Up Up and Away", artist: "Juice WRLD", vidId: "Y3vr1DkhPv4" },
+    ],
     playlistPosition: 0,
     options: {
       lyrics: false,
@@ -72,7 +84,11 @@ export default class App extends Component {
 
   setPlayer = (event) => {
     this.setState({ player: event.target }, () => {
-      this.getVid();
+      if (this.state.playlist.length > 0) {
+        this.loadVideo(this.state.playlist[0].vidId);
+      } else {
+        this.getVid();
+      }
     });
   };
 
@@ -118,7 +134,7 @@ export default class App extends Component {
     this.setState({ cachedVid: vid, loadingCachedVid: false });
   };
 
-  playNext = async () => {
+  playNext = async (type) => {
     const {
       playlist,
       playlistPosition,
@@ -131,20 +147,29 @@ export default class App extends Component {
     } else {
       if (playlistPosition < playlist.length - 1) {
         const { vidId } = playlist[playlistPosition + 1];
-        this.setState(
-          {
-            playlistPosition: playlistPosition + 1,
-            playedNext: true,
-          },
-          () => this.loadVideo(vidId)
-        );
+        if (type === "automatic") {
+          this.setState(
+            {
+              playlistPosition: playlistPosition + 1,
+              playedNext: true,
+            },
+            () => this.loadVideo(vidId)
+          );
+        } else {
+          this.setState(
+            {
+              playlistPosition: playlistPosition + 1,
+            },
+            () => this.loadVideo(vidId)
+          );
+        }
       } else if (cachedVid) {
         const { vidId } = cachedVid;
         this.loadVideo(vidId);
         this.useCachedVid();
       } else if (cachedVid === null && !loadingCachedVid) {
         await this.getVid();
-        this.playNext();
+        this.playNext("manual");
       }
     }
   };
@@ -174,10 +199,10 @@ export default class App extends Component {
   handleError = async () => {
     const { player, cachedVid } = this.state;
     if (player.getVideoData().video_id !== cachedVid.vidId) {
-      this.playNext();
+      this.playNext("manual");
     } else {
       await this.getVid();
-      this.playNext();
+      this.playNext("manual");
     }
   };
 
@@ -279,6 +304,7 @@ export default class App extends Component {
               togglePlayPause={this.togglePlayPause}
               playing={playing}
               playlistPosition={playlistPosition}
+              playlist={playlist}
             />
           )}
           {activeTab === "none" && (

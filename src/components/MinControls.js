@@ -9,6 +9,7 @@ const MinControls = (props) => {
     togglePlayPause,
     playing,
     playlistPosition,
+    playlist,
   } = props;
 
   let title = undefined;
@@ -121,7 +122,7 @@ const MinControls = (props) => {
             play_arrow
           </i>
         )}
-        {cachedVid === null ? (
+        {cachedVid === null && playlistPosition === playlist.length - 1 ? (
           <i className="material-icons" style={styles.disabledControlsIcons}>
             skip_next
           </i>
@@ -129,7 +130,7 @@ const MinControls = (props) => {
           <i
             className="material-icons"
             style={styles.controlsIcons}
-            onClick={playNext}
+            onClick={() => playNext("manual")}
           >
             skip_next
           </i>
