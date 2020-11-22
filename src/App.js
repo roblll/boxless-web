@@ -239,8 +239,9 @@ export default class App extends Component {
     if (playlistPosition > 0) {
       const prevVid = playlist[playlistPosition - 1];
       const { vidId } = prevVid;
-      this.loadVideo(vidId);
-      this.setState({ playlistPosition: playlistPosition - 1 });
+      this.setState({ playlistPosition: playlistPosition - 1 }, () =>
+        this.loadVideo(vidId)
+      );
     }
   };
 
