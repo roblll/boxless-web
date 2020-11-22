@@ -138,7 +138,6 @@ export default class App extends Component {
         });
       }
     } else if (cachedVid) {
-      console.log("plays cached vid");
       const { vidId } = cachedVid;
       this.loadVideo(vidId);
       this.useCachedVid();
@@ -276,6 +275,7 @@ export default class App extends Component {
               cachedVid={cachedVid}
               togglePlayPause={this.togglePlayPause}
               playing={playing}
+              playlistPosition={playlistPosition}
             />
           )}
           {activeTab === "none" && (
