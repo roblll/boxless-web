@@ -61,6 +61,7 @@ export default class App extends Component {
     pickVid2: null,
     searchResults: {},
     playing: false,
+    playedNext: false,
   };
 
   componentDidMount() {
@@ -123,12 +124,21 @@ export default class App extends Component {
       playlistPosition,
       cachedVid,
       loadingCachedVid,
+      playedNext,
     } = this.state;
     if (playlistPosition < playlist.length - 1) {
-      const { vidId } = playlist[playlistPosition];
-      this.loadVideo(vidId);
-      this.setState({ playlistPosition: playlistPosition + 1 });
+      if (playedNext) {
+        this.setState({ playedNext: false });
+      } else {
+        const { vidId } = playlist[playlistPosition];
+        this.loadVideo(vidId);
+        this.setState({
+          playlistPosition: playlistPosition + 1,
+          playedNext: true,
+        });
+      }
     } else if (cachedVid) {
+      console.log("plays cached vid");
       const { vidId } = cachedVid;
       this.loadVideo(vidId);
       this.useCachedVid();
