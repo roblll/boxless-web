@@ -122,28 +122,30 @@ export default class App extends Component {
     const {
       playlist,
       playlistPosition,
+      playedNext,
       cachedVid,
       loadingCachedVid,
-      playedNext,
     } = this.state;
-    if (playlistPosition < playlist.length - 1) {
-      if (playedNext) {
-        this.setState({ playedNext: false });
-      } else {
-        const { vidId } = playlist[playlistPosition];
+    if (playedNext) {
+      this.setState({ playedNext: false });
+    } else {
+      if (playlistPosition < playlist.length - 1) {
+        const { vidId } = playlist[playlistPosition + 1];
+        this.setState(
+          {
+            playlistPosition: playlistPosition + 1,
+            playedNext: true,
+          },
+          () => this.loadVideo(vidId)
+        );
+      } else if (cachedVid) {
+        const { vidId } = cachedVid;
         this.loadVideo(vidId);
-        this.setState({
-          playlistPosition: playlistPosition + 1,
-          playedNext: true,
-        });
+        this.useCachedVid();
+      } else if (cachedVid === null && !loadingCachedVid) {
+        await this.getVid();
+        this.playNext();
       }
-    } else if (cachedVid) {
-      const { vidId } = cachedVid;
-      this.loadVideo(vidId);
-      this.useCachedVid();
-    } else if (cachedVid === null && !loadingCachedVid) {
-      await this.getVid();
-      this.playNext();
     }
   };
 
