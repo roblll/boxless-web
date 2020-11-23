@@ -133,7 +133,7 @@ const MinControls = (props) => {
 
         {playButton}
 
-        {cachedVid !== null && playlistPosition < playlist.length - 1 ? (
+        {cachedVid !== null || playlistPosition < playlist.length - 1 ? (
           <i
             className="material-icons"
             style={styles.controlsIcons}
