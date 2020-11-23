@@ -229,7 +229,8 @@ export default class App extends Component {
       localStorage.clear();
       this.setState({ loggedIn: false });
     } else {
-      console.log(data);
+      const { searchResults } = data;
+      this.setState({ searchResults });
     }
   };
 
