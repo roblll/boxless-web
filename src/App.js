@@ -10,7 +10,7 @@ import Playlist from "./components/Playlist";
 import MinControls from "./components/MinControls";
 import FullControls from "./components/FullControls";
 
-import { fetchVid } from "./api/api";
+import { fetchVid, fetchSearchVids } from "./api/api";
 import { getDefaultDates } from "./utils/utils";
 
 const {
@@ -223,7 +223,14 @@ export default class App extends Component {
   };
 
   getSearchVids = async (searchTerm) => {
-    console.log("getSearchVids");
+    const token = localStorage.getItem("token");
+    const data = await fetchSearchVids(token, searchTerm);
+    if (data === null) {
+      localStorage.clear();
+      this.setState({ loggedIn: false });
+    } else {
+      console.log(data);
+    }
   };
 
   onPlay = () => {

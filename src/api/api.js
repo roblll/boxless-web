@@ -45,6 +45,32 @@ export const fetchVid = async (state, token) => {
       return null;
     }
   } catch (err) {
-    return { error: "error" };
+    return null;
+    // return { error: "error" };
+  }
+};
+
+export const fetchSearchVids = async (token, searchTerm) => {
+  const api_url =
+    process.env.NODE_ENV === "production"
+      ? "https://boxless.herokuapp.com"
+      : "http://localhost:3001";
+  try {
+    const response = await fetch(
+      `${api_url}/api/searchvids?search=${searchTerm.replace(/ /g, "%")}`,
+      {
+        method: "GET",
+        headers: { "content-type": "application/json", Authorization: token },
+      }
+    );
+    if (response.ok) {
+      const data = await response.json();
+      return data;
+    } else {
+      return null;
+    }
+  } catch (err) {
+    return null;
+    // return { error: "error" };
   }
 };
