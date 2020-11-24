@@ -4,13 +4,13 @@ import "../App.css";
 import DateRange from "./DateRange";
 import Rank from "./Rank";
 import OptionsButton from "./OptionsButton";
+import LengthDropdown from "./LengthDropdown";
 
 const Options = (props) => {
   const {
     options: {
       lyrics,
       clean,
-      karaoke,
       norepeats,
       alternative,
       country,
@@ -62,12 +62,7 @@ const Options = (props) => {
           label="Lyrics"
         />
         <OptionsButton toggle={toggle} on={clean} name="clean" label="Clean" />
-        <OptionsButton
-          toggle={toggle}
-          on={karaoke}
-          name="karaoke"
-          label="Karaoke"
-        />
+        <LengthDropdown />
         <OptionsButton
           toggle={toggle}
           on={norepeats}
