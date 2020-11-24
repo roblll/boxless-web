@@ -25,7 +25,7 @@ export default class Playlist extends React.Component {
         label = `${vid.title}`;
       }
       return (
-        <div>
+        <div key={index}>
           {selected === index ? (
             <div
               style={styles.rowSelected}
