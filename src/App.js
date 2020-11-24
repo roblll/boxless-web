@@ -10,7 +10,7 @@ import Playlist from "./components/Playlist";
 import MinControls from "./components/MinControls";
 import FullControls from "./components/FullControls";
 
-import { fetchVid, fetchSearchVids } from "./api/api";
+import { fetchVid, fetchSearchVids, fetchPickVids } from "./api/api";
 import { getDefaultDates } from "./utils/utils";
 
 const {
@@ -218,8 +218,15 @@ export default class App extends Component {
     });
   };
 
-  refreshPickVids = () => {
-    console.log("refreshPickVids");
+  getPickVids = async () => {
+    const token = localStorage.getItem("token");
+    const data = await fetchPickVids(this.state, token);
+    if (data === null) {
+      localStorage.clear();
+      this.setState({ loggedIn: false });
+    } else {
+      console.log(data);
+    }
   };
 
   getSearchVids = async (searchTerm) => {
@@ -315,7 +322,7 @@ export default class App extends Component {
             <Pick
               pickVid1={pickVid1}
               pickVid2={pickVid2}
-              refresh={this.refreshPickVids}
+              refresh={this.getPickVids}
               addToPlaylist={this.addToPlaylist}
             />
           )}

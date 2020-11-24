@@ -74,3 +74,7 @@ export const fetchSearchVids = async (token, searchTerm) => {
     // return { error: "error" };
   }
 };
+
+export const fetchPickVids = async () => {
+  return { test: "test" };
+};
