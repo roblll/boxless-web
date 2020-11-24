@@ -102,14 +102,10 @@ export default class App extends Component {
   addToPlaylist = (vid) => {
     const { playlist } = this.state;
     this.setState({ playlist: [...playlist, vid] }, () => {
-      const { player, playlist } = this.state;
+      const { playlist } = this.state;
       if (playlist.length === 1) {
         const { vidId } = playlist[0];
-        player.loadVideoById({
-          videoId: vidId,
-          startSeconds: 100,
-          endSeconds: 123,
-        });
+        this.loadVideo(vidId);
         this.getVid();
       }
     });
@@ -165,7 +161,8 @@ export default class App extends Component {
       options: { lengthMax },
     } = this.state;
     let start = 100;
-    let end = start + lengthMax;
+    // let end = start + lengthMax;
+    let end = 10000;
     player.loadVideoById({
       videoId,
       startSeconds: start,
