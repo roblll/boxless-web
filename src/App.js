@@ -181,8 +181,12 @@ export default class App extends Component {
   };
 
   handleError = async () => {
+    console.log("handleError");
     const { player, cachedVid } = this.state;
-    if (player.getVideoData().video_id !== cachedVid.vidId) {
+    if (
+      cachedVid !== null &&
+      player.getVideoData().video_id !== cachedVid.vidId
+    ) {
       this.playNext("manual");
     } else {
       await this.getVid();
