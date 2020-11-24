@@ -32,6 +32,7 @@ const Options = (props) => {
       yearMax,
       rankMin,
       rankMax,
+      lengthMax,
     },
     toggle,
     handleChange,
@@ -62,7 +63,11 @@ const Options = (props) => {
           label="Lyrics"
         />
         <OptionsButton toggle={toggle} on={clean} name="clean" label="Clean" />
-        <LengthDropdown />
+        <LengthDropdown
+          value={lengthMax}
+          optionName="lengthMax"
+          handleChange={handleChange}
+        />
         <OptionsButton
           toggle={toggle}
           on={norepeats}

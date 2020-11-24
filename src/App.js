@@ -160,9 +160,9 @@ export default class App extends Component {
       player,
       options: { lengthMax },
     } = this.state;
-    let start = 100;
+    let start = 0;
     // let end = start + lengthMax;
-    let end = 10000;
+    let end = lengthMax;
     player.loadVideoById({
       videoId,
       startSeconds: start,
