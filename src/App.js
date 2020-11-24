@@ -53,6 +53,7 @@ export default class App extends Component {
       yearMax,
       rankMin: 1,
       rankMax: 100,
+      lengthMax: 60,
     },
     cachedVid: null,
     loadingCachedVid: false,
@@ -159,11 +160,16 @@ export default class App extends Component {
   };
 
   loadVideo = (videoId) => {
-    const { player } = this.state;
+    const {
+      player,
+      options: { lengthMax },
+    } = this.state;
+    let start = 100;
+    let end = start + lengthMax;
     player.loadVideoById({
       videoId,
-      startSeconds: 100,
-      endSeconds: 123,
+      startSeconds: start,
+      endSeconds: end,
     });
   };
 
