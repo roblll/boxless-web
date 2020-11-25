@@ -10,14 +10,14 @@ export default class LengthDropdown extends React.Component {
   render() {
     const { value } = this.props;
     const lengthOptions = [
-      { key: 0, text: "Full Video", value: Infinity },
+      { key: 0, text: "Max", value: Infinity },
       { key: 1, text: "15 sec", value: 15 },
       { key: 2, text: "30 sec", value: 30 },
       { key: 3, text: "1 min", value: 60 },
-      { key: 4, text: "2 mins", value: 120 },
-      { key: 5, text: "3 mins", value: 180 },
-      { key: 6, text: "4 mins", value: 240 },
-      { key: 7, text: "5 mins", value: 300 },
+      { key: 4, text: "2 min", value: 120 },
+      { key: 5, text: "3 min", value: 180 },
+      { key: 6, text: "4 min", value: 240 },
+      { key: 7, text: "5 min", value: 300 },
     ];
 
     return (
