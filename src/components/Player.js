@@ -1,8 +1,18 @@
 import React from "react";
 
+import ReactPlayer from "react-player/youtube";
+
 class Player extends React.Component {
   render() {
-    return <p>Player</p>;
+    return (
+      <ReactPlayer
+        url="https://www.youtube.com/watch?v=QYh6mYIJG2Y"
+        width="448px"
+        height="252px"
+        onReady={() => console.log("onRead")}
+        playing={true}
+      />
+    );
   }
 }
 
