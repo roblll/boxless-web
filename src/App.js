@@ -2,6 +2,7 @@ import React, { Component } from "react";
 
 import Login from "./components/Login";
 import Player from "./components/Player";
+import Static from "./components/Static";
 
 import { fetchVid } from "./api/api";
 import { getDefaultDates } from "./utils/utils";
@@ -69,7 +70,7 @@ export default class App extends Component {
       if (currentVid && currentVid.vidId) {
         return <Player vidId={currentVid.vidId} getVid={this.getVid} />;
       } else {
-        return <p>Test</p>;
+        return <Static width="448px" height="252px" />;
       }
     } else {
       return <Login handleLogin={this.handleLogin} />;
