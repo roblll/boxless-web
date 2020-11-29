@@ -3,6 +3,7 @@ import React, { Component } from "react";
 import Login from "./components/Login";
 import Player from "./components/Player";
 import Static from "./components/Static";
+import Tabs from "./components/Tabs";
 
 import { fetchVid } from "./api/api";
 import { getDefaultDates } from "./utils/utils";
@@ -47,6 +48,7 @@ export default class App extends Component {
       lengthMax: 60,
     },
     currentVid: null,
+    activeTab: "options",
   };
 
   componentDidMount() {
@@ -65,7 +67,7 @@ export default class App extends Component {
   };
 
   render() {
-    const { loggedIn, currentVid } = this.state;
+    const { loggedIn, currentVid, activeTab } = this.state;
     if (loggedIn) {
       return (
         <div style={styles.container}>
@@ -74,6 +76,7 @@ export default class App extends Component {
           ) : (
             <Static width="448px" height="252px" />
           )}
+          <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
         </div>
       );
     } else {
