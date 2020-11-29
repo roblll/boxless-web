@@ -5,6 +5,7 @@ import Player from "./components/Player";
 import Static from "./components/Static";
 import Tabs from "./components/Tabs";
 import Options from "./components/Options";
+import MinControls from "./components/MinControls";
 
 import { fetchVid } from "./api/api";
 import { getDefaultDates } from "./utils/utils";
@@ -100,6 +101,19 @@ export default class App extends Component {
             <Player vidId={currentVid.vidId} getVid={this.getVid} />
           ) : (
             <Static width="448px" height="252px" />
+          )}
+          {activeTab !== "none" && (
+            <MinControls
+              info={currentVid}
+              playNext={this.playNext}
+              playPrevious={this.playPrevious}
+              // cachedVid={cachedVid}
+              togglePlayPause={this.togglePlayPause}
+              // playing={playing}
+              // playlistPosition={playlistPosition}
+              // playlist={playlist}
+              // player={player}
+            />
           )}
           {activeTab === "options" && (
             <Options
