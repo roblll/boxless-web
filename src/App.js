@@ -18,9 +18,6 @@ const {
 export default class App extends Component {
   state = {
     loggedIn: false,
-    player: null,
-    playlist: [],
-    playlistPosition: 0,
     options: {
       lyrics: false,
       clean: false,
@@ -48,30 +45,32 @@ export default class App extends Component {
       rankMax: 100,
       lengthMax: 60,
     },
-    cachedVid: null,
-    loadingCachedVid: false,
-    activeTab: "options",
-    pickVid1: null,
-    pickVid2: null,
-    searchResults: {},
-    playing: false,
-    playedNext: false,
+    currentVid: null,
   };
 
-  async componentDidMount() {
-    const token = localStorage.getItem("token");
-    const data = await fetchVid(this.state, token);
-    console.log(data);
+  componentDidMount() {
+    if (localStorage.getItem("token")) {
+      this.setState({ loggedIn: true }, () => this.getVid());
+    }
   }
 
   handleLogin = () => {
     this.setState({ loggedIn: true });
   };
 
+  getVid = async () => {
+    const data = await fetchVid(this.state, localStorage.getItem("token"));
+    this.setState({ currentVid: data });
+  };
+
   render() {
-    const { loggedIn } = this.state;
+    const { loggedIn, currentVid } = this.state;
     if (loggedIn) {
-      return <Player vidId={"QYh6mYIJG2Y"} />;
+      if (currentVid && currentVid.vidId) {
+        return <Player vidId={currentVid.vidId} getVid={this.getVid} />;
+      } else {
+        return <p>Test</p>;
+      }
     } else {
       return <Login handleLogin={this.handleLogin} />;
     }

@@ -10,7 +10,6 @@ class Player extends React.Component {
         url={`https://www.youtube.com/watch?v=${vidId}`}
         width="448px"
         height="252px"
-        onReady={() => console.log("onRead")}
         playing={true}
       />
     );
