@@ -8,6 +8,7 @@ import Options from "./components/Options";
 import MinControls from "./components/MinControls";
 import Pick from "./components/Pick";
 import Search from "./components/Search";
+import Playlist from "./components/Playlist";
 
 import { fetchVid } from "./api/api";
 import { getDefaultDates } from "./utils/utils";
@@ -53,6 +54,9 @@ export default class App extends Component {
     },
     currentVid: null,
     activeTab: "options",
+    searchResults: {},
+    playlist: [],
+    playlistPosition: 0,
   };
 
   componentDidMount() {
@@ -95,7 +99,14 @@ export default class App extends Component {
   };
 
   render() {
-    const { loggedIn, currentVid, activeTab, options } = this.state;
+    const {
+      loggedIn,
+      currentVid,
+      activeTab,
+      options,
+      playlist,
+      playlistPosition,
+    } = this.state;
     if (loggedIn) {
       return (
         <div style={styles.container}>
@@ -138,6 +149,9 @@ export default class App extends Component {
               // searchResults={searchResults}
               addToPlaylist={this.addToPlaylist}
             />
+          )}
+          {activeTab === "playlist" && (
+            <Playlist playlist={playlist} playlistPosition={playlistPosition} />
           )}
           <div style={styles.bottomPadding}></div>
           <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
