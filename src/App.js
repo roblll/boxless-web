@@ -122,6 +122,7 @@ export default class App extends Component {
               handleChange={this.handleDropDownChange}
             />
           )}
+          <div style={styles.bottomPadding}></div>
           <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
         </div>
       );
