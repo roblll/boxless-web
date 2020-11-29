@@ -4,6 +4,7 @@ import Login from "./components/Login";
 import Player from "./components/Player";
 import Static from "./components/Static";
 import Tabs from "./components/Tabs";
+import Options from "./components/Options";
 
 import { fetchVid } from "./api/api";
 import { getDefaultDates } from "./utils/utils";
@@ -66,8 +67,32 @@ export default class App extends Component {
     this.setState({ currentVid: data });
   };
 
+  handleTabClick = (e, { name }) => {
+    if (this.state.activeTab === name) {
+      this.setState({ activeTab: "none" });
+    } else {
+      this.setState({ activeTab: name });
+    }
+  };
+
+  handleOptionClick = (e) => {
+    const option = e.target.name;
+    this.setState({
+      options: {
+        ...this.state.options,
+        [option]: !this.state.options[option],
+      },
+    });
+  };
+
+  handleDropDownChange = (dropDownType, value) => {
+    this.setState({
+      options: { ...this.state.options, [dropDownType]: value },
+    });
+  };
+
   render() {
-    const { loggedIn, currentVid, activeTab } = this.state;
+    const { loggedIn, currentVid, activeTab, options } = this.state;
     if (loggedIn) {
       return (
         <div style={styles.container}>
@@ -75,6 +100,13 @@ export default class App extends Component {
             <Player vidId={currentVid.vidId} getVid={this.getVid} />
           ) : (
             <Static width="448px" height="252px" />
+          )}
+          {activeTab === "options" && (
+            <Options
+              options={options}
+              toggle={this.handleOptionClick}
+              handleChange={this.handleDropDownChange}
+            />
           )}
           <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
         </div>
