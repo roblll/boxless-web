@@ -7,6 +7,7 @@ import Tabs from "./components/Tabs";
 import Options from "./components/Options";
 import MinControls from "./components/MinControls";
 import Pick from "./components/Pick";
+import Search from "./components/Search";
 
 import { fetchVid } from "./api/api";
 import { getDefaultDates } from "./utils/utils";
@@ -128,6 +129,13 @@ export default class App extends Component {
               // pickVid1={pickVid1}
               // pickVid2={pickVid2}
               refresh={this.getPickVids}
+              addToPlaylist={this.addToPlaylist}
+            />
+          )}
+          {activeTab === "search" && (
+            <Search
+              getSearchVids={this.getSearchVids}
+              // searchResults={searchResults}
               addToPlaylist={this.addToPlaylist}
             />
           )}
