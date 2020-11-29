@@ -67,16 +67,33 @@ export default class App extends Component {
   render() {
     const { loggedIn, currentVid } = this.state;
     if (loggedIn) {
-      if (currentVid && currentVid.vidId) {
-        return <Player vidId={currentVid.vidId} getVid={this.getVid} />;
-      } else {
-        return <Static width="448px" height="252px" />;
-      }
+      return (
+        <div style={styles.container}>
+          {currentVid && currentVid.vidId ? (
+            <Player vidId={currentVid.vidId} getVid={this.getVid} />
+          ) : (
+            <Static width="448px" height="252px" />
+          )}
+        </div>
+      );
     } else {
       return <Login handleLogin={this.handleLogin} />;
     }
   }
 }
+
+const styles = {
+  container: {
+    display: "flex",
+    justifyContent: "center",
+    flexDirection: "column",
+    backgroundColor: "black",
+  },
+  bottomPadding: {
+    height: "50px",
+    backgroundColor: "#3D3E3F",
+  },
+};
 
 // import React, { Component } from "react";
 
