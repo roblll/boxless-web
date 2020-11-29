@@ -6,6 +6,7 @@ import Static from "./components/Static";
 import Tabs from "./components/Tabs";
 import Options from "./components/Options";
 import MinControls from "./components/MinControls";
+import Pick from "./components/Pick";
 
 import { fetchVid } from "./api/api";
 import { getDefaultDates } from "./utils/utils";
@@ -120,6 +121,14 @@ export default class App extends Component {
               options={options}
               toggle={this.handleOptionClick}
               handleChange={this.handleDropDownChange}
+            />
+          )}
+          {activeTab === "pick" && (
+            <Pick
+              // pickVid1={pickVid1}
+              // pickVid2={pickVid2}
+              refresh={this.getPickVids}
+              addToPlaylist={this.addToPlaylist}
             />
           )}
           <div style={styles.bottomPadding}></div>
