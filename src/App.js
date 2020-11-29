@@ -1,10 +1,80 @@
 import React, { Component } from "react";
 
+import Login from "./components/Login";
 import Player from "./components/Player";
 
+import { fetchVid } from "./api/api";
+import { getDefaultDates } from "./utils/utils";
+
+const {
+  dayMin,
+  monthMin,
+  yearMin,
+  dayMax,
+  monthMax,
+  yearMax,
+} = getDefaultDates();
+
 export default class App extends Component {
+  state = {
+    loggedIn: false,
+    player: null,
+    playlist: [],
+    playlistPosition: 0,
+    options: {
+      lyrics: false,
+      clean: false,
+      karaoke: false,
+      norepeats: true,
+      alternative: true,
+      country: true,
+      dance: true,
+      electronic: true,
+      hiphop: true,
+      house: true,
+      latin: true,
+      pop: true,
+      rap: true,
+      randb: true,
+      rock: true,
+      trance: true,
+      dayMin,
+      dayMax,
+      monthMin,
+      monthMax,
+      yearMin,
+      yearMax,
+      rankMin: 1,
+      rankMax: 100,
+      lengthMax: 60,
+    },
+    cachedVid: null,
+    loadingCachedVid: false,
+    activeTab: "options",
+    pickVid1: null,
+    pickVid2: null,
+    searchResults: {},
+    playing: false,
+    playedNext: false,
+  };
+
+  async componentDidMount() {
+    const token = localStorage.getItem("token");
+    const data = await fetchVid(this.state, token);
+    console.log(data);
+  }
+
+  handleLogin = () => {
+    this.setState({ loggedIn: true });
+  };
+
   render() {
-    return <Player />;
+    const { loggedIn } = this.state;
+    if (loggedIn) {
+      return <Player vidId={"QYh6mYIJG2Y"} />;
+    } else {
+      return <Login handleLogin={this.handleLogin} />;
+    }
   }
 }
 
