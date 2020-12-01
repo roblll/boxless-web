@@ -76,13 +76,31 @@ export default class App extends Component {
       this.setState({ loggedIn: false });
     } else {
       if (data.vidId) {
-        this.setState({ currentVid: data });
+        const { playlist } = this.state;
+        if (playlist.length === 0) {
+          this.addToPlaylist(data);
+        }
       } else {
         setTimeout(() => {
           this.getVid();
         }, 4000);
       }
     }
+  };
+
+  addToPlaylist = (vid) => {
+    const { playlist } = this.state;
+    this.setState({ playlist: [...playlist, vid] }, () => {
+      const { playlist } = this.state;
+      if (playlist.length === 1) {
+        this.playVid(playlist[0]);
+        this.getVid();
+      }
+    });
+  };
+
+  playVid = (vid) => {
+    this.setState({ currentVid: vid });
   };
 
   handleTabClick = (e, { name }) => {
