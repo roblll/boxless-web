@@ -4,7 +4,7 @@ import ReactPlayer from "react-player/youtube";
 
 class Player extends React.Component {
   render() {
-    const { vidId, getVid } = this.props;
+    const { vidId, playNext } = this.props;
     return (
       <ReactPlayer
         url={`https://www.youtube.com/watch?v=${vidId}`}
@@ -12,7 +12,7 @@ class Player extends React.Component {
         height="252px"
         controls={true}
         playing={true}
-        onEnded={getVid}
+        onEnded={playNext}
       />
     );
   }

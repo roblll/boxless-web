@@ -110,6 +110,22 @@ export default class App extends Component {
     this.setState({ cachedVid: vid });
   };
 
+  playNext = () => {
+    const { playlist, playlistPosition, cachedVid } = this.state;
+    if (playlistPosition < playlist.length - 1) {
+      const vid = playlist[playlistPosition];
+      this.setState({ playlistPosition: playlistPosition + 1 }, () => {
+        this.playVid(vid);
+      });
+    } else if (cachedVid) {
+      const vid = cachedVid;
+      this.setState({ cacheVid: null }, () => {
+        this.playVid(vid);
+        this.getVid();
+      });
+    }
+  };
+
   handleTabClick = (e, { name }) => {
     if (this.state.activeTab === name) {
       this.setState({ activeTab: "none" });
@@ -147,7 +163,7 @@ export default class App extends Component {
       return (
         <div style={styles.container}>
           {currentVid && currentVid.vidId ? (
-            <Player vidId={currentVid.vidId} getVid={this.getVid} />
+            <Player vidId={currentVid.vidId} playNext={this.playNext} />
           ) : (
             <Static width="448px" height="252px" />
           )}
