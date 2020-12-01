@@ -119,10 +119,17 @@ export default class App extends Component {
       });
     } else if (cachedVid) {
       const vid = cachedVid;
-      this.setState({ cacheVid: null }, () => {
-        this.playVid(vid);
-        this.getVid();
-      });
+      this.setState(
+        {
+          cacheVid: null,
+          playlist: [...playlist, vid],
+          playlistPosition: playlistPosition + 1,
+        },
+        () => {
+          this.playVid(vid);
+          this.getVid();
+        }
+      );
     }
   };
 
