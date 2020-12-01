@@ -57,6 +57,7 @@ export default class App extends Component {
     searchResults: {},
     playlist: [],
     playlistPosition: 0,
+    cachedVid: null,
   };
 
   componentDidMount() {
@@ -79,6 +80,8 @@ export default class App extends Component {
         const { playlist } = this.state;
         if (playlist.length === 0) {
           this.addToPlaylist(data);
+        } else {
+          this.cacheVid(data);
         }
       } else {
         setTimeout(() => {
@@ -101,6 +104,10 @@ export default class App extends Component {
 
   playVid = (vid) => {
     this.setState({ currentVid: vid });
+  };
+
+  cacheVid = (vid) => {
+    this.setState({ cachedVid: vid });
   };
 
   handleTabClick = (e, { name }) => {
