@@ -71,7 +71,18 @@ export default class App extends Component {
 
   getVid = async () => {
     const data = await fetchVid(this.state, localStorage.getItem("token"));
-    this.setState({ currentVid: data });
+    if (data === null) {
+      localStorage.clear();
+      this.setState({ loggedIn: false });
+    } else {
+      if (data.vidId) {
+        this.setState({ currentVid: data });
+      } else {
+        setTimeout(() => {
+          this.getVid();
+        }, 4000);
+      }
+    }
   };
 
   handleTabClick = (e, { name }) => {
