@@ -58,7 +58,7 @@ export default class App extends Component {
     playlist: [],
     playlistPosition: 0,
     cachedVid: null,
-    playing: false,
+    playing: null,
   };
 
   componentDidMount() {
@@ -185,6 +185,7 @@ export default class App extends Component {
               playNext={this.playNext}
               onPlay={this.onPlay}
               onPause={this.onPause}
+              playing={playing}
             />
           ) : (
             <Static width="448px" height="252px" />

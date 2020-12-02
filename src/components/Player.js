@@ -4,14 +4,17 @@ import ReactPlayer from "react-player/youtube";
 
 class Player extends React.Component {
   render() {
-    const { vidId, playNext, onPlay, onPause } = this.props;
+    let { vidId, playNext, onPlay, onPause, playing } = this.props;
+    if (playing === null) {
+      playing = true;
+    }
     return (
       <ReactPlayer
         url={`https://www.youtube.com/watch?v=${vidId}`}
         width="448px"
         height="252px"
         controls={true}
-        playing={true}
+        playing={playing}
         onEnded={playNext}
         onPlay={onPlay}
         onPause={onPause}
