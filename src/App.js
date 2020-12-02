@@ -114,9 +114,10 @@ export default class App extends Component {
   playNext = () => {
     const { playlist, playlistPosition, cachedVid } = this.state;
     if (playlistPosition < playlist.length - 1) {
-      const vid = playlist[playlistPosition];
-      this.setState({ playlistPosition: playlistPosition + 1 }, () => {
-        this.playVid(vid);
+      const vid = playlist[playlistPosition + 1];
+      this.setState({
+        playlistPosition: playlistPosition + 1,
+        currentVid: vid,
       });
     } else if (cachedVid) {
       const vid = cachedVid;
@@ -125,9 +126,9 @@ export default class App extends Component {
           cacheVid: null,
           playlist: [...playlist, vid],
           playlistPosition: playlistPosition + 1,
+          currentVid: vid,
         },
         () => {
-          this.playVid(vid);
           this.getVid();
         }
       );
