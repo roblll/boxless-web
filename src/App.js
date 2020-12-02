@@ -134,6 +134,17 @@ export default class App extends Component {
     }
   };
 
+  playPrevious = () => {
+    const { playlist, playlistPosition } = this.state;
+    if (playlistPosition > 0) {
+      const prevVid = playlist[playlistPosition - 1];
+      this.setState({
+        playlistPosition: playlistPosition - 1,
+        currentVid: prevVid,
+      });
+    }
+  };
+
   handleTabClick = (e, { name }) => {
     if (this.state.activeTab === name) {
       this.setState({ activeTab: "none" });
