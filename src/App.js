@@ -166,6 +166,11 @@ export default class App extends Component {
     this.setState({ playing: false });
   };
 
+  togglePlayPause = () => {
+    const { playing } = this.state;
+    this.setState({ playing: !playing });
+  };
+
   render() {
     const {
       loggedIn,
@@ -200,7 +205,6 @@ export default class App extends Component {
               playing={playing}
               // playlistPosition={playlistPosition}
               // playlist={playlist}
-              // player={player}
             />
           )}
           {activeTab === "options" && (

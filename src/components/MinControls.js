@@ -10,7 +10,6 @@ const MinControls = (props) => {
     playing,
     playlistPosition,
     playlist,
-    player,
   } = props;
 
   let title = undefined;
