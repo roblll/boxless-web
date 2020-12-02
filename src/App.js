@@ -58,6 +58,7 @@ export default class App extends Component {
     playlist: [],
     playlistPosition: 0,
     cachedVid: null,
+    playing: false,
   };
 
   componentDidMount() {
@@ -157,6 +158,14 @@ export default class App extends Component {
     });
   };
 
+  onPlay = () => {
+    this.setState({ playing: true });
+  };
+
+  onPause = () => {
+    this.setState({ playing: false });
+  };
+
   render() {
     const {
       loggedIn,
@@ -165,12 +174,18 @@ export default class App extends Component {
       options,
       playlist,
       playlistPosition,
+      playing,
     } = this.state;
     if (loggedIn) {
       return (
         <div style={styles.container}>
           {currentVid && currentVid.vidId ? (
-            <Player vidId={currentVid.vidId} playNext={this.playNext} />
+            <Player
+              vidId={currentVid.vidId}
+              playNext={this.playNext}
+              onPlay={this.onPlay}
+              onPause={this.onPause}
+            />
           ) : (
             <Static width="448px" height="252px" />
           )}
@@ -181,7 +196,7 @@ export default class App extends Component {
               playPrevious={this.playPrevious}
               // cachedVid={cachedVid}
               togglePlayPause={this.togglePlayPause}
-              // playing={playing}
+              playing={playing}
               // playlistPosition={playlistPosition}
               // playlist={playlist}
               // player={player}

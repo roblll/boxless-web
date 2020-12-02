@@ -84,30 +84,30 @@ const MinControls = (props) => {
     text = `${title}`;
   }
 
-  let playButton = (
-    <i className="material-icons" style={styles.disabledControlsIcons}>
-      play_arrow
-    </i>
-  );
-  if (player) {
-    playButton = playing ? (
-      <i
-        className="material-icons"
-        style={styles.controlsIcons}
-        onClick={togglePlayPause}
-      >
-        pause
-      </i>
-    ) : (
-      <i
-        className="material-icons"
-        style={styles.controlsIcons}
-        onClick={togglePlayPause}
-      >
-        play_arrow
-      </i>
-    );
-  }
+  // let playButton = (
+  //   <i className="material-icons" style={styles.disabledControlsIcons}>
+  //     play_arrow
+  //   </i>
+  // );
+  // if (player) {
+  //   playButton = playing ? (
+  //     <i
+  //       className="material-icons"
+  //       style={styles.controlsIcons}
+  //       onClick={togglePlayPause}
+  //     >
+  //       pause
+  //     </i>
+  //   ) : (
+  //     <i
+  //       className="material-icons"
+  //       style={styles.controlsIcons}
+  //       onClick={togglePlayPause}
+  //     >
+  //       play_arrow
+  //     </i>
+  //   );
+  // }
 
   return (
     <div style={styles.container}>
@@ -131,7 +131,23 @@ const MinControls = (props) => {
           </i>
         )}
 
-        {playButton}
+        {playing ? (
+          <i
+            className="material-icons"
+            style={styles.controlsIcons}
+            onClick={togglePlayPause}
+          >
+            pause
+          </i>
+        ) : (
+          <i
+            className="material-icons"
+            style={styles.controlsIcons}
+            onClick={togglePlayPause}
+          >
+            play_arrow
+          </i>
+        )}
 
         {cachedVid !== null || playlistPosition < playlist.length - 1 ? (
           <i
