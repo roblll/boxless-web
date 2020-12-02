@@ -97,14 +97,11 @@ export default class App extends Component {
     this.setState({ playlist: [...playlist, vid] }, () => {
       const { playlist } = this.state;
       if (playlist.length === 1) {
-        this.playVid(playlist[0]);
-        this.getVid();
+        this.setState({ currentVid: playlist[0] }, () => {
+          this.getVid();
+        });
       }
     });
-  };
-
-  playVid = (vid) => {
-    this.setState({ currentVid: vid });
   };
 
   cacheVid = (vid) => {
