@@ -120,7 +120,7 @@ export default class App extends Component {
       const vid = cachedVid;
       this.setState(
         {
-          cacheVid: null,
+          cachedVid: null,
           playlist: [...playlist, vid],
           playlistPosition: playlistPosition + 1,
           currentVid: vid,
@@ -189,6 +189,7 @@ export default class App extends Component {
       playlist,
       playlistPosition,
       playing,
+      cachedVid,
     } = this.state;
     if (loggedIn) {
       return (
@@ -209,11 +210,11 @@ export default class App extends Component {
               info={currentVid}
               playNext={this.playNext}
               playPrevious={this.playPrevious}
-              // cachedVid={cachedVid}
+              cachedVid={cachedVid}
               togglePlayPause={this.togglePlayPause}
               playing={playing}
-              // playlistPosition={playlistPosition}
-              // playlist={playlist}
+              playlistPosition={playlistPosition}
+              playlist={playlist}
             />
           )}
           {activeTab === "options" && (
