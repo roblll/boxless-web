@@ -201,6 +201,7 @@ export default class App extends Component {
               onPlay={this.onPlay}
               onPause={this.onPause}
               playing={playing}
+              lengthMax={options.lengthMax}
             />
           ) : (
             <Static width="448px" height="252px" />
