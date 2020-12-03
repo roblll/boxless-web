@@ -10,7 +10,7 @@ import Pick from "./components/Pick";
 import Search from "./components/Search";
 import Playlist from "./components/Playlist";
 
-import { fetchVid } from "./api/api";
+import { fetchSearchVids, fetchVid } from "./api/api";
 import { getDefaultDates } from "./utils/utils";
 
 const {
@@ -140,6 +140,20 @@ export default class App extends Component {
         playlistPosition: playlistPosition - 1,
         currentVid: prevVid,
       });
+    }
+  };
+
+  getSearchVids = async (searchTerm) => {
+    const data = await fetchSearchVids(
+      localStorage.getItem("token"),
+      searchTerm
+    );
+    if (data === null) {
+      localStorage.clear();
+      this.setState({ loggedIn: false });
+    } else {
+      const { searchResults } = data;
+      this.setState({ searchResults });
     }
   };
 
