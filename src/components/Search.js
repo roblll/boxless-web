@@ -30,7 +30,8 @@ export default class Search extends React.Component {
 
   render() {
     const { getSearchVids, searchResults, addToPlaylist } = this.props;
-    const { searchTerm, vids } = searchResults;
+    // const { searchTerm, vids } = searchResults;
+    const vids = searchResults ? searchResults.vids : undefined;
     const { current, search } = this.state;
     return (
       <div style={styles.container}>
