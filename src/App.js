@@ -190,6 +190,7 @@ export default class App extends Component {
       playlistPosition,
       playing,
       cachedVid,
+      searchResults,
     } = this.state;
     if (loggedIn) {
       return (
@@ -236,7 +237,7 @@ export default class App extends Component {
           {activeTab === "search" && (
             <Search
               getSearchVids={this.getSearchVids}
-              // searchResults={searchResults}
+              searchResults={searchResults}
               addToPlaylist={this.addToPlaylist}
             />
           )}
