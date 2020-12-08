@@ -60,6 +60,12 @@ export default class App extends Component {
     playlistPosition: 0,
     cachedVid: null,
     playing: null,
+    hiphopAfter: "",
+    hiphopCount: "",
+    houseAfter: "",
+    houseCount: "",
+    tranceAfter: "",
+    tranceCount: "",
   };
 
   componentDidMount() {
