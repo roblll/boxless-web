@@ -9,24 +9,37 @@ class Player extends React.Component {
       playing = true;
     }
     return (
-      <ReactPlayer
-        url={`https://www.youtube.com/watch?v=${vidId}`}
-        width="448px"
-        height="252px"
-        controls={true}
-        playing={playing}
-        onEnded={playNext}
-        onPlay={onPlay}
-        onPause={onPause}
-        config={{
-          youtube: {
-            playerVars: { start: 0, end: lengthMax },
-          },
-        }}
-      />
+      <div style={styles.container}>
+        <ReactPlayer
+          url={`https://www.youtube.com/watch?v=${vidId}`}
+          width="448px"
+          height="252px"
+          controls={true}
+          playing={playing}
+          onEnded={playNext}
+          onPlay={onPlay}
+          onPause={onPause}
+          config={{
+            youtube: {
+              playerVars: { start: 0, end: lengthMax },
+            },
+          }}
+        />
+      </div>
     );
   }
 }
+
+const styles = {
+  container: {
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  center: {
+    width: 50,
+  },
+};
 
 export default Player;
 
