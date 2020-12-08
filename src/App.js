@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import ReactPlayer from "react-player/youtube";
 
 import Login from "./components/Login";
 import Player from "./components/Player";
@@ -77,7 +78,10 @@ export default class App extends Component {
       localStorage.clear();
       this.setState({ loggedIn: false });
     } else {
-      if (data.vidId) {
+      if (
+        data.vidId &&
+        ReactPlayer.canPlay(`https://www.youtube.com/watch?v=${data.vidId}`)
+      ) {
         const { playlist } = this.state;
         if (playlist.length === 0) {
           this.addToPlaylist(data);
