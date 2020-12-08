@@ -32,6 +32,8 @@ export default class Static extends React.Component {
 
 const styles = {
   container: {
-    flex: 1,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
 };
