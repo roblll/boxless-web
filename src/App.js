@@ -262,11 +262,6 @@ export default class App extends Component {
   };
 
   render() {
-    console.log(
-      "before and count",
-      this.state.hiphopCount,
-      this.state.hiphopAfter
-    );
     const {
       loggedIn,
       currentVid,
