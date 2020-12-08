@@ -104,18 +104,75 @@ export default class App extends Component {
 
   addToPlaylist = (vid) => {
     const { playlist } = this.state;
-    this.setState({ playlist: [...playlist, vid] }, () => {
-      const { playlist } = this.state;
-      if (playlist.length === 1) {
-        this.setState({ currentVid: playlist[0] }, () => {
-          this.getVid();
-        });
+    let updatedBeforeAndCount = {};
+    if (vid.genre) {
+      updatedBeforeAndCount = this.getUpdateBeforeAndCount(vid);
+    }
+    this.setState(
+      { playlist: [...playlist, vid], ...updatedBeforeAndCount },
+      () => {
+        const { playlist } = this.state;
+        if (playlist.length === 1) {
+          this.setState({ currentVid: playlist[0] }, () => {
+            this.getVid();
+          });
+        }
       }
-    });
+    );
   };
 
   cacheVid = (vid) => {
-    this.setState({ cachedVid: vid });
+    let updatedBeforeAndCount = {};
+    if (vid.genre) {
+      updatedBeforeAndCount = this.getUpdateBeforeAndCount(vid);
+    }
+    this.setState({ cachedVid: vid, ...updatedBeforeAndCount });
+  };
+
+  getUpdateBeforeAndCount = (data) => {
+    const {
+      hiphopAfter,
+      hiphopCount,
+      houseAfter,
+      houseCount,
+      tranceAfter,
+      tranceCount,
+    } = this.state;
+    const newState = {};
+    if (data.genre === "hiphop") {
+      if (
+        hiphopAfter === data.hiphopAfter &&
+        hiphopCount === data.hiphopCount
+      ) {
+        newState.hiphopAfter = "";
+        newState.hiphopCount = "";
+      } else {
+        newState.hiphopAfter = data.hiphopAfter;
+        newState.hiphopCount = data.hiphopCount;
+      }
+    }
+    if (data.genre === "house") {
+      if (houseAfter === data.houseAfter && houseCount === data.houseCount) {
+        newState.houseAfter = "";
+        newState.houseCount = "";
+      } else {
+        newState.houseAfter = data.houseAfter;
+        newState.houseCount = data.houseCount;
+      }
+    }
+    if (data.genre === "trance") {
+      if (
+        tranceAfter === data.tranceAfter &&
+        tranceCount === data.tranceCount
+      ) {
+        newState.tranceAfter = "";
+        newState.tranceCount = "";
+      } else {
+        newState.tranceAfter = data.tranceAfter;
+        newState.tranceCount = data.tranceCount;
+      }
+    }
+    return newState;
   };
 
   playNext = () => {
@@ -205,6 +262,11 @@ export default class App extends Component {
   };
 
   render() {
+    console.log(
+      "before and count",
+      this.state.hiphopCount,
+      this.state.hiphopAfter
+    );
     const {
       loggedIn,
       currentVid,
