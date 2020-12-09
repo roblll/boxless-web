@@ -75,7 +75,9 @@ export default class App extends Component {
   }
 
   handleLogin = () => {
-    this.setState({ loggedIn: true });
+    this.setState({ loggedIn: true }, () => {
+      this.getVid();
+    });
   };
 
   getVid = async () => {
