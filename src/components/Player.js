@@ -4,7 +4,15 @@ import ReactPlayer from "react-player/youtube";
 
 class Player extends React.Component {
   render() {
-    let { vidId, playNext, onPlay, onPause, playing, lengthMax } = this.props;
+    let {
+      vidId,
+      playNext,
+      onPlay,
+      onPause,
+      playing,
+      lengthMax,
+      onError,
+    } = this.props;
     if (playing === null) {
       playing = true;
     }
@@ -19,6 +27,7 @@ class Player extends React.Component {
           onEnded={playNext}
           onPlay={onPlay}
           onPause={onPause}
+          onError={onError}
           config={{
             youtube: {
               playerVars: { start: 0, end: lengthMax },

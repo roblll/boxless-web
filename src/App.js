@@ -226,6 +226,16 @@ export default class App extends Component {
     }
   };
 
+  handleError = async () => {
+    const { cachedVid } = this.state;
+    if (cachedVid !== null) {
+      this.playNext();
+    } else {
+      await this.getVid();
+      this.playNext();
+    }
+  };
+
   handleTabClick = (e, { name }) => {
     if (this.state.activeTab === name) {
       this.setState({ activeTab: "none" });
