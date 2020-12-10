@@ -177,7 +177,7 @@ export default class App extends Component {
     return newState;
   };
 
-  playNext = () => {
+  playNext = async () => {
     const { playlist, playlistPosition, cachedVid } = this.state;
     if (playlistPosition < playlist.length - 1) {
       const vid = playlist[playlistPosition + 1];
@@ -198,6 +198,9 @@ export default class App extends Component {
           this.getVid();
         }
       );
+    } else {
+      await this.getVid();
+      this.playNext();
     }
   };
 
