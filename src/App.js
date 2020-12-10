@@ -198,9 +198,6 @@ export default class App extends Component {
           this.getVid();
         }
       );
-    } else {
-      await this.getVid();
-      this.playNext();
     }
   };
 
