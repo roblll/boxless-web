@@ -81,14 +81,19 @@ export default class App extends Component {
   };
 
   getVid = async () => {
+    const {
+      options: { norepeats },
+    } = this.state;
     const data = await fetchVid(this.state, localStorage.getItem("token"));
     if (data === null) {
       localStorage.clear();
       this.setState({ loggedIn: false });
     } else {
+      const repeat = this.checkRepeat(data) && norepeats;
       if (
         data.vidId &&
-        ReactPlayer.canPlay(`https://www.youtube.com/watch?v=${data.vidId}`)
+        ReactPlayer.canPlay(`https://www.youtube.com/watch?v=${data.vidId}`) &&
+        !repeat
       ) {
         const { playlist } = this.state;
         if (playlist.length === 0) {
@@ -234,6 +239,17 @@ export default class App extends Component {
       await this.getVid();
       this.playNext();
     }
+  };
+
+  checkRepeat = (data) => {
+    const { playlist } = this.state;
+    let res = false;
+    playlist.forEach((vid) => {
+      if (data.vidId === vid.vidId) {
+        res = true;
+      }
+    });
+    return res;
   };
 
   handleTabClick = (e, { name }) => {
