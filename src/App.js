@@ -68,6 +68,7 @@ export default class App extends Component {
     tranceCount: "",
     fetchingVid: false,
     shouldPlayNext: false,
+    playedNext: false,
   };
 
   componentDidMount() {
@@ -201,28 +202,33 @@ export default class App extends Component {
   };
 
   playNext = async () => {
-    const { playlist, playlistPosition, cachedVid, fetchingVid } = this.state;
-    if (playlistPosition < playlist.length - 1) {
-      const vid = playlist[playlistPosition + 1];
-      this.setState({
-        playlistPosition: playlistPosition + 1,
-        currentVid: vid,
-      });
-    } else if (cachedVid) {
-      const vid = cachedVid;
-      this.setState(
-        {
-          cachedVid: null,
-          playlist: [...playlist, vid],
+    const { playedNext } = this.state;
+    if (playedNext) {
+      const { playlist, playlistPosition, cachedVid, fetchingVid } = this.state;
+      if (playlistPosition < playlist.length - 1) {
+        const vid = playlist[playlistPosition + 1];
+        this.setState({
           playlistPosition: playlistPosition + 1,
           currentVid: vid,
-        },
-        () => {
-          this.getVid();
-        }
-      );
-    } else if (fetchingVid) {
-      this.setState({ shouldPlayNext: true });
+        });
+      } else if (cachedVid) {
+        const vid = cachedVid;
+        this.setState(
+          {
+            cachedVid: null,
+            playlist: [...playlist, vid],
+            playlistPosition: playlistPosition + 1,
+            currentVid: vid,
+          },
+          () => {
+            this.getVid();
+          }
+        );
+      } else if (fetchingVid) {
+        this.setState({ shouldPlayNext: true });
+      }
+    } else {
+      this.setState({ playedNext: true });
     }
   };
 

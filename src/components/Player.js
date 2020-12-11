@@ -3,20 +3,6 @@ import React from "react";
 import ReactPlayer from "react-player/youtube";
 
 class Player extends React.Component {
-  state = {
-    calledPlayNext: false,
-  };
-
-  handlePlayNext = () => {
-    const { calledPlayNext } = this.state;
-    const { playNext } = this.props;
-    if (calledPlayNext) {
-      this.setState({ calledPlayNext: false }, () => playNext());
-    } else {
-      this.setState({ calledPlayNext: true });
-    }
-  };
-
   render() {
     let {
       vidId,
@@ -38,7 +24,7 @@ class Player extends React.Component {
           height="252px"
           controls={true}
           playing={playing}
-          onEnded={this.handlePlayNext}
+          onEnded={playNext}
           onPlay={onPlay}
           onPause={onPause}
           onError={onError}
