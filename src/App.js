@@ -137,11 +137,21 @@ export default class App extends Component {
   };
 
   cacheVid = (vid) => {
+    const { shouldPlayNext } = this.state;
     let updatedBeforeAndCount = {};
     if (vid.genre) {
       updatedBeforeAndCount = this.getUpdateBeforeAndCount(vid);
     }
-    this.setState({ cachedVid: vid, ...updatedBeforeAndCount });
+    if (shouldPlayNext) {
+      this.setState(
+        { shouldPlayNext: false, cachedVid: vid, ...updatedBeforeAndCount },
+        () => {
+          this.playNext();
+        }
+      );
+    } else {
+      this.setState({ cachedVid: vid, ...updatedBeforeAndCount });
+    }
   };
 
   getUpdateBeforeAndCount = (data) => {
@@ -191,6 +201,7 @@ export default class App extends Component {
   };
 
   playNext = async () => {
+    console.log("playNext");
     const { playlist, playlistPosition, cachedVid, fetchingVid } = this.state;
     if (playlistPosition < playlist.length - 1) {
       const vid = playlist[playlistPosition + 1];
@@ -212,7 +223,7 @@ export default class App extends Component {
         }
       );
     } else if (fetchingVid) {
-      this.setState({ shouldPlayNext: true });
+      // this.setState({ shouldPlayNext: true });
     }
   };
 
