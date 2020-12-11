@@ -66,6 +66,8 @@ export default class App extends Component {
     houseCount: "",
     tranceAfter: "",
     tranceCount: "",
+    fetchingVid: false,
+    shouldPlayNext: false,
   };
 
   componentDidMount() {
