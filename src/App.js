@@ -296,6 +296,7 @@ export default class App extends Component {
               onPause={this.onPause}
               playing={playing}
               lengthMax={options.lengthMax}
+              onError={this.handleError}
             />
           ) : (
             <Static width="448px" height="252px" />
