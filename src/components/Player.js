@@ -38,10 +38,7 @@ class Player extends React.Component {
           height="252px"
           controls={true}
           playing={playing}
-          onEnded={() => {
-            console.log("Player PlayNext");
-            playNext();
-          }}
+          onEnded={this.handlePlayNext}
           onPlay={onPlay}
           onPause={onPause}
           onError={onError}

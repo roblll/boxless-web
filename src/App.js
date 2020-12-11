@@ -201,7 +201,6 @@ export default class App extends Component {
   };
 
   playNext = async () => {
-    console.log("playNext");
     const { playlist, playlistPosition, cachedVid, fetchingVid } = this.state;
     if (playlistPosition < playlist.length - 1) {
       const vid = playlist[playlistPosition + 1];
@@ -223,7 +222,7 @@ export default class App extends Component {
         }
       );
     } else if (fetchingVid) {
-      // this.setState({ shouldPlayNext: true });
+      this.setState({ shouldPlayNext: true });
     }
   };
 
