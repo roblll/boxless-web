@@ -82,33 +82,39 @@ export default class App extends Component {
     });
   };
 
-  getVid = async () => {
-    const {
-      options: { norepeats },
-    } = this.state;
-    const data = await fetchVid(this.state, localStorage.getItem("token"));
-    if (data === null) {
-      localStorage.clear();
-      this.setState({ loggedIn: false });
-    } else {
-      const repeat = this.checkRepeat(data) && norepeats;
-      if (
-        data.vidId &&
-        ReactPlayer.canPlay(`https://www.youtube.com/watch?v=${data.vidId}`) &&
-        !repeat
-      ) {
-        const { playlist } = this.state;
-        if (playlist.length === 0) {
-          this.addToPlaylist(data);
-        } else {
-          this.cacheVid(data);
-        }
+  getVid = () => {
+    this.setState({ fetchingVid: true }, async () => {
+      const {
+        options: { norepeats },
+      } = this.state;
+      const data = await fetchVid(this.state, localStorage.getItem("token"));
+      if (data === null) {
+        localStorage.clear();
+        this.setState({ loggedIn: false });
       } else {
-        setTimeout(() => {
-          this.getVid();
-        }, 4000);
+        const repeat = this.checkRepeat(data) && norepeats;
+        if (
+          data.vidId &&
+          ReactPlayer.canPlay(
+            `https://www.youtube.com/watch?v=${data.vidId}`
+          ) &&
+          !repeat
+        ) {
+          this.setState({ fetchingVid: false }, () => {
+            const { playlist } = this.state;
+            if (playlist.length === 0) {
+              this.addToPlaylist(data);
+            } else {
+              this.cacheVid(data);
+            }
+          });
+        } else {
+          setTimeout(() => {
+            this.getVid();
+          }, 4000);
+        }
       }
-    }
+    });
   };
 
   addToPlaylist = (vid) => {
