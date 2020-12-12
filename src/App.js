@@ -201,10 +201,10 @@ export default class App extends Component {
     return newState;
   };
 
-  playNext = async () => {
+  playNext = async (type) => {
     const { playedNext } = this.state;
-    if (playedNext) {
-      const { playlist, playlistPosition, cachedVid, fetchingVid } = this.state;
+    if (type === "manual") {
+      const { playlist, playlistPosition, cachedVid } = this.state;
       if (playlistPosition < playlist.length - 1) {
         const vid = playlist[playlistPosition + 1];
         this.setState({
@@ -220,15 +220,39 @@ export default class App extends Component {
             playlistPosition: playlistPosition + 1,
             currentVid: vid,
           },
-          () => {
-            this.getVid();
-          }
+          () => this.getVid()
         );
+      }
+    } else if (!playedNext) {
+      const { playlist, playlistPosition, cachedVid, fetchingVid } = this.state;
+      if (playlistPosition < playlist.length - 1) {
+        const vid = playlist[playlistPosition + 1];
+        this.setState({ playedNext: true }, () => {
+          this.setState({
+            playlistPosition: playlistPosition + 1,
+            currentVid: vid,
+            playedNext: true,
+          });
+        });
+      } else if (cachedVid) {
+        const vid = cachedVid;
+        this.setState({ playedNext: true }, () => {
+          this.setState(
+            {
+              cachedVid: null,
+              playlist: [...playlist, vid],
+              playlistPosition: playlistPosition + 1,
+              currentVid: vid,
+              playedNext: true,
+            },
+            () => this.getVid()
+          );
+        });
       } else if (fetchingVid) {
         this.setState({ shouldPlayNext: true });
       }
     } else {
-      this.setState({ playedNext: true });
+      this.setState({ playedNext: false });
     }
   };
 
