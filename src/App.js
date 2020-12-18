@@ -6,15 +6,14 @@ export default class App extends Component {
   state = {
     playing: true,
     vidId: "QYh6mYIJG2Y",
-    muted: true,
   };
 
   render() {
-    const { playing, vidId, muted } = this.state;
+    const { playing, vidId } = this.state;
 
     return (
       <div style={styles.container}>
-        <Player vidId={vidId} playing={playing} muted={muted} />
+        <Player vidId={vidId} playing={playing} />
       </div>
     );
   }
