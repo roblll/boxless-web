@@ -12,6 +12,7 @@ class Player extends React.Component {
       playing,
       lengthMax,
       onError,
+      muted,
     } = this.props;
     if (playing === null) {
       playing = true;
@@ -33,6 +34,7 @@ class Player extends React.Component {
               playerVars: { start: 0, end: lengthMax },
             },
           }}
+          muted={muted}
         />
       </div>
     );

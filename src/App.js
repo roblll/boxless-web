@@ -4,13 +4,17 @@ import Player from "./components/Player";
 
 export default class App extends Component {
   state = {
-    continuePlaying: true,
+    playing: true,
+    vidId: "QYh6mYIJG2Y",
+    muted: true,
   };
 
   render() {
+    const { playing, vidId, muted } = this.state;
+
     return (
       <div style={styles.container}>
-        <Player vidId={"QYh6mYIJG2Y"} />
+        <Player vidId={vidId} playing={playing} muted={muted} />
       </div>
     );
   }
