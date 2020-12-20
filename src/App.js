@@ -4,16 +4,55 @@ import { Button } from "semantic-ui-react";
 import Login from "./components/Login";
 import Player from "./components/Player";
 
+import { fetchVid } from "./api/api";
+import { getDefaultDates } from "./utils/utils";
+
+const {
+  dayMin,
+  monthMin,
+  yearMin,
+  dayMax,
+  monthMax,
+  yearMax,
+} = getDefaultDates();
+
 export default class App extends Component {
   state = {
     loggedIn: false,
     playing: false,
-    vidId: "QYh6mYIJG2Y",
+    options: {
+      lyrics: false,
+      clean: false,
+      karaoke: false,
+      norepeats: true,
+      alternative: true,
+      country: true,
+      dance: true,
+      electronic: true,
+      hiphop: true,
+      house: true,
+      latin: true,
+      pop: true,
+      rap: true,
+      randb: true,
+      rock: true,
+      trance: true,
+      dayMin,
+      dayMax,
+      monthMin,
+      monthMax,
+      yearMin,
+      yearMax,
+      rankMin: 1,
+      rankMax: 100,
+      lengthMax: 60,
+    },
+    currentVid: null,
   };
 
   componentDidMount() {
     if (localStorage.getItem("token")) {
-      this.setState({ loggedIn: true });
+      this.setState({ loggedIn: true }, () => this.getVid());
     }
   }
 
@@ -21,17 +60,26 @@ export default class App extends Component {
     this.setState({ loggedIn: true });
   };
 
+  getVid = async () => {
+    const data = await fetchVid(this.state, localStorage.getItem("token"));
+    this.setState({ currentVid: data });
+  };
+
   handlePlayPause = () => {
     this.setState({ playing: !this.state.playing });
   };
 
   render() {
-    const { loggedIn, playing, vidId } = this.state;
+    const { loggedIn, playing, currentVid } = this.state;
 
     if (loggedIn) {
       return (
         <div style={styles.container}>
-          <Player vidId={vidId} playing={playing} />
+          {currentVid && currentVid.vidId ? (
+            <Player vidId={currentVid.vidId} playing={playing} />
+          ) : (
+            <div></div>
+          )}
           <Button onClick={this.handlePlayPause}>Play</Button>
         </div>
       );
