@@ -54,7 +54,7 @@ export default class Login extends React.Component {
   render() {
     const { height, width } = this.state;
     return (
-      <div class="login-container">
+      <div className="login-container">
         <Static width={width} height={height + 100} />
         <div style={styles.loginContainer}>
           <form style={styles.login} onSubmit={this.handleSubmit}>
