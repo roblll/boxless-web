@@ -67,7 +67,14 @@ export default class App extends Component {
   };
 
   handlePlayPause = () => {
-    this.setState({ playing: !this.state.playing });
+    const { currentVid } = this.state;
+    if (currentVid) {
+      this.setState({ playing: !this.state.playing });
+    } else {
+      this.setState({ playing: true }, () => {
+        this.getVid();
+      });
+    }
   };
 
   render() {
