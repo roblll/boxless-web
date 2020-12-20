@@ -3,6 +3,7 @@ import { Button } from "semantic-ui-react";
 
 import Login from "./components/Login";
 import Player from "./components/Player";
+import Static from "./components/Static";
 
 import { fetchVid } from "./api/api";
 import { getDefaultDates } from "./utils/utils";
@@ -52,7 +53,7 @@ export default class App extends Component {
 
   componentDidMount() {
     if (localStorage.getItem("token")) {
-      this.setState({ loggedIn: true }, () => this.getVid());
+      this.setState({ loggedIn: true });
     }
   }
 
@@ -78,7 +79,7 @@ export default class App extends Component {
           {currentVid && currentVid.vidId ? (
             <Player vidId={currentVid.vidId} playing={playing} />
           ) : (
-            <div></div>
+            <Static width="448px" height="252px" />
           )}
           <Button onClick={this.handlePlayPause}>Play</Button>
         </div>
