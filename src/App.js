@@ -1,21 +1,43 @@
 import React, { Component } from "react";
+import { Button } from "semantic-ui-react";
 
+import Login from "./components/Login";
 import Player from "./components/Player";
 
 export default class App extends Component {
   state = {
-    playing: true,
+    loggedIn: false,
+    playing: false,
     vidId: "QYh6mYIJG2Y",
   };
 
-  render() {
-    const { playing, vidId } = this.state;
+  componentDidMount() {
+    if (localStorage.getItem("token")) {
+      this.setState({ loggedIn: true });
+    }
+  }
 
-    return (
-      <div style={styles.container}>
-        <Player vidId={vidId} playing={playing} />
-      </div>
-    );
+  handleLogin = () => {
+    this.setState({ loggedIn: true });
+  };
+
+  handlePlayPause = () => {
+    this.setState({ playing: !this.state.playing });
+  };
+
+  render() {
+    const { loggedIn, playing, vidId } = this.state;
+
+    if (loggedIn) {
+      return (
+        <div style={styles.container}>
+          <Player vidId={vidId} playing={playing} />
+          <Button onClick={this.handlePlayPause}>Play</Button>
+        </div>
+      );
+    } else {
+      return <Login handleLogin={this.handleLogin} />;
+    }
   }
 }
 
