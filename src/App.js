@@ -50,6 +50,7 @@ export default class App extends Component {
     },
     currentVid: null,
     gettingVid: false,
+    keepPlaying: true,
   };
 
   componentDidMount() {
@@ -75,9 +76,13 @@ export default class App extends Component {
   };
 
   handlePlayPause = () => {
-    const { currentVid } = this.state;
+    const { currentVid, playing } = this.state;
     if (currentVid) {
-      this.setState({ playing: !this.state.playing });
+      if (playing) {
+        this.setState({ playing: false, keepPlaying: false });
+      } else {
+        this.setState({ playing: true, keepPlaying: true });
+      }
     } else {
       this.setState({ playing: true }, () => {
         this.getVid();
