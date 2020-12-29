@@ -49,6 +49,7 @@ export default class App extends Component {
       lengthMax: 10,
     },
     currentVid: null,
+    gettingVid: false,
   };
 
   componentDidMount() {
@@ -61,9 +62,16 @@ export default class App extends Component {
     this.setState({ loggedIn: true });
   };
 
-  getVid = async () => {
-    const data = await fetchVid(this.state, localStorage.getItem("token"));
-    this.setState({ currentVid: data });
+  getVid = () => {
+    this.setState(
+      {
+        gettingVid: true,
+      },
+      async () => {
+        const data = await fetchVid(this.state, localStorage.getItem("token"));
+        this.setState({ currentVid: data, gettingVid: false });
+      }
+    );
   };
 
   handlePlayPause = () => {
@@ -90,6 +98,7 @@ export default class App extends Component {
       playing,
       currentVid,
       options: { lengthMax },
+      gettingVid,
     } = this.state;
 
     if (loggedIn) {
@@ -104,6 +113,11 @@ export default class App extends Component {
             />
           ) : (
             <Static width="448px" height="252px" />
+          )}
+          {gettingVid && (
+            <div>
+              <p style={{ color: "white" }}>Getting Vid</p>
+            </div>
           )}
           <Button onClick={this.handlePlayPause}>Play</Button>
         </div>
