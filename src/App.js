@@ -46,7 +46,7 @@ export default class App extends Component {
       yearMax,
       rankMin: 1,
       rankMax: 100,
-      lengthMax: 60,
+      lengthMax: 10,
     },
     currentVid: null,
   };
@@ -78,13 +78,22 @@ export default class App extends Component {
   };
 
   render() {
-    const { loggedIn, playing, currentVid } = this.state;
+    const {
+      loggedIn,
+      playing,
+      currentVid,
+      options: { lengthMax },
+    } = this.state;
 
     if (loggedIn) {
       return (
         <div style={styles.container}>
           {currentVid && currentVid.vidId ? (
-            <Player vidId={currentVid.vidId} playing={playing} />
+            <Player
+              vidId={currentVid.vidId}
+              playing={playing}
+              lengthMax={lengthMax}
+            />
           ) : (
             <Static width="448px" height="252px" />
           )}
