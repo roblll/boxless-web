@@ -77,6 +77,13 @@ export default class App extends Component {
     }
   };
 
+  playNext = () => {
+    // if not at end of playlist play next vid playlist
+    // else if at end of playlist and there is a cached vid, play cached vid
+    // else if at end of playlist and there is no cached vid and keepPlaying is true and gettingVid is false, call getVid
+    console.log("playNext");
+  };
+
   render() {
     const {
       loggedIn,
@@ -93,6 +100,7 @@ export default class App extends Component {
               vidId={currentVid.vidId}
               playing={playing}
               lengthMax={lengthMax}
+              playNext={this.playNext}
             />
           ) : (
             <Static width="448px" height="252px" />
