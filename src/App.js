@@ -51,6 +51,7 @@ export default class App extends Component {
     currentVid: null,
     gettingVid: false,
     keepPlaying: true,
+    playedNext: false,
   };
 
   componentDidMount() {
@@ -94,6 +95,14 @@ export default class App extends Component {
     // if not at end of playlist play next vid playlist
     // else if at end of playlist and there is a cached vid, play cached vid
     // else if at end of playlist and there is no cached vid and keepPlaying is true and gettingVid is false, call getVid
+    const { playedNext } = this.state;
+    if (!playedNext) {
+      this.setState({ playedNext: true }, () => {
+        // this.getVid();
+      });
+    } else {
+      this.setState({ playedNext: false });
+    }
     console.log("playNext");
   };
 
