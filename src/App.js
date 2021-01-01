@@ -71,7 +71,12 @@ export default class App extends Component {
       },
       async () => {
         const data = await fetchVid(this.state, localStorage.getItem("token"));
-        this.setState({ currentVid: data, gettingVid: false });
+        if (data) {
+          this.setState({ currentVid: data, gettingVid: false });
+        } else {
+          localStorage.clear();
+          this.setState({ loggedIn: false });
+        }
       }
     );
   };
