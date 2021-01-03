@@ -54,6 +54,7 @@ export default class App extends Component {
     gettingVid: false,
     keepPlaying: true,
     playedNext: false,
+    playlist = []
   };
 
   componentDidMount() {
@@ -120,6 +121,10 @@ export default class App extends Component {
       this.setState({ playedNext: false });
     }
   };
+
+  addToPlaylist = (vid) => {
+    const {playlist} = this.state
+  }
 
   render() {
     const {
