@@ -79,11 +79,12 @@ export default class App extends Component {
             data.vidId &&
             ReactPlayer.canPlay(`https://www.youtube.com/watch?v=${data.vidId}`)
           ) {
-            // this.setState({ currentVid: data, gettingVid: false });
             this.setState({ gettingVid: false }, () => {
               const { playlist } = this.state;
               if (playlist.length === 0) {
                 this.addToPlaylist(data);
+              } else {
+                console.log("cache this", data);
               }
             });
           } else {
@@ -130,10 +131,13 @@ export default class App extends Component {
 
   addToPlaylist = (vid) => {
     const { playlist } = this.state;
-    console.log(playlist);
     this.setState({ playlist: [...playlist, vid] }, () => {
       const { playlist } = this.state;
-      console.log(playlist);
+      if (playlist.length === 1) {
+        this.setState({ currentVid: playlist[0] }, () => {
+          this.getVid();
+        });
+      }
     });
   };
 
