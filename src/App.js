@@ -54,7 +54,7 @@ export default class App extends Component {
     gettingVid: false,
     keepPlaying: true,
     playedNext: false,
-    playlist = []
+    playlist: [],
   };
 
   componentDidMount() {
@@ -79,7 +79,13 @@ export default class App extends Component {
             data.vidId &&
             ReactPlayer.canPlay(`https://www.youtube.com/watch?v=${data.vidId}`)
           ) {
-            this.setState({ currentVid: data, gettingVid: false });
+            // this.setState({ currentVid: data, gettingVid: false });
+            this.setState({ gettingVid: false }, () => {
+              const { playlist } = this.state;
+              if (playlist.length === 0) {
+                this.addToPlaylist(data);
+              }
+            });
           } else {
             setTimeout(() => {
               this.getVid();
@@ -123,8 +129,13 @@ export default class App extends Component {
   };
 
   addToPlaylist = (vid) => {
-    const {playlist} = this.state
-  }
+    const { playlist } = this.state;
+    console.log(playlist);
+    this.setState({ playlist: [...playlist, vid] }, () => {
+      const { playlist } = this.state;
+      console.log(playlist);
+    });
+  };
 
   render() {
     const {
