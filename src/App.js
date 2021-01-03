@@ -55,6 +55,7 @@ export default class App extends Component {
     keepPlaying: true,
     playedNext: false,
     playlist: [],
+    cachedVid: null,
   };
 
   componentDidMount() {
@@ -84,7 +85,7 @@ export default class App extends Component {
               if (playlist.length === 0) {
                 this.addToPlaylist(data);
               } else {
-                console.log("cache this", data);
+                this.cacheVid(data);
               }
             });
           } else {
@@ -139,6 +140,10 @@ export default class App extends Component {
         });
       }
     });
+  };
+
+  cacheVid = (vid) => {
+    this.setState({ cachedVid: vid });
   };
 
   render() {
