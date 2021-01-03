@@ -1,6 +1,8 @@
 import React, { Component } from "react";
 import { Button } from "semantic-ui-react";
 
+import ReactPlayer from "react-player/youtube";
+
 import Login from "./components/Login";
 import Player from "./components/Player";
 import Static from "./components/Static";
@@ -72,7 +74,16 @@ export default class App extends Component {
       async () => {
         const data = await fetchVid(this.state, localStorage.getItem("token"));
         if (data) {
-          this.setState({ currentVid: data, gettingVid: false });
+          if (
+            data.vidId &&
+            ReactPlayer.canPlay(`https://www.youtube.com/watch?v=${data.vidId}`)
+          ) {
+            this.setState({ currentVid: data, gettingVid: false });
+          } else {
+            setTimeout(() => {
+              this.getVid();
+            }, 4000);
+          }
         } else {
           localStorage.clear();
           this.setState({ loggedIn: false });
@@ -103,12 +114,11 @@ export default class App extends Component {
     const { playedNext } = this.state;
     if (!playedNext) {
       this.setState({ playedNext: true }, () => {
-        // this.getVid();
+        this.getVid();
       });
     } else {
       this.setState({ playedNext: false });
     }
-    console.log("playNext");
   };
 
   render() {
