@@ -56,6 +56,7 @@ export default class App extends Component {
     playedNext: false,
     playlist: [],
     cachedVid: null,
+    playlistPosition: 0,
   };
 
   componentDidMount() {
@@ -123,7 +124,20 @@ export default class App extends Component {
     const { playedNext } = this.state;
     if (!playedNext) {
       this.setState({ playedNext: true }, () => {
-        this.getVid();
+        const { playlist, playlistPosition, cachedVid } = this.state;
+        if (playlistPosition < playlist.length - 1) {
+          console.log("play next in playlist queue");
+        } else if (cachedVid) {
+          this.setState(
+            {
+              cacheVid: null,
+              playlist: [...playlist, cachedVid],
+              playlistPosition: playlistPosition + 1,
+              currentVid: cachedVid,
+            },
+            () => this.getVid()
+          );
+        }
       });
     } else {
       this.setState({ playedNext: false });
