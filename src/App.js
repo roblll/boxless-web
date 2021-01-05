@@ -157,8 +157,15 @@ export default class App extends Component {
   };
 
   cacheVid = (vid) => {
-    console.log("playing", this.state.playing);
-    this.setState({ cachedVid: vid });
+    this.setState({ cachedVid: vid }, () => {
+      const { playing, keepPlaying } = this.state;
+      if (!playing && keepPlaying) {
+        this.setState({ playedNext: false }, () => {
+          console.log("playNext after cacheVid");
+          this.playNext();
+        });
+      }
+    });
   };
 
   render() {
@@ -189,6 +196,7 @@ export default class App extends Component {
             </div>
           )}
           <Button onClick={this.handlePlayPause}>Play</Button>
+          <Button onClick={() => console.log(this.state)}>State</Button>
         </div>
       );
     } else {
