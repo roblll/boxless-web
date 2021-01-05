@@ -123,17 +123,17 @@ export default class App extends Component {
     // else if at end of playlist and there is no cached vid and keepPlaying is true and gettingVid is false, call getVid
     const { playedNext } = this.state;
     if (!playedNext) {
-      this.setState({ playedNext: true }, () => {
+      this.setState({ playedNext: true, playing: false }, () => {
         const { playlist, playlistPosition, cachedVid } = this.state;
         if (playlistPosition < playlist.length - 1) {
-          console.log("play next in playlist queue");
         } else if (cachedVid) {
           this.setState(
             {
-              cacheVid: null,
+              cachedVid: null,
               playlist: [...playlist, cachedVid],
               playlistPosition: playlistPosition + 1,
               currentVid: cachedVid,
+              playing: true,
             },
             () => this.getVid()
           );
@@ -157,6 +157,7 @@ export default class App extends Component {
   };
 
   cacheVid = (vid) => {
+    console.log("playing", this.state.playing);
     this.setState({ cachedVid: vid });
   };
 
