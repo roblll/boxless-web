@@ -33,6 +33,9 @@ export const fetchVid = async (state, token) => {
   try {
     let aController = new AbortController();
     let signal = aController.signal;
+    setTimeout(() => {
+      aController.abort();
+    }, 10000);
     const response = await fetch(
       `${api_url}/api/vid?dateMin=${dateMin}&dateMax=${dateMax}&rankMin=${rankMin}&rankMax=${rankMax}&pop=${pop}&rap=${rap}&latin=${latin}&alternative=${alternative}&electronic=${electronic}&country=${country}&randb=${randb}&rock=${rock}&dance=${dance}&hiphop=${hiphop}&house=${house}&trance=${trance}&lyrics=false&clean=false&karaoke=false&hiphopAfter=${hiphopAfter}&hiphopCount=${hiphopCount}&houseAfter=${houseAfter}&houseCount=${houseCount}&tranceAfter=${tranceAfter}&tranceCount=${tranceCount}`,
       {
@@ -41,9 +44,6 @@ export const fetchVid = async (state, token) => {
         headers: { "content-type": "application/json", Authorization: token },
       }
     );
-    setTimeout(() => {
-      aController.abort();
-    }, 10000);
 
     if (response.ok) {
       const data = await response.json();
