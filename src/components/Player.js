@@ -13,6 +13,7 @@ class Player extends React.Component {
       lengthMax,
       onError,
       muted,
+      endSong,
     } = this.props;
     if (playing === null) {
       playing = true;
@@ -25,7 +26,7 @@ class Player extends React.Component {
           height="252px"
           controls={true}
           playing={playing}
-          onEnded={playNext}
+          onEnded={endSong}
           onPlay={onPlay}
           onPause={onPause}
           onError={onError}
