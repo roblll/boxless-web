@@ -90,8 +90,6 @@ export default class App extends Component {
               }
             });
           } else {
-            console.log("no data.vidId");
-            console.log(data);
             setTimeout(() => {
               this.getVid();
             }, 4000);
@@ -120,35 +118,9 @@ export default class App extends Component {
   };
 
   playNext = () => {
-    // if not at end of playlist play next vid playlist
-    // else if at end of playlist and there is a cached vid, play cached vid
-    // else if at end of playlist and there is no cached vid and keepPlaying is true and gettingVid is false, call getVid
-    // const { playedNext } = this.state;
-    // if (!playedNext) {
-    //   this.setState({ playedNext: true, playing: false }, () => {
-    //     const { playlist, playlistPosition, cachedVid } = this.state;
-    //     if (playlistPosition < playlist.length - 1) {
-    //     } else if (cachedVid) {
-    //       console.log("play", cachedVid);
-    //       this.setState(
-    //         {
-    //           cachedVid: null,
-    //           playlist: [...playlist, cachedVid],
-    //           playlistPosition: playlistPosition + 1,
-    //           currentVid: cachedVid,
-    //           playing: true,
-    //         },
-    //         () => this.getVid()
-    //       );
-    //     }
-    //   });
-    // } else {
-    //   this.setState({ playedNext: false });
-    // }
     const { playlist, playlistPosition, cachedVid } = this.state;
     if (playlistPosition < playlist.length - 1) {
     } else if (cachedVid) {
-      console.log("play", cachedVid);
       this.setState(
         {
           cachedVid: null,
@@ -185,7 +157,6 @@ export default class App extends Component {
       const { playing, keepPlaying } = this.state;
       if (!playing && keepPlaying) {
         this.setState({ playedNext: false }, () => {
-          console.log("playNext after cacheVid");
           this.playNext();
         });
       }
