@@ -29,7 +29,10 @@ class Player extends React.Component {
           onEnded={endSong}
           onPlay={onPlay}
           onPause={onPause}
-          onError={endSong}
+          onError={() => {
+            console.log("error");
+            endSong();
+          }}
           config={{
             youtube: {
               playerVars: { start: 0, end: lengthMax },
