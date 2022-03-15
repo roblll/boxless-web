@@ -361,7 +361,7 @@ export default class App extends Component {
                 endSong={this.playNext}
               />
             ) : (
-              <Static width="448px" height="252px" />
+              <Static width="100%" height="250px" maxWidth="450px" />
             )}
             {activeTab !== "none" && (
               <MinControls
