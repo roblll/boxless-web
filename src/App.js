@@ -347,59 +347,64 @@ export default class App extends Component {
     } = this.state;
     if (loggedIn) {
       return (
-        <div style={styles.container}>
-          {currentVid && currentVid.vidId ? (
-            <Player
-              vidId={currentVid.vidId}
-              playNext={this.playNext}
-              onPlay={this.onPlay}
-              onPause={this.onPause}
-              playing={playing}
-              lengthMax={options.lengthMax}
-              onError={this.handleError}
-              endSong={this.playNext}
-            />
-          ) : (
-            <Static width="448px" height="252px" />
-          )}
-          {activeTab !== "none" && (
-            <MinControls
-              info={currentVid}
-              playNext={this.playNext}
-              playPrevious={this.playPrevious}
-              cachedVid={cachedVid}
-              togglePlayPause={this.togglePlayPause}
-              playing={playing}
-              playlistPosition={playlistPosition}
-              playlist={playlist}
-            />
-          )}
-          {activeTab === "options" && (
-            <Options
-              options={options}
-              toggle={this.handleOptionClick}
-              handleChange={this.handleDropDownChange}
-            />
-          )}
-          {activeTab === "pick" && (
-            <Pick
-              // pickVid1={pickVid1}
-              // pickVid2={pickVid2}
-              refresh={this.getPickVids}
-              addToPlaylist={this.addToPlaylist}
-            />
-          )}
-          {activeTab === "search" && (
-            <Search
-              getSearchVids={this.getSearchVids}
-              searchResults={searchResults}
-              addToPlaylist={this.addToPlaylist}
-            />
-          )}
-          {activeTab === "playlist" && (
-            <Playlist playlist={playlist} playlistPosition={playlistPosition} />
-          )}
-          <div style={styles.bottomPadding}></div>
+        <div style={styles.outerContainer}>
+          <div style={styles.container}>
+            {currentVid && currentVid.vidId ? (
+              <Player
+                vidId={currentVid.vidId}
+                playNext={this.playNext}
+                onPlay={this.onPlay}
+                onPause={this.onPause}
+                playing={playing}
+                lengthMax={options.lengthMax}
+                onError={this.handleError}
+                endSong={this.playNext}
+              />
+            ) : (
+              <Static width="448px" height="252px" />
+            )}
+            {activeTab !== "none" && (
+              <MinControls
+                info={currentVid}
+                playNext={this.playNext}
+                playPrevious={this.playPrevious}
+                cachedVid={cachedVid}
+                togglePlayPause={this.togglePlayPause}
+                playing={playing}
+                playlistPosition={playlistPosition}
+                playlist={playlist}
+              />
+            )}
+            {activeTab === "options" && (
+              <Options
+                options={options}
+                toggle={this.handleOptionClick}
+                handleChange={this.handleDropDownChange}
+              />
+            )}
+            {activeTab === "pick" && (
+              <Pick
+                // pickVid1={pickVid1}
+                // pickVid2={pickVid2}
+                refresh={this.getPickVids}
+                addToPlaylist={this.addToPlaylist}
+              />
+            )}
+            {activeTab === "search" && (
+              <Search
+                getSearchVids={this.getSearchVids}
+                searchResults={searchResults}
+                addToPlaylist={this.addToPlaylist}
+              />
+            )}
+            {activeTab === "playlist" && (
+              <Playlist
+                playlist={playlist}
+                playlistPosition={playlistPosition}
+              />
+            )}
+            <div style={styles.bottomPadding}></div>
+          </div>
           <Tabs activeTab={activeTab} handleTabClick={this.handleTabClick} />
         </div>
       );
@@ -410,11 +415,15 @@ export default class App extends Component {
 }
 
 const styles = {
+  outerContainer: {
+    display: "flex",
+    justifyContent: "center",
+    backgroundColor: "#1e1e1e",
+  },
   container: {
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
-    backgroundColor: "black",
   },
   bottomPadding: {
     height: "50px",
