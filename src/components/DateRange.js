@@ -4,16 +4,12 @@ import MonthDropdown from "./MonthDropdown";
 import DayDropdwon from "./DayDropdown";
 import YearDropdown from "./YearDropdown";
 
+const today = new Date();
+const totalYearMax = today.getFullYear();
+
 const DateRange = (props) => {
-  const {
-    dayMin,
-    dayMax,
-    monthMin,
-    monthMax,
-    yearMin,
-    yearMax,
-    handleChange,
-  } = props;
+  const { dayMin, dayMax, monthMin, monthMax, yearMin, yearMax, handleChange } =
+    props;
 
   return (
     <span>
@@ -32,7 +28,7 @@ const DateRange = (props) => {
         <YearDropdown
           year={yearMin}
           min={1960}
-          max={2020}
+          max={totalYearMax}
           handleChange={handleChange}
           yearType="yearMin"
         />
@@ -53,7 +49,7 @@ const DateRange = (props) => {
         <YearDropdown
           year={yearMax}
           min={1960}
-          max={2020}
+          max={totalYearMax}
           handleChange={handleChange}
           yearType="yearMax"
         />
