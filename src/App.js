@@ -297,11 +297,7 @@ export default class App extends Component {
   };
 
   handleTabClick = (e, { name }) => {
-    if (this.state.activeTab === name) {
-      this.setState({ activeTab: "none" });
-    } else {
-      this.setState({ activeTab: name });
-    }
+    this.setState({ activeTab: name });
   };
 
   handleOptionClick = (e) => {
