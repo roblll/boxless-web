@@ -52,7 +52,7 @@ const styles = {
   },
   innerContainer: {
     width: "100%",
-    maxWidth: 500,
+    maxWidth: 450,
   },
 };
 

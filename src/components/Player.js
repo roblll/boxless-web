@@ -22,8 +22,8 @@ class Player extends React.Component {
       <div style={styles.container}>
         <ReactPlayer
           url={`https://www.youtube.com/watch?v=${vidId}`}
-          width="448px"
-          height="252px"
+          width="100%"
+          height="250px"
           controls={true}
           playing={playing}
           onEnded={endSong}
@@ -50,6 +50,8 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
+    width: "100vw",
+    maxWidth: 450,
   },
   center: {
     width: 50,
