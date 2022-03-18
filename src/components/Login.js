@@ -5,8 +5,8 @@ import Static from "./Static";
 
 export default class Login extends React.Component {
   state = {
-    initials: "",
-    phone: "",
+    username: "",
+    password: "",
     width: 0,
     height: 0,
   };
@@ -28,7 +28,7 @@ export default class Login extends React.Component {
 
   handleSubmit = async (event) => {
     event.preventDefault();
-    const { initials, phone } = this.state;
+    const { username, password } = this.state;
     const api_url =
       process.env.NODE_ENV === "production"
         ? "https://boxless.herokuapp.com"
@@ -36,7 +36,7 @@ export default class Login extends React.Component {
     const response = await fetch(`${api_url}/api/login`, {
       method: "POST",
       headers: { "Content-Type": "application/json" },
-      body: JSON.stringify({ initials, phone }),
+      body: JSON.stringify({ username, password }),
     });
     if (response.ok) {
       const data = await response.json();
@@ -63,9 +63,9 @@ export default class Login extends React.Component {
               <input
                 style={styles.input}
                 type="text"
-                value={this.state.initials}
-                onChange={this.handleChange("initials")}
-                placeholder="initials"
+                value={this.state.username}
+                onChange={this.handleChange("username")}
+                placeholder="username"
                 autoComplete="off"
                 autoCorrect="off"
                 autoCapitalize="off"
@@ -77,9 +77,9 @@ export default class Login extends React.Component {
               <input
                 style={styles.input}
                 type="text"
-                value={this.state.phone}
-                onChange={this.handleChange("phone")}
-                placeholder="phone"
+                value={this.state.password}
+                onChange={this.handleChange("password")}
+                placeholder="password"
                 autoComplete="off"
                 autoCorrect="off"
                 autoCapitalize="off"

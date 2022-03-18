@@ -341,7 +341,7 @@ export default class App extends Component {
       cachedVid,
       searchResults,
     } = this.state;
-    if (true) {
+    if (loggedIn) {
       return (
         <div style={styles.outerContainer}>
           <div style={styles.container}>
