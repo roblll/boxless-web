@@ -422,6 +422,8 @@ const styles = {
     flexDirection: "column",
     width: "100vw",
     maxWidth: 450,
+    minHeight: "100vh",
+    flex: 1,
   },
   bottomPadding: {
     height: "50px",
