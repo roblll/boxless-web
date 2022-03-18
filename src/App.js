@@ -341,7 +341,7 @@ export default class App extends Component {
       cachedVid,
       searchResults,
     } = this.state;
-    if (loggedIn) {
+    if (true) {
       return (
         <div style={styles.outerContainer}>
           <div style={styles.container}>
@@ -420,6 +420,8 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     flexDirection: "column",
+    width: "100vw",
+    maxWidth: 450,
   },
   bottomPadding: {
     height: "50px",
