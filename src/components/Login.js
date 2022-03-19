@@ -58,7 +58,6 @@ export default class Login extends React.Component {
         <Static width={width} height={height + 100} />
         <div style={styles.loginContainer}>
           <form style={styles.login} onSubmit={this.handleSubmit}>
-            <h1>boxless</h1>
             <label>
               <input
                 style={styles.input}
