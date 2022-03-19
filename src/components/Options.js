@@ -134,7 +134,7 @@ const styles = {
     flex: 1,
     flexDirection: "column",
     textAlign: "center",
-    backgroundColor: "#3D3E3F",
+    backgroundColor: "#252526",
     color: "white",
     padding: "44px 0",
   },
@@ -152,7 +152,7 @@ const styles = {
   },
   divider: {
     width: "82%",
-    background: "#555",
+    background: "#414141",
     height: "1px",
   },
 };

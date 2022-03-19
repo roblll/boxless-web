@@ -92,7 +92,7 @@ const styles = {
     flex: 1,
     flexDirection: "column",
     textAlign: "center",
-    backgroundColor: "#3D3E3F",
+    backgroundColor: "#252526",
     color: "white",
     padding: "20px 0 0 0",
     minWidth: "375px",

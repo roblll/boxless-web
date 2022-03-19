@@ -243,7 +243,7 @@ const styles = {
     display: "flex",
     flex: 1,
     flexDirection: "column",
-    backgroundColor: "#3D3E3F",
+    backgroundColor: "#252526",
     color: "white",
   },
   scrollable: {

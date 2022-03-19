@@ -36,7 +36,7 @@ const MinControls = (props) => {
       display: "flex",
       flex: 1,
       flexDirection: "column",
-      backgroundColor: "#3D3E3F",
+      backgroundColor: "#252526",
       color: "white",
       backgroundImage: bgImage,
       backgroundRepeat: "no-repeat",
