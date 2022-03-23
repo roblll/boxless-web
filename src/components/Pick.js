@@ -1,9 +1,11 @@
 import React from "react";
 
-// import Static from "./Static";
-// import Static2 from "./Static2";
-
 export default class Pick extends React.Component {
+  componentDidMount() {
+    const { refresh } = this.props;
+    refresh();
+  }
+
   render() {
     const { refresh, addToPlaylist, pickVid1, pickVid2 } = this.props;
 
