@@ -340,16 +340,6 @@ export default class App extends Component {
       title2,
       artist2,
     } = await fetchPickVids(this.state, localStorage.getItem("token"));
-    console.log(
-      vid1Id,
-      vid1Length,
-      title1,
-      artist1,
-      vid2Id,
-      vid2Length,
-      title2,
-      artist2
-    );
   };
 
   render() {
