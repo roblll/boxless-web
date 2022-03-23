@@ -342,20 +342,26 @@ export default class App extends Component {
       title2,
       artist2,
     } = await fetchPickVids(this.state, localStorage.getItem("token"));
-    this.setState({
-      pickVid1: {
-        vidId: vid1Id,
-        vidLength: vid1Length,
-        title: title1,
-        artist: artist1,
-      },
-      pickVid2: {
-        vidId: vid2Id,
-        vidLength: vid2Length,
-        title: title2,
-        artist: artist2,
-      },
-    });
+    if (vid1Id && vid2Id) {
+      this.setState({
+        pickVid1: {
+          vidId: vid1Id,
+          vidLength: vid1Length,
+          title: title1,
+          artist: artist1,
+        },
+        pickVid2: {
+          vidId: vid2Id,
+          vidLength: vid2Length,
+          title: title2,
+          artist: artist2,
+        },
+      });
+    } else {
+      setTimeout(() => {
+        this.getPickVids();
+      }, 4000);
+    }
   };
 
   render() {
