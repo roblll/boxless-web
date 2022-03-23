@@ -65,6 +65,7 @@ export default class App extends Component {
     playedNext: false,
     pickVid1: null,
     pickVid2: null,
+    fetchingPicks: false,
   };
 
   componentDidMount() {
@@ -332,36 +333,39 @@ export default class App extends Component {
   };
 
   getPickVids = async () => {
-    const {
-      vid1Id,
-      vid1Length,
-      title1,
-      artist1,
-      vid2Id,
-      vid2Length,
-      title2,
-      artist2,
-    } = await fetchPickVids(this.state, localStorage.getItem("token"));
-    if (vid1Id && vid2Id) {
-      this.setState({
-        pickVid1: {
-          vidId: vid1Id,
-          vidLength: vid1Length,
-          title: title1,
-          artist: artist1,
-        },
-        pickVid2: {
-          vidId: vid2Id,
-          vidLength: vid2Length,
-          title: title2,
-          artist: artist2,
-        },
-      });
-    } else {
-      setTimeout(() => {
-        this.getPickVids();
-      }, 4000);
-    }
+    this.setState({ fetchingPicks: true }, async () => {
+      const {
+        vid1Id,
+        vid1Length,
+        title1,
+        artist1,
+        vid2Id,
+        vid2Length,
+        title2,
+        artist2,
+      } = await fetchPickVids(this.state, localStorage.getItem("token"));
+      if (vid1Id && vid2Id) {
+        this.setState({
+          pickVid1: {
+            vidId: vid1Id,
+            vidLength: vid1Length,
+            title: title1,
+            artist: artist1,
+          },
+          pickVid2: {
+            vidId: vid2Id,
+            vidLength: vid2Length,
+            title: title2,
+            artist: artist2,
+          },
+          fetchingPicks: false,
+        });
+      } else {
+        setTimeout(() => {
+          this.getPickVids();
+        }, 4000);
+      }
+    });
   };
 
   render() {
@@ -377,6 +381,7 @@ export default class App extends Component {
       searchResults,
       pickVid1,
       pickVid2,
+      fetchingPicks,
     } = this.state;
     if (loggedIn) {
       return (
@@ -421,6 +426,7 @@ export default class App extends Component {
                 pickVid2={pickVid2}
                 refresh={this.getPickVids}
                 addToPlaylist={this.addToPlaylist}
+                fetchingPicks={fetchingPicks}
               />
             )}
             {activeTab === "search" && (
