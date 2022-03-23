@@ -63,6 +63,8 @@ export default class App extends Component {
     fetchingVid: false,
     shouldPlayNext: false,
     playedNext: false,
+    pickVid1: null,
+    pickVid2: null,
   };
 
   componentDidMount() {
@@ -340,6 +342,20 @@ export default class App extends Component {
       title2,
       artist2,
     } = await fetchPickVids(this.state, localStorage.getItem("token"));
+    this.setState({
+      pickVid1: {
+        vidId: vid1Id,
+        vidLength: vid1Length,
+        title: title1,
+        artist: artist1,
+      },
+      pickVid2: {
+        vidId: vid2Id,
+        vidLength: vid2Length,
+        title: title2,
+        artist: artist2,
+      },
+    });
   };
 
   render() {
@@ -353,6 +369,8 @@ export default class App extends Component {
       playing,
       cachedVid,
       searchResults,
+      pickVid1,
+      pickVid2,
     } = this.state;
     if (loggedIn) {
       return (
@@ -393,8 +411,8 @@ export default class App extends Component {
             )}
             {activeTab === "pick" && (
               <Pick
-                // pickVid1={pickVid1}
-                // pickVid2={pickVid2}
+                pickVid1={pickVid1}
+                pickVid2={pickVid2}
                 refresh={this.getPickVids}
                 addToPlaylist={this.addToPlaylist}
               />
