@@ -11,7 +11,7 @@ import Pick from "./components/Pick";
 import Search from "./components/Search";
 import Playlist from "./components/Playlist";
 
-import { fetchSearchVids, fetchVid } from "./api/api";
+import { fetchSearchVids, fetchVid, fetchPickVids } from "./api/api";
 import { getDefaultDates } from "./utils/utils";
 
 const { dayMin, monthMin, yearMin, dayMax, monthMax, yearMax } =
@@ -327,6 +327,29 @@ export default class App extends Component {
   togglePlayPause = () => {
     const { playing } = this.state;
     this.setState({ playing: !playing });
+  };
+
+  getPickVids = async () => {
+    const {
+      vid1Id,
+      vid1Length,
+      title1,
+      artist1,
+      vid2Id,
+      vid2Length,
+      title2,
+      artist2,
+    } = await fetchPickVids(this.state, localStorage.getItem("token"));
+    console.log(
+      vid1Id,
+      vid1Length,
+      title1,
+      artist1,
+      vid2Id,
+      vid2Length,
+      title2,
+      artist2
+    );
   };
 
   render() {
