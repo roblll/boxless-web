@@ -49,12 +49,14 @@ export default class Search extends React.Component {
             </div>
             <div
               style={styles.center}
-              onClick={() =>
-                addToPlaylist({
-                  vidId: vids[current].vidId,
-                  title: vids[current].title,
-                })
-              }
+              onClick={() => {
+                this.setState({ search: "" }, () => {
+                  addToPlaylist({
+                    vidId: vids[current].vidId,
+                    title: vids[current].title,
+                  });
+                });
+              }}
             >
               <div style={styles.thumbnail}>
                 <img

@@ -122,7 +122,11 @@ export default class App extends Component {
       updatedBeforeAndCount = this.getUpdateBeforeAndCount(vid);
     }
     this.setState(
-      { playlist: [...playlist, vid], ...updatedBeforeAndCount },
+      {
+        playlist: [...playlist, vid],
+        searchResults: {},
+        ...updatedBeforeAndCount,
+      },
       () => {
         const { playlist } = this.state;
         if (playlist.length === 1) {
