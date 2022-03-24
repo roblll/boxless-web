@@ -9,7 +9,7 @@ import LengthDropdown from "./LengthDropdown";
 const Options = (props) => {
   const {
     options: {
-      lyrics,
+      mode,
       clean,
       norepeats,
       alternative,
@@ -56,12 +56,7 @@ const Options = (props) => {
       </div>
       <div style={styles.divider}></div>
       <div style={styles.optionsRow}>
-        <OptionsButton
-          toggle={toggle}
-          on={lyrics}
-          name="lyrics"
-          label="Lyrics"
-        />
+        <p>{mode}</p>
         <OptionsButton toggle={toggle} on={clean} name="clean" label="Clean" />
         <LengthDropdown
           value={lengthMax}
