@@ -5,6 +5,7 @@ import DateRange from "./DateRange";
 import Rank from "./Rank";
 import OptionsButton from "./OptionsButton";
 import LengthDropdown from "./LengthDropdown";
+import ModeDropdown from "./ModeDropdown";
 
 const Options = (props) => {
   const {
@@ -56,7 +57,7 @@ const Options = (props) => {
       </div>
       <div style={styles.divider}></div>
       <div style={styles.optionsRow}>
-        <p>{mode}</p>
+        <ModeDropdown mode={mode} handleChange={handleChange} />
         <OptionsButton toggle={toggle} on={clean} name="clean" label="Clean" />
         <LengthDropdown
           value={lengthMax}
