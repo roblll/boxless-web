@@ -106,7 +106,7 @@ const Options = (props) => {
         <OptionsButton toggle={toggle} on={randb} name="randb" label="R&B" />
         <OptionsButton toggle={toggle} on={rock} name="rock" label="Rock" />
       </div>
-      <div style={styles.divider}></div>
+      {/* <div style={styles.divider}></div>
       <div style={styles.genreRow}>
         <OptionsButton
           toggle={toggle}
@@ -121,7 +121,7 @@ const Options = (props) => {
           name="trance"
           label="Trance"
         />
-      </div>
+      </div> */}
     </div>
   );
 };
