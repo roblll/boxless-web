@@ -14,6 +14,9 @@ export default class Pick extends React.Component {
     if (!fetchingPicks) {
       return (
         <div style={styles.container}>
+          <div style={styles.header}>
+            <p>Pick one to add to queue</p>
+          </div>
           <div style={styles.pick}>
             {pickVid1 && pickVid2 ? (
               <div
@@ -112,16 +115,17 @@ const styles = {
     textAlign: "center",
     backgroundColor: "#252526",
     color: "white",
-    padding: "20px 0 0 0",
     minWidth: "375px",
   },
   pick: {
     display: "flex",
     alignItems: "center",
+    backgroundColor: "black",
   },
   left: {
     flex: 1,
     cursor: "pointer",
+    height: "100%",
   },
   thumbnail: {
     display: "flex",
@@ -129,14 +133,13 @@ const styles = {
     alignItems: "center",
   },
   image: {
-    width: "175px",
+    width: "100%",
     flex: 1,
   },
   title: {
     fontSize: "14px",
     padding: "10px 10px",
-    background: "black",
-    width: "175px",
+    backgroundColor: "black",
     flex: 1,
     textAlign: "left",
   },
@@ -160,12 +163,14 @@ const styles = {
   right: {
     flex: 1,
     cursor: "pointer",
+    height: "100%",
   },
   refresh: {
     flex: 1,
     display: "flex",
     alignItems: "center",
     justifyContent: "center",
+    minHeight: 50,
   },
   refreshIcon: {
     cursor: "pointer",
@@ -185,5 +190,11 @@ const styles = {
     alignItems: "center",
     height: "100%",
     width: "100%",
+  },
+  header: {
+    minHeight: 50,
+    display: "flex",
+    justifyContent: "center",
+    alignItems: "center",
   },
 };
