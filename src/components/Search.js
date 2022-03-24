@@ -37,13 +37,15 @@ export default class Search extends React.Component {
         {vids && (
           <div style={styles.carousel}>
             <div style={styles.left}>
-              <i
-                class="material-icons"
-                style={styles.arrow}
-                onClick={this.handlePrev}
-              >
-                chevron_left
-              </i>
+              {current > 0 && (
+                <i
+                  class="material-icons"
+                  style={styles.arrow}
+                  onClick={this.handlePrev}
+                >
+                  chevron_left
+                </i>
+              )}
             </div>
             <div
               style={styles.center}
@@ -64,13 +66,15 @@ export default class Search extends React.Component {
               </div>
             </div>
             <div style={styles.right}>
-              <i
-                class="material-icons"
-                style={styles.arrow}
-                onClick={this.handleNext}
-              >
-                chevron_right
-              </i>
+              {current < vids.length - 1 && (
+                <i
+                  class="material-icons"
+                  style={styles.arrow}
+                  onClick={this.handleNext}
+                >
+                  chevron_right
+                </i>
+              )}
             </div>
           </div>
         )}
@@ -127,7 +131,7 @@ const styles = {
     cursor: "pointer",
   },
   image: {
-    width: "275px",
+    width: "320px",
   },
   title: {
     flex: 1,

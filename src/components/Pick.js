@@ -2,7 +2,6 @@ import React from "react";
 
 export default class Pick extends React.Component {
   componentDidMount() {
-    console.log("refresh");
     const { refresh } = this.props;
     refresh();
   }
