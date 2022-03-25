@@ -52,7 +52,7 @@ export default class App extends Component {
     playlist: [],
     playlistPosition: 0,
     cachedVid: null,
-    playing: null,
+    playing: false,
     hiphopAfter: "",
     hiphopCount: "",
     houseAfter: "",

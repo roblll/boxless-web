@@ -6,12 +6,12 @@ export default class Playlist extends React.Component {
   };
 
   handleSelect = (id) => {
-    const { selected } = this.state;
-    if (id === selected) {
-      this.setState({ selected: null });
-    } else {
-      this.setState({ selected: id });
-    }
+    // const { selected } = this.state;
+    // if (id === selected) {
+    //   this.setState({ selected: null });
+    // } else {
+    //   this.setState({ selected: id });
+    // }
   };
 
   render() {
