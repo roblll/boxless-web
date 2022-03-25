@@ -15,8 +15,16 @@ export default class Login extends React.Component {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   };
   componentDidMount() {
+    const query = new URLSearchParams(window.location.search);
+    const username = query.get("username");
+    const password = query.get("password");
     window.addEventListener("resize", this.updateDimensions);
-    this.setState({ width: window.innerWidth, height: window.innerHeight });
+    this.setState({
+      width: window.innerWidth,
+      height: window.innerHeight,
+      username,
+      password,
+    });
   }
   componentWillUnmount() {
     window.removeEventListener("resize", this.updateDimensions);
