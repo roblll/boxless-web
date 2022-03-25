@@ -88,6 +88,11 @@ export default class Search extends React.Component {
             style={styles.input}
             value={search}
             onChange={this.handleChange}
+            onKeyDown={(e) => {
+              if (e.key === "Enter") {
+                getSearchVids(search);
+              }
+            }}
           />
           <div style={styles.button} onClick={() => getSearchVids(search)}>
             <i style={styles.searchIcon} class="material-icons">
