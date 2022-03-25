@@ -226,30 +226,37 @@ export default class App extends Component {
       const { playlist, playlistPosition, cachedVid, fetchingVid } = this.state;
       if (playlistPosition < playlist.length - 1) {
         const vid = playlist[playlistPosition + 1];
-        this.setState({ playedNext: true }, () => {
-          this.setState({
-            playlistPosition: playlistPosition + 1,
-            currentVid: vid,
-            playedNext: true,
-          });
-        });
-      } else if (cachedVid) {
-        const vid = cachedVid;
         this.setState(
           {
-            cachedVid: null,
-            playlist: [...playlist, vid],
             playlistPosition: playlistPosition + 1,
             currentVid: vid,
+            cachedVid: null,
           },
           () => {
             setTimeout(() => {
-              this.getVid();
+              this.setState({ cachedVid: cachedVid });
             }, 2000);
           }
         );
-      } else if (fetchingVid) {
-        this.setState({ shouldPlayNext: true });
+      } else {
+        if (cachedVid) {
+          const vid = cachedVid;
+          this.setState(
+            {
+              cachedVid: null,
+              playlist: [...playlist, vid],
+              playlistPosition: playlistPosition + 1,
+              currentVid: vid,
+            },
+            () => {
+              setTimeout(() => {
+                this.getVid();
+              }, 2000);
+            }
+          );
+        } else if (fetchingVid) {
+          this.setState({ shouldPlayNext: true });
+        }
       }
     }
   };
