@@ -52,7 +52,7 @@ export default class App extends Component {
     playlist: [],
     playlistPosition: 0,
     cachedVid: null,
-    playing: false,
+    playing: null,
     hiphopAfter: "",
     hiphopCount: "",
     houseAfter: "",
@@ -202,7 +202,6 @@ export default class App extends Component {
   };
 
   playNext = async (type) => {
-    const { playedNext } = this.state;
     if (type === "manual") {
       const { playlist, playlistPosition, cachedVid } = this.state;
       if (playlistPosition < playlist.length - 1) {
@@ -223,7 +222,7 @@ export default class App extends Component {
           () => this.getVid()
         );
       }
-    } else if (!playedNext) {
+    } else {
       const { playlist, playlistPosition, cachedVid, fetchingVid } = this.state;
       if (playlistPosition < playlist.length - 1) {
         const vid = playlist[playlistPosition + 1];
@@ -236,23 +235,22 @@ export default class App extends Component {
         });
       } else if (cachedVid) {
         const vid = cachedVid;
-        this.setState({ playedNext: true }, () => {
-          this.setState(
-            {
-              cachedVid: null,
-              playlist: [...playlist, vid],
-              playlistPosition: playlistPosition + 1,
-              currentVid: vid,
-              playedNext: true,
-            },
-            () => this.getVid()
-          );
-        });
+        this.setState(
+          {
+            cachedVid: null,
+            playlist: [...playlist, vid],
+            playlistPosition: playlistPosition + 1,
+            currentVid: vid,
+          },
+          () => {
+            setTimeout(() => {
+              this.getVid();
+            }, 2000);
+          }
+        );
       } else if (fetchingVid) {
         this.setState({ shouldPlayNext: true });
       }
-    } else {
-      this.setState({ playedNext: false });
     }
   };
 
@@ -331,8 +329,22 @@ export default class App extends Component {
   };
 
   togglePlayPause = () => {
-    const { playing } = this.state;
-    this.setState({ playing: !playing });
+    const { playing, currentVid } = this.state;
+    if (playing === null) {
+      const temp = {
+        artist: "    ",
+        title: "    ",
+        vidId: "tRNZPYTMWyg",
+        vidLength: 134,
+      };
+      this.setState({ playing: !playing, currentVid: temp }, () => {
+        this.setState({ playing: !playing, currentVid: currentVid });
+      });
+    } else if (playing === false) {
+      this.setState({ playing: true });
+    } else {
+      this.setState({ playing: false });
+    }
   };
 
   getPickVids = async () => {
