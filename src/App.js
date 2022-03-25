@@ -228,14 +228,13 @@ export default class App extends Component {
         const vid = playlist[playlistPosition + 1];
         this.setState(
           {
-            playlistPosition: playlistPosition + 1,
-            currentVid: vid,
-            cachedVid: null,
+            currentVid: null,
           },
           () => {
-            setTimeout(() => {
-              this.setState({ cachedVid: cachedVid });
-            }, 2000);
+            this.setState({
+              playlistPosition: playlistPosition + 1,
+              currentVid: vid,
+            });
           }
         );
       } else {
@@ -338,13 +337,7 @@ export default class App extends Component {
   togglePlayPause = () => {
     const { playing, currentVid } = this.state;
     if (playing === null) {
-      const temp = {
-        artist: "    ",
-        title: "    ",
-        vidId: "tRNZPYTMWyg",
-        vidLength: 134,
-      };
-      this.setState({ playing: !playing, currentVid: temp }, () => {
+      this.setState({ playing: !playing, currentVid: null }, () => {
         this.setState({ playing: !playing, currentVid: currentVid });
       });
     } else if (playing === false) {
