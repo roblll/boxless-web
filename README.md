@@ -1,68 +1,15 @@
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+# Boxless - Frontend
 
-## Available Scripts
+Web app available at
 
-In the project directory, you can run:
+[boxlesslessmusic.com](https://boxlessmusic.com/?username=rob&password=lenon)
 
-### `yarn start`
+## Description
 
-Runs the app in the development mode.<br />
-Open [http://localhost:3000](http://localhost:3000) to view it in the browser.
+Stream the top songs from a selected date range and genres. The app randomly picks songs on the Billboard chart then plays it in YouTube based on the user's selected preference, including chart range (1 - 100), date range (from 1960 - present), and genre (Alternative, Country, Dance, Electronic, Latin, Pop, Rap, R&B, and Rock). The app will continuously load and play songs. There are additional features including: no repeats, clean version, play the music video, audio, or lyrics version, and limit the song's play length. The controls section displays the current song and allows the play/pause/previous/next functionality. There is a tab navigation on the bottom. The first tab shows the main controls, options and the video player. The next tab allows the user to select between random 2 videos to add to the playlist queue. The third allows the user to search for a specific song and add to the playlist queue. The fourth shows all the songs that have been added to the playlist and the current song playing.
 
-The page will reload if you make edits.<br />
-You will also see any lint errors in the console.
+## Frontend Implementation
 
-### `yarn test`
+The frontend is built using React. The app first ensures that the user is authenticated. A token is provided once the proper credentials are entered. The token is used for all future API calls. Next, the app will request a song from the backend API. It sends all of the selected options, including genre, date range, chart range, and more. Once it receives the data, it adds it to the play queue. The controls display the current song title and artist, can pause and play the current song, skip to the next song, or play the previous song again. Once a song ends, an event is initiated to play the next song. If there are songs waiting in the queue, it will play the next song in line. If there are no queued songs, the app will play a cached song. After playing a new song, the app will request the backend API for a song to put in the cache. This improves the performance of the app.
 
-Launches the test runner in the interactive watch mode.<br />
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
-
-### `yarn build`
-
-Builds the app for production to the `build` folder.<br />
-It correctly bundles React in production mode and optimizes the build for the best performance.
-
-The build is minified and the filenames include the hashes.<br />
-Your app is ready to be deployed!
-
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
-
-### `yarn eject`
-
-**Note: this is a one-way operation. Once you `eject`, you can’t go back!**
-
-If you aren’t satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
-
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you’re on your own.
-
-You don’t have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn’t feel obligated to use this feature. However we understand that this tool wouldn’t be useful if you couldn’t customize it when you are ready for it.
-
-## Learn More
-
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
-
-To learn React, check out the [React documentation](https://reactjs.org/).
-
-### Code Splitting
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/code-splitting
-
-### Analyzing the Bundle Size
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size
-
-### Making a Progressive Web App
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app
-
-### Advanced Configuration
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/advanced-configuration
-
-### Deployment
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/deployment
-
-### `yarn build` fails to minify
-
-This section has moved here: https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify
+Built using: JavaScript, React, HTML, CSS
