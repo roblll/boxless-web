@@ -158,7 +158,7 @@ const styles = {
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    marginBottom: "33px",
+    minHeight: "120px",
   },
   input: {
     border: "none",
